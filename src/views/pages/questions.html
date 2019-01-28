@@ -1,0 +1,88 @@
+<div class="bsr-talk-card">
+    <h2 class="bsr-talk-title"><%= talk.name %></h2>
+</div>
+
+<div class="bsr-talk-card" data-id="<%= talk.slug %>">
+    <div class="bsr-talk-questions-top">
+        <input type="checkbox" id="selected-only" onchange="toggleShowSelectedOnly(this.checked)">
+        <label for="selected-only">Show only selected questions.</label>
+    </div>
+    <% questions.forEach((question) => { %>
+        <div class="bsr-talk-question" data-id="<%= question.id %>">
+            <div class="bsr-talk-question-star" onclick="toggleQuestion(this)">
+                <% include ../partials/icons/star.html %>
+            </div>
+            <p class="bsr-talk-question-text"><%= question.question %></p>
+        </div>
+    <% }) %>
+</div>
+
+<script type="text/javascript">
+    var variables = {
+        talkSlug: document.querySelector('.bsr-talk-card[data-id]').getAttribute('data-id')
+    };
+    var elements = {
+        styleElement: document.querySelector('#questions-list-runtime-style'),
+        selectedOnlyCheckbox: document.querySelector('#selected-only')
+    };
+    var state = {
+        selectedQuestions: {}
+    };
+
+    function getLocalStorageKey() {
+        return 'questions-state-' + variables.talkSlug;
+    }
+
+    function load() {
+        var data = localStorage.getItem(getLocalStorageKey());
+        if (!!data) {
+            state = JSON.parse(data);
+        }
+    }
+
+    function save() {
+        localStorage.setItem(getLocalStorageKey(), JSON.stringify(state));
+    }
+
+    function toggleQuestion(element) {
+        var parent = element.parentElement;
+        var questionId = parseInt(parent.getAttribute('data-id'));
+        if (state.selectedQuestions[questionId]) {
+            state.selectedQuestions[questionId] = false;
+            parent.classList.remove('is-selected');
+        } else {
+            state.selectedQuestions[questionId] = true;
+            parent.classList.add('is-selected');
+        }
+        save();
+    }
+
+    function toggleShowSelectedOnly(value) {
+        if (value) {
+            elements.styleElement.textContent = '.bsr-talk-question:not(.is-selected) { display: none; }';
+        } else {
+            elements.styleElement.textContent = '';
+        }
+    }
+
+    function render() {
+        var questions = document.querySelectorAll('.bsr-talk-question[data-id]');
+        for(var i = 0; i < questions.length; i++) {
+            var element = questions[i];
+            var id = parseInt(element.getAttribute('data-id'));
+            if (state.selectedQuestions[id]) {
+                element.classList.add('is-selected');
+            }
+        }
+
+        toggleShowSelectedOnly(elements.selectedOnlyCheckbox.checked);
+    }
+
+    load();
+    render();
+</script>
+
+
+<%- contentFor('head') %>
+<title><%= config.title %> - Questions for '<%= talk.name %>'</title>
+<style id="questions-list-runtime-style"></style>

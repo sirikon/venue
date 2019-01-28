@@ -1,0 +1,28 @@
+<html>
+    <head>
+        <% include ../partials/head.html %>
+        <%-head%>
+    </head>
+    <body>
+        <div class="bsr-header">
+            <div class="bsr-content bsr-header-content">
+                <div>
+                    <a href="/" class="bsr-header-link">
+                        <h1 class="bsr-header-title">Bilbo<span class="bsr-header-title-darker">Stack</span><span class="bsr-header-title-accent">;</span></h1>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+
+        <div class="bsr-content bsr-body">
+            <%-body%>
+        </div>
+
+        <div class="bsr-footer">
+            <div class="bsr-content bsr-footer-content">
+                <span class="bsr-footer-credit"><%= config.title %> <%= config.year %></span>
+            </div>
+        </div>
+    </body>
+</html>

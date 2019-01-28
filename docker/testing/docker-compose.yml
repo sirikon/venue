@@ -1,0 +1,26 @@
+version: "2"
+
+services:
+  db:
+    image: postgres:10.2-alpine
+    restart: always
+    environment:
+    - POSTGRES_PASSWORD=12345
+    - POSTGRES_DB=eventfeedback_dev
+
+  adminer:
+    image: adminer
+    restart: always
+
+  redis:
+    image: redis:alpine
+    restart: always
+
+  app:
+    image: eventtoolbox
+    build:
+      context: ../../
+      dockerfile: ./docker/testing/Dockerfile
+    environment:
+      - REDIS_URL=redis://redis:6379
+      - DATABASE_URL=postgresql://postgres:12345@db/eventfeedback_dev

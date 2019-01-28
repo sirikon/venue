@@ -1,0 +1,31 @@
+<% talks.forEach((talk, i) => { %>
+    <a href="/talk/<%= talk.slug %>" class="bsr-talk-card-link">
+        <div class="bsr-talk-card <% if (talk._feedbackReceived) { %>is-done<% } %>">
+            <div class="bsr-talk-card-arrow">
+                <% include ../partials/icons/arrow-right.html %>
+            </div>
+            <h3 class="bsr-talk-card-name">
+                <% if (talk._feedbackReceived) { %>
+                    <div class="bsr-talk-card-check">
+                        <% include ../partials/icons/check.html %>
+                    </div>
+                <% } %>
+                <span><%= talk.name %></span>
+            </h3>
+            <div class="bsr-talk-card-info">
+                <div class="bsr-talk-card-info-speaker">
+                    <span><%= talk.speaker %></span>
+                </div>
+                <div class="bsr-talk-card-info-track">
+                    <span>TRACK <%= talk.track %></span>
+                </div>
+                <div class="bsr-talk-card-info-when">
+                    <span><%= talk.when %></span>
+                </div>
+            </div>
+        </div>
+    </a>
+<% }) %>
+
+<%- contentFor('head') %>
+<title><%= config.title %> Feedback</title>

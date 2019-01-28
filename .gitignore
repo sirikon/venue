@@ -1,0 +1,10 @@
+node_modules/
+.vscode/
+.nyc_output/
+coverage/
+.env
+src/static/style.css
+scripts/variables.sh
+backup
+backup.log
+data

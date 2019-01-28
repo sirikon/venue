@@ -1,0 +1,436 @@
+@import "./reset";
+@import "./variables";
+
+::-moz-selection,
+::selection {
+    background:$highlight-color;
+}
+
+html {
+    font-family: $global-font;
+    -webkit-tap-highlight-color: $highlight-color;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+html, body {
+    height: 100%;
+    background-color: $background-color;
+}
+
+.bsr-body {
+    flex-grow: 1;
+    width: 100%;
+}
+
+.bsr-content {
+    max-width: 800px;
+    display: block;
+    margin: auto;
+    box-sizing: border-box;
+}
+
+.bsr-header {
+    background-color: $secondary-color;
+    color: white;
+    text-align: center;
+    user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-user-select: none;
+}
+
+.bsr-header-link {
+    color: inherit;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.bsr-header-content {
+    padding: 15px 25px;
+}
+
+.bsr-header-title {
+    font-size: 2.5em;
+    margin: 0 8px;
+    font-weight: 900;
+    font-family: $monospace-font;
+
+    &-darker {
+        color: #9b9b9b;
+    }
+    &-accent {
+        color: $primary-color;
+    }
+}
+
+.bsr-talk-card-link {
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.bsr-talk-card {
+    margin: 10px 10px 0 10px;
+    padding: 15px 35px 15px 15px;
+    background-color: white;
+    border-radius: 10px * $roundness;
+    position: relative;
+}
+
+.bsr-talk-card-name {
+    font-size: 1.3em;
+    font-weight: 700;
+    color: $secondary-color;
+    display: block;
+    margin: 0 0 .5em 0;
+}
+
+.bsr-talk-card.is-done .bsr-talk-card-name {
+    color: rgba(0,0,0,0.3);
+}
+
+.bsr-talk-card-info {
+    display: flex;
+    align-items: flex-end;
+}
+
+.bsr-talk-card-info-speaker {
+    font-size: 1em;
+    flex-grow: 1;
+    color: $primary-color;
+    font-style: italic;
+    font-weight: 700;
+}
+
+.bsr-talk-card-info-track {
+    font-size: 1em;
+    font-weight: 700;
+    float: right;
+    color: $primary-color;
+    margin: 0 .6em;
+    white-space: nowrap;
+}
+
+.bsr-talk-card-info-when {
+    font-size: 1em;
+    font-weight: 700;
+    float: right;
+    white-space: nowrap;
+}
+
+.bsr-talk-card-result {
+    margin-top: 10px;
+    display: flex;
+}
+
+.bsr-talk-card-result-ratings {
+    flex-shrink: 0;
+}
+
+.bsr-talk-card-result-comments {
+    flex-grow: 1;
+    padding: 10px 0 0 15px;
+}
+
+.bsr-talk-card-result-comment {
+    background-color: rgba(0,0,0,0.03);
+    padding: 10px;
+    margin-bottom: 5px;
+}
+
+.bsr-talk-card-result-average {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+.bsr-talk-card-result-average small {
+    font-size: .5em;
+    opacity: .5;
+}
+
+.bsr-talk-card-result-option-bar {
+    display: inline-block;
+    width: 200px;
+    height: 4px;
+    background-color: whitesmoke;
+    vertical-align: middle;
+    position: relative;
+}
+
+.bsr-talk-card-result-option-bar div {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    background-color: $primary-color;
+}
+
+@media (max-width: 800px) {
+    .bsr-talk-card-result {
+        display: block;
+    }
+    .bsr-talk-card-result-comments {
+        padding: 15px 0 0 0;
+    }
+}
+
+.bsr-talk-card-arrow {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    width: 15px;
+    height: 15px;
+    transform: translate(0, -50%);
+}
+
+.bsr-talk-card-arrow svg {
+    fill: $primary-color;
+}
+
+.bsr-talk-card-check {
+    vertical-align: top;
+    background-color: $accent-color;
+    width: 20px;
+    height: 20px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50% * $roundness;
+}
+
+.bsr-talk-card-check svg {
+    width: 12px;
+    height: 12px;
+    display: block;
+    fill: white;
+}
+
+.bsr-footer-content {
+    padding: 25px;
+    text-align: center;
+}
+
+.bsr-footer-credit {
+    color: $secondary-color;
+}
+
+.bsr-talk {
+    margin: 10px 10px 0 10px;
+}
+
+.bsr-talk-box {
+    padding: 15px;
+    margin-top: 15px;
+    background-color: white;
+    border-radius: 10px * $roundness;
+}
+
+.bsr-talk-box-title {
+    font-size: 1.3em;
+    color: $secondary-color;
+    margin-bottom: .7em;
+}
+
+.bsr-talk-title {
+    font-size: 1.7em;
+    font-weight: 700;
+    color: $secondary-color;
+}
+
+.bsr-talk-info {
+    margin-top: 10px;
+}
+
+.bsr-talk-track {
+    font-size: 1em;
+    font-weight: 700;
+    color: $primary-color;
+    margin: 0 .6em 0 0;
+    white-space: nowrap;
+}
+
+.bsr-talk-when {
+    font-size: 1em;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.bsr-talk-description {
+    line-height: 1.4em;
+    margin: 10px 0 0 0;
+    color: $text-color;
+}
+
+.bsr-talk-description i {
+    text-decoration: underline;
+}
+
+.bsr-talk-description b {
+    font-weight: bold;
+}
+
+.bsr-talk-speaker {
+    padding: 15px 15px 0 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (max-width: 580px) {
+    .bsr-talk-speaker {
+        align-items: flex-start;
+    }
+}
+
+.bsr-talk-speaker-image {
+    height: 20vw;
+    width: 20vw;
+    max-width: 140px;
+    max-height: 140px;
+    background-size: cover;
+    background-position: center;
+    margin-right: 20px;
+    flex-shrink: 0;
+    border-radius: 50% * $roundness;
+}
+
+.bsr-talk-speaker-info {
+    flex-grow: 1;
+}
+
+.bsr-talk-speaker-name {
+    font-size: 1.4em;
+    display: block;
+    color: $secondary-color;
+    font-weight: 700;
+}
+
+.bsr-talk-speaker-title {
+    margin: .5em 0 0 0;
+    display: inline-block;
+    color: $primary-color;
+    line-height: 1.42;
+}
+
+.bsr-talk-feedback-stars {
+    display: flex;
+    max-width: 300px;
+    justify-content: space-between;
+    margin: 10px auto;
+}
+
+.bsr-talk-feedback-stars input {
+    display: none;
+}
+
+.bsr-talk-feedback-stars label svg {
+    width: 40px;
+    height: 40px;
+    fill: $primary-color;
+    cursor: pointer;
+}
+
+.bsr-talk-feedback-stars input:checked ~ label svg {
+    fill: rgba(0,0,0,0.05);
+}
+
+.bsr-talk-feedback-comment {
+    display: block;
+    margin: auto;
+    width: 100%;
+    max-width: 300px;
+    resize: none;
+    height: 150px;
+    border-color: rgba(0,0,0,0.1);
+    border-style: solid;
+    border-width: 1px;
+    font-size: 1.2em;
+    padding: 15px;
+}
+
+.bsr-talk-feedback-comment:focus {
+    border-color: $primary-color;
+}
+
+.bsr-talk-feedback-button {
+    appearance: none;
+    -moz-appearance: none;
+    width: 100%;
+    max-width: 300px;
+    margin: 10px auto;
+    display: block;
+    font-size: 1.3em;
+    background-color: $primary-color;
+    color: white;
+    border: none;
+    padding: .4em;
+    cursor: pointer;
+}
+
+.bsr-talk-success {
+    padding: 15px;
+    margin-top: 15px;
+    background-color: $accent-color;
+    color: white;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border-radius: 50px * $roundness;
+}
+
+.bsr-talk-success span {
+    margin-left: 10px;
+}
+
+.bsr-talk-success svg {
+    width: 20px;
+    height: 20px;
+    fill: white;
+}
+
+.bsr-talk-question {
+    border-top: 1px solid rgba(0,0,0,0.1);
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    &:first-child {
+        border-top: none;
+    }
+
+    &-star {
+        svg {
+            width: 30px;
+            margin-right: 15px;
+            cursor: pointer;
+    
+            path {
+                fill: rgba(0,0,0,0.2);
+            }
+        }
+
+        
+    }
+
+    &-text {
+        flex-grow: 1;
+    }
+
+    &.is-selected {
+        .bsr-talk-question-star svg path {
+            fill: gold;
+        }
+    }
+}
+
+.bsr-talk-questions-top {
+    padding: 0 0 15px 0;
+}
