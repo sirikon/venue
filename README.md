@@ -1,4 +1,6 @@
-# Event Toolbox
+# BilboStack App
+
+(a.k.a. Event Toolbox)
 
 This software is intended to provide tools to event organizers. Including:
 
@@ -7,7 +9,7 @@ This software is intended to provide tools to event organizers. Including:
 - Talk voting with comment
 - Talk question submission
 - Global voting summary for admins
-- Single-talk voting summary for speakers
+- (To Do) Single-talk voting summary for speakers
 
 ## Requirements
 
