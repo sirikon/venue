@@ -7,4 +7,4 @@ src/static/style.css
 scripts/variables.sh
 backup
 backup.log
-data
+./data
