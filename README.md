@@ -52,3 +52,34 @@ Run them like `npm run <command>`.
 The tests are inside the `test` folder. Run them with the command `npm test`.
 
 Tests can also run inside Docker. All the files involved in this process are inside `docker/testing` and you can run it by calling `npm run test:docker` or running `run.sh` inside `docker/testing`.
+
+## Running in production
+
+You'll find a script inside `scripts` folder called `deploy.sh`. This will:
+
+- Build the Docker image locally.
+- Run the built Docker image with all the service dependencies.
+- Start listening on the specified PORT.
+- Run migrations against the PostgreSQL database.
+
+For configuring this, you **must** create a `.env` file on the project's root folder like this:
+
+```
+POSTGRES_PASSWORD=verysecret
+PORT=8080
+BASE_URL=https://example.com
+ADMIN_USER=admin
+ADMIN_PASSWORD=password
+```
+
+- `POSTGRES_PASSWORD`: The 'postgres' user in PostgreSQL database will take this password.
+- `PORT`: The server will run locally on this port.
+- `BASE_URL`: The server's url (including protocol, like `https`).
+- `ADMIN_USER`: Administrator user.
+- `ADMIN_PASSWORD`: Administrator password.
+
+All this will create a data folder with the PostgreSQL persistent information.
+
+### Using a pre-compiled Docker image
+
+Inside `docker-compose.yml`, in `services.app`, replace `image: eventtoolbox` with the name of the correct image (including registry url) and remove the `build` parameter.
