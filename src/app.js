@@ -13,9 +13,9 @@ const ADMIN_USER = process.env.ADMIN_USER || 'admin';
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'admin';
 
 const config = {
-    title: 'BilboStack',
+    title: 'Pucela Tech Day',
     year: '2019',
-    twitter: '@bilbostack',
+    twitter: '@GDGValladolid',
     baseUrl: process.env.BASE_URL || 'http://localhost:8000'
 };
 

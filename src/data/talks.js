@@ -1,102 +1,119 @@
 const talks = {
 
-    'kubernetes-is-not-a-deployment-tool-its-a-platform': {
-        name: 'Kubernetes is not a deployment tool: it\'s a platform',
-        description: `Kubernetes se ha convertido poco a poco el standard del mercado para desplegar aplicaciones tanto en cloud como en datacenters tradicionales. Esto es así gracias a su potente API y sus primitivas que nos permiten describir el ciclo de vida del software. ¿Pero es Kubernetes la pieza final del puzzle? ¿Debemos utilizar esas primitivas directamente para nuestros deploys?<br><br>
-
-        En esta charla veremos cómo podemos extender la funcionalidad base de Kubernetes para adecuarla a nuestras necesidades, y cómo esa extensibilidad está haciendo que grandes compañías estén creando nuevas herramientas usando Kubernetes como plataforma.`,
-        speaker: 'Jose Armesto',
-        speakerTitle: 'CloudBees',
-        speakerImage: 'armesto.jpg',
-        track: '1',
-        when: '9:30-10:20'
-    },
-
-    'web-components-api-esto-va-en-serio': {
-        name: 'Web Components API: esto va en serio',
-        description: 'La API de Web Components empieza a estar disponible en los navegadores principales… ¿Qué funcionalidades nos aporta exactamente? ¿Podemos dejar de usar frameworks JavaScript como React, Vue o Angular? En esta charla veremos cómo usar la API de Web Components con JavaScript vanilla, qué consecuencias tiene esta API sobre nuestro CSS, y qué ventajas ofrece respecto a los componentes implementados en frameworks como React.',
+    'como-hacer-un-videojuego-en-48-horas': {
+        name: 'Cómo hacer un videojuego en 48 horas',
+        description: [
+            '¿Es posible crear un videojuego en un fin de semana? ¿Cómo?',
+            'En esta charla veremos herramientas, consejos y trucos para participar en la Ludum Dare, una competición desarrollo donde se crea un videojuego desde cero en 48 horas.'
+        ],
         speaker: 'Belén Albeza',
-        speakerTitle: 'Mozilla',
-        speakerImage: 'albeza.png',
-        track: '2',
-        when: '9:30-10:20'
+        speakerTitle: [
+            'Belén es ingeniera informática y trabaja como desarrolladora en Mozilla, en el equipo de Firefox DevTools.',
+            'Anteriormente ha trabajado en start-up’s y corporaciones de Londres y Barcelona, creando videojuegos, aplicaciones de móviles, prototipos de I+D, aplicaciones web, etc...',
+            'En su tiempo libre le gusta seguir creando pequeños videojuegos, tocar la guitarra y jugar al Mass Effect.'
+        ],
+        when: '10:00-10:50'
     },
 
-    'come-reza-data': {
-        name: 'Come reza data',
-        description: 'Hablaremos sobre como y cuando desplegar arquitecturas Big Data, así como los errores mas comunes cuando implantamos este tipo de soluciones en empresa, desde la cultura de trabajo a las herramientas a utilizar en función de los casos de explotación. Un viaje por las meteduras de pata mas comunes para encontrar las mejoras practicas de despliegue de este tipo de infraestructuras.',
-        speaker: 'Inés Huertas',
-        speakerTitle: 'DataTONS',
-        speakerImage: 'huertas.jpg',
-        track: '1',
-        when: '10:30-11:20'
+    'he-fracasado-tengo-mas-de-30-y-sigo-programando': {
+        name: 'He fracasado: tengo más de 30 y sigo programando',
+        description: [
+            'Y es probable que llegue a los 40 y siga siendo el caso: seguiré siendo programadora.',
+            'Durante mis estudios y los primeros años de trabajo, de diversas maneras más o menos sutiles, mi entorno me hizo pensar lo siguiente: para tener una carrera profesional considerada de éxito, debes de ser "manager", "jefa de proyecto"... algo que no implique programar. Y a poder ser antes de los 30. Ni siquiera lo he intentado porque no es lo que quiero. ¿Soy un bicho raro?',
+            'Rompamos los mitos. En esta charla compartiré mis experiencias, las lecciones que he aprendido en estos últimos +10 años y lo que para mí significa realmente ser programador.',
+            'Además os daré algunos trucos para no estancarse y salir de la zona de confort de forma agradable. Para que un día todos y todas llevemos con orgullo el titulo de "programador" en nuestra solapa.',
+            'Yes we code!'
+        ],
+        speaker: 'Katia Aresti',
+        speakerTitle: [
+            'Ingeniera Informática por la Universidad de Deusto, Katia trabaja desde hace años como programadora backend java/scala principalmente.',
+            'Desde 2017 trabaja en Red Hat en el equipo Infinispan/Datadrid, ocupándose de la integración con Spring-Boot y Vert.x.',
+            'Co-organizadora de Duchess Francia (meetup para conectar mujeres tech), participa como ponente sobre diversos temas tanto técnicos (java, testing, arquitecturas de streaming, infinispan) como relacionados con la carrera profesional.'
+        ],
+        when: '11:00-11:50'
     },
 
-    'agile-javascript': {
-        name: 'Agile JavaScript',
-        description: `En el mundo del desarrollo JavaScript, encontrar un flow estable y medianamente fácil de asimilar por nuestro equipo puede suponer todo un reto.<br><br>
-
-        Un posible factor de éxito puede radicar en nuestra capacidad para alinear este entorno con nuestros valores de crafter pata negra: Testing, pair programming, continuous delivery, design patterns...<br><br>
-        
-        En 'Agile JavaScript' intentaremos hacer explícitos estos valores con el fin de que sean ellos los que nos ayuden a elegir el conjunto de prácticas y tecnologías que nos conviene adoptar. Una manera distinta de viajar por el estado actual y futuro del ecosistema JavaScript y no caer en la 'JavaScript fatigue'.`,
-        speaker: 'Ricardo Borillo',
-        speakerTitle: 'Universitat Jaume I',
-        speakerImage: 'borillo.jpg',
-        track: '2',
-        when: '10:30-11:20'
+    'metatypo-redefiniendo-la-tipografia': {
+        name: 'METATYPO: Redefiniendo la tipografía',
+        description: [
+            'La tipografía digital es más que un conjunto de letras, es un pequeño software que puede programarse y con un gran potencial creativo.',
+            'En METATYPO exploramos todas esas posibilidades al mismo tiempo que creamos un marco teórico y práctico a través de casos de estudio.'
+        ],
+        speaker: 'Rubén Chumillas y Álvaro Recuenco',
+        speakerTitle: [
+            'Rubén Chumillas:',
+            'Dirección de Arte y Creatividad Visual en Estudio Rubén Chumillas.',
+            'Dirección de Arte y Diseño Gráfico en Santillana Educación.',
+            'Nominación Grammy Latino al mejor diseño de álbum 2018 (Mismo Sitio, Distinto Lugar - Vetusta Morla)',
+            'Varios premios Laus 2014, 2015, 2017.',
+            'Investigación y teoría: Creación, dirección y coordinación de la plataforma digital de investigación centrada en tipografía y diseño experimental METATYPO.',
+            'Álvaro Recuenco:',
+            'Diseñador Gráfico en Dir. de Arte de Santillana y Diseñador Full-Stack Freelance.',
+            'Colaborador en la web de “ESD Madrid".',
+            'Colaborador en el proyecto “Metatypo”.'
+        ],
+        when: '12:35-13:25'
     },
 
-    'devops-is-not-what-you-think': {
-        name: 'Devops is not what you think',
-        description: `Seguramente alguien os haya contado que Devops es un rol, o un equipo, o incluso peor… el nombre moderno para los administradores de sistemas.<br><br>
-
-        Lo que seguramente no os hayan contado es que Devops es un movimiento, una cultura y una serie de practicas que incluyendo las ideas de Agile, las amplian y modernizan adaptandolas a los tiempos actuales (SaaS, Cloud, etc).<br><br>
-        
-        Devops es la piedra ángular de todos las empresas tecnologicas de alto rendimiento y lo que les permite tener una buena frequencia de despliegue manteniendo la disponibilidad del sistema.<br><br>
-        
-        En esta charla describiremos la cultura (colaboración, confianza, aprendizaje continuo, etc.), las prácticas (incluir requisitos operacionales en el producto, automatización, Continuous Delivery, Infrastructure as Code, You Build It, You Run It, etc...), y daremos ideas de como introducirla (The Three Ways, Hiring, Incident Reports, Optimizar el Mean Ttime To Recovery, etc). Hablaremos de la importancia de la arquitectura, del desarrollo de software ágil y de distintas organizaciones de equipos que favorecen este tipo de cultura.`,
-        speaker: 'Eduardo Ferro',
-        speakerTitle: 'Nextail',
-        speakerImage: 'ferro.jpg',
-        track: '1',
-        when: '12:00-12:50'
+    'como-desarrollar-bots-para-google-assistant': {
+        name: 'Cómo desarrollar bots para Google Assistant',
+        description: [
+            'Los asistentes virtuales han llegado, y parece que para quedarse.',
+            'Google ofrece todo un stack de tecnologías para que podamos desarrollar nuestras propias apps para Google Assistant, y además, es realmente sencillo.',
+            'En esta charla explico todo lo que he aprendido durante el desarrollo de dos juegos: RIC Escape y La Anomalía Dimensional, que explotan mucho de lo que este stack puede ofrecer.'
+        ],
+        speaker: 'Jordi Martí',
+        speakerTitle: [
+            'Desarrollador en Grupo INIT, Jordi trabaja principalmente desarrollando productos digitales relacionados con la salud.',
+            'Cree firmemente en aportar valor a través del aprendizaje, del trabajo en equipo y de la pasión.',
+            'Su vida profesional y sus últimos pet projects le han llevado a explorar el mundo de los bots y asombrarse con el potencial de éstos.'
+        ],
+        when: '13:35-14:25'
     },
 
-    'ux-para-desarrolladores-front-y-back': {
-        name: 'UX para desarrolladores front y back',
-        description: `La experiencia de usuario de un producto o servicio digital es responsabilidad de todo el equipo de desarrollo y no solamente de los 'uxers'.<br><br>
-
-        Muchos proyectos arrancan por la tecnología que se va usar y por ello haremos hincapié en la necesidad actual de poner el foco en el usuario y no en la tecnología si queremos construir productos útiles, deseables y usables.<br><br>
-        
-        Veremos en qué consiste el proceso de Diseño Centrado en el usuario y cómo integrarlo en los procesos de desarrollo más tradicionales.`,
-        speaker: 'Virginia Aguirre',
-        speakerTitle: 'Uxer School',
-        speakerImage: 'aguirre.jpg',
-        track: '2',
-        when: '12:00-12:50'
+    'unbiasing-teams-un-tour-por-la-psicología-aplicada-a-equipos': {
+        name: 'Unbiasing Teams. Un tour por la psicología aplicada a equipos',
+        description: [
+            'Hablaremos de situaciones diarias que tenemos en los equipos y vemos como normales pero que en realidad están fundamentadas en esquemas y estereotipos que gobiernan nuestras decisiones.',
+            'Contaré sesgos, falacias y otros factores psicológicos que nos afectan en el día.'
+        ],
+        speaker: 'Félix López',
+        speakerTitle: [
+            'Félix es actualmente engineering manager en Google. Lleva más de 17 años desarrollando software en los que ha pasado por desarrollo web, programación de videojuegos, sistemas distribuidos, fintech, etc...',
+            'Ha desempeñado roles como desarrollador, team lead, director técnico o engineering manager.',
+            'Pasa los días leyendo sobre sistemas distribuidos, management y psicología.'
+        ],
+        when: '16:00-16:50'
     },
 
-    'diez-retos-de-la-creacion-de-chatbots-y-asistentes-con-nlp': {
-        name: '10 retos de la creación de chatbots y asistentes con NLP',
-        description: 'Los asistentes virtuales y chatbots son tendencia y tienen un gran potencial, pero el uso de lenguaje natural trae asociados retos que los diseñadores y desarrolladores de estas nuevas interfaces tenemos que sortear. En la charla \'Retos de la creación de chatbots y asistentes con NLP\' desmitificaremos el NLP, repasaremos los 10 principales retos de estos proyectos, veremos ejemplos reales de éxitos y hablaremos de herramientas y buenas prácticas que ayudan a crear mejores experiencias conversacionales.',
-        speaker: 'Cristina Santamarina',
-        speakerTitle: 'The Neon Project',
-        speakerImage: 'santamarina.jpg',
-        track: '1',
-        when: '13:00-13:50'
+    'pensando-cristalino': {
+        name: 'Pensando cristalino',
+        description: [
+            '¿Cómo ven las máquinas los cristales? Con un poco de JavaScript y Tensorflow vamos a crear arte generativo, todo paso a paso.',
+            '¡De aquí al Museo del Prado!'
+        ],
+        speaker: 'Bea Hernández',
+        speakerTitle: [
+            'Data Scientist en Olympic Channel. Miembro de NASADatanauts (Comunidad oficial de NASA donde se trabaja con el Open Data de la NASA) y co-organizadora R-Ladies Madrid.'
+        ],
+        when: '17:00-17:50'
     },
 
-    'viaje-desde-arquitectura-hexagonal-al-event-sourcing': {
-        name: 'Viaje desde Arquitectura Hexagonal al Event Sourcing',
-        description: `Arquitecturas basadas en eventos tales como Event Sourcing tienen múltiples beneficios: escalabilidad, gestión de la complejidad, auditoría, etc. Pero llegar a ellas es duro. Nos faltan conocimientos, experiencia y coraje.<br><br>
-
-        En esta charla, mostraré algunos trucos y consejos para evolucionar vuestra arquitectura actual hacia Event Sourcing paso a paso. Empezaremos desde una aplicación con arquitectura hexagonal y acabaremos a las puertas de Event Sourcing.`,
-        speaker: 'Carlos Buenosvinos',
-        speakerTitle: 'Xing',
-        speakerImage: 'buenosvinos.jpg',
-        track: '2',
-        when: '13:00-13:50'
+    'a-journey-building-trust-the-growth': {
+        name: 'A Journey Building Trust: The Growth',
+        description: [
+            'En mi equipo desarrollamos una herramienta para ayudar a los usuarios a comprender el verdadero coste al mover dinero entre diferentes divisas.',
+            'Con esta charla quiero compartir el nacimiento y maduración de este producto y traer a debate los aciertos y errores eligiendo el stack ya que muchas veces me pregunto: “¿y si hubiéramos elegido diferente?”'
+        ],
+        speaker: 'Cata Oyaneder',
+        speakerTitle: [
+            'Trabaja como software engineer en el equipo Comparison de TransferWise donde su objetivo es ayudar al usuario a entender todo lo relacionado con el coste al hacer transferrencias internacionales.',
+            'Desde hace tres años vive en Londres donde primeramente trabajó para Sky News desarrollando aplicaciones en Node y React.',
+            'Ahora su backend es otro pero con la ayuda de su equipo el challenge se hace mucho más divertido.'
+        ],
+        when: '18:00-18:50'
     }
+
 };
 
 Object.keys(talks).forEach((k) => {

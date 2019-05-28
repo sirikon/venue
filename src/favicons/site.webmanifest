@@ -1,6 +1,6 @@
 {
-    "name": "BilboStack",
-    "short_name": "BilboStack",
+    "name": "Pucela Tech Day",
+    "short_name": "Pucela Tech Day",
     "icons": [
         {
             "src": "/android-chrome-192x192.png",
@@ -8,12 +8,12 @@
             "type": "image/png"
         },
         {
-            "src": "/android-chrome-512x512.png",
-            "sizes": "512x512",
+            "src": "/android-chrome-256x256.png",
+            "sizes": "256x256",
             "type": "image/png"
         }
     ],
-    "theme_color": "#542836",
-    "background_color": "#542836",
+    "theme_color": "#bf87ff",
+    "background_color": "#bf87ff",
     "display": "standalone"
 }

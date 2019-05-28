@@ -16,9 +16,11 @@
                 <div class="bsr-talk-card-info-speaker">
                     <span><%= talk.speaker %></span>
                 </div>
-                <div class="bsr-talk-card-info-track">
-                    <span>TRACK <%= talk.track %></span>
-                </div>
+                <% if (talk.track) { %>
+                    <div class="bsr-talk-card-info-track">
+                        <span>TRACK <%= talk.track %></span>
+                    </div>
+                <% } %>
                 <div class="bsr-talk-card-info-when">
                     <span><%= talk.when %></span>
                 </div>
