@@ -1,0 +1,90 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2014-04-01-preview/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "name": {
+            "type": "string"
+        },
+        "location": {
+            "type": "string"
+        },
+        "databaseUser": {
+            "type": "string"
+        },
+        "databasePassword": {
+            "type": "securestring"
+        }
+    },
+    "variables": {
+        "databaseName": "[parameters('name')]",
+        "databaseVersion": "10",
+
+        "databaseSkuTier": "Basic",
+        "databaseSkuFamily": "Gen5",
+        "databaseSkuName": "B_Gen5_1",
+        "databaseSkuCapacity": 1,
+        "databaseSkuSizeMB": "51200",
+
+        "backupRetentionDays": "7",
+        "geoRedundantBackup": "Disabled",
+        "storageAutoGrow": "Enabled",
+        "previewFeature": "",
+
+        "redisName": "[parameters('name')]",
+        
+        "redisSkuName": "Basic",
+        "redisSkuFamily": "C",
+        "redisSkuCapacity": 0
+    },
+    "resources": [
+
+        {
+            "apiVersion": "2017-12-01-preview",
+            "type": "Microsoft.DBforPostgreSQL/servers",
+            "kind": "",
+            "location": "[parameters('location')]",
+            "name": "[variables('databaseName')]",
+            "properties": {
+                "version": "[variables('databaseVersion')]",
+                "administratorLogin": "[parameters('databaseUser')]",
+                "administratorLoginPassword": "[parameters('databasePassword')]",
+                "storageProfile": {
+                    "storageMB": "[variables('databaseSkuSizeMB')]",
+                    "backupRetentionDays": "[variables('backupRetentionDays')]",
+                    "geoRedundantBackup": "[variables('geoRedundantBackup')]",
+                    "storageAutoGrow": "[variables('storageAutoGrow')]"
+                },
+                "previewFeature": "[variables('previewFeature')]"
+            },
+            "sku": {
+                "name": "[variables('databaseSkuName')]",
+                "tier": "[variables('databaseSkuTier')]",
+                "capacity": "[variables('databaseSkuCapacity')]",
+                "size": "[variables('databaseSkuSizeMB')]",
+                "family": "[variables('databaseSkuFamily')]"
+            }
+        },
+
+        {
+            "apiVersion": "2018-03-01",
+            "type": "Microsoft.Cache/Redis",
+            "name": "[variables('redisName')]",
+            "location": "[parameters('location')]",
+            "properties": {
+                "sku": {
+                    "name": "Basic",
+                    "family": "C",
+                    "capacity": 0
+                },
+                "redisConfiguration": {},
+                "enableNonSslPort": false
+            }
+        }
+    ],
+    "outputs": {
+        "redisPrimaryKey": {
+            "type": "string",
+            "value": "[listKeys(resourceId('Microsoft.Cache/Redis', variables('redisName')), '2018-03-01').primaryKey]"
+        }
+    }
+}

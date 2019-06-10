@@ -8,3 +8,4 @@ scripts/variables.sh
 backup
 backup.log
 ./data
+/cloud/azure/variables.sh
