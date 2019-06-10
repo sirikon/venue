@@ -315,7 +315,7 @@ html, body {
 .bsr-talk-speaker-title {
     margin: .5em 0 0 0;
     display: inline-block;
-    color: #440092;
+    color: $primary-color;
     line-height: 1.42;
 
     p {
@@ -420,8 +420,6 @@ html, body {
                 fill: rgba(0,0,0,0.2);
             }
         }
-
-        
     }
 
     &-text {
@@ -438,3 +436,15 @@ html, body {
 .bsr-talk-questions-top {
     padding: 0 0 15px 0;
 }
+
+.bsr-talk-card-questions-button {
+    background-color: $primary-color;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 10px 15px;
+    display: inline-block;
+    margin-top: 15px;
+}
+
+@import "./custom";

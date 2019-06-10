@@ -14,7 +14,7 @@
     "dev": "nodemon",
     "devenv:up": "cd docker/eventtoolbox-devenv && docker-compose up -d",
     "devenv:down": "cd docker/eventtoolbox-devenv && docker-compose down",
-    "style:dev": "node-sass -w -r ./src/style/style.scss ./src/static/style.css",
+    "style:dev": "npm run style:build && npm run style:build -- -w -r",
     "style:build": "node-sass ./src/style/style.scss ./src/static/style.css"
   },
   "repository": {

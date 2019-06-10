@@ -1,0 +1,49 @@
+@import "./variables";
+
+.bsr-header {
+    background-color: white;
+    color: $text-color;
+    box-shadow: 0 6px 20px 0 rgba(23,33,46,0.2);
+
+    &-title {
+        font-size: 0;
+        background-image: url(/static/logo.svg);
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        white-space: nowrap;
+        overflow: hidden;
+        max-width: 300px;
+        height: 60px;
+        display: block;
+        margin: auto;
+    }
+
+    &-link {
+        display: block;
+        text-align: center;
+    }
+}
+
+.bsr-talk-card {
+    margin-top: 15px;
+    box-shadow: 0 6px 20px 0 rgba(23,33,46,0.14);
+}
+
+.bsr-talk-box {
+    box-shadow: 0 6px 20px 0 rgba(23,33,46,0.14);
+    @media (min-width: 800px) {
+        padding: 32px;
+    }
+}
+
+.bsr-talk-speaker-image {
+    border-radius: 50%;
+    box-shadow: 0 6px 20px 0 rgba(23,33,46,0.14);
+}
+
+.bsr-talk-info {
+    @media (min-width: 800px) {
+        margin-bottom: 28px;
+    }
+}
