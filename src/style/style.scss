@@ -315,8 +315,12 @@ html, body {
 .bsr-talk-speaker-title {
     margin: .5em 0 0 0;
     display: inline-block;
-    color: $primary-color;
+    color: #440092;
     line-height: 1.42;
+
+    p {
+        margin-bottom: 10px;
+    }
 }
 
 .bsr-talk-feedback-stars {
