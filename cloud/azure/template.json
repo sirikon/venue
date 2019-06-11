@@ -5,6 +5,15 @@
         "name": {
             "type": "string"
         },
+        "url": {
+            "type": "string"
+        },
+        "adminUser": {
+            "type": "string"
+        },
+        "adminPassword": {
+            "type": "securestring"
+        },
         "location": {
             "type": "string"
         },
@@ -13,28 +22,51 @@
         },
         "databasePassword": {
             "type": "securestring"
+        },
+        "dockerRegistryUrl": {
+            "type": "string"
+        },
+        "dockerRegistryUsername": {
+            "type": "string"
+        },
+        "dockerRegistryPassword": {
+            "type": "securestring"
+        },
+        "dockerImageName": {
+            "type": "string"
         }
     },
     "variables": {
         "databaseName": "[parameters('name')]",
         "databaseVersion": "10",
-
         "databaseSkuTier": "Basic",
         "databaseSkuFamily": "Gen5",
         "databaseSkuName": "B_Gen5_1",
         "databaseSkuCapacity": 1,
         "databaseSkuSizeMB": "51200",
-
         "backupRetentionDays": "7",
         "geoRedundantBackup": "Disabled",
         "storageAutoGrow": "Enabled",
         "previewFeature": "",
 
         "redisName": "[parameters('name')]",
-        
         "redisSkuName": "Basic",
         "redisSkuFamily": "C",
-        "redisSkuCapacity": 0
+        "redisSkuCapacity": 0,
+
+        "webAppName": "[parameters('name')]",
+        "webAppDockerRegistryUrl": "[parameters('dockerRegistryUrl')]",
+        "webAppDockerRegistryUsername": "[parameters('dockerRegistryUsername')]",
+        "webAppDockerRegistryPassword": "[parameters('dockerRegistryPassword')]",
+        "webAppLinuxFXVersion": "[concat('DOCKER|', parameters('dockerImageName'))]",
+        "webAppAlwaysOn": true,
+
+        "webAppHostingPlanName": "[parameters('name')]",
+        "webAppHostingPlanWorkerSize": "0",
+        "webAppHostingPlanWorkerSizeId": "0",
+        "webAppHostingPlanNumberOfWorkers": "1",
+        "webAppHostingPlanSkuTier": "Basic",
+        "webAppHostingPlanSkuName": "B1"
     },
     "resources": [
 
@@ -62,7 +94,22 @@
                 "capacity": "[variables('databaseSkuCapacity')]",
                 "size": "[variables('databaseSkuSizeMB')]",
                 "family": "[variables('databaseSkuFamily')]"
-            }
+            },
+            "resources": [
+                {
+                    "name": "AllowAll",
+                    "type": "firewallrules",
+                    "apiVersion": "2017-12-01",
+                    "location": "[parameters('location')]",
+                    "dependsOn": [
+                        "[concat('Microsoft.DBforPostgreSQL/servers/', variables('databaseName'))]"
+                    ],
+                    "properties": {
+                        "startIpAddress": "0.0.0.0",
+                        "endIpAddress": "255.255.255.255"
+                    }
+                }
+            ]
         },
 
         {
@@ -72,12 +119,89 @@
             "location": "[parameters('location')]",
             "properties": {
                 "sku": {
-                    "name": "Basic",
-                    "family": "C",
-                    "capacity": 0
+                    "name": "[variables('redisSkuName')]",
+                    "family": "[variables('redisSkuFamily')]",
+                    "capacity": "[variables('redisSkuCapacity')]"
                 },
                 "redisConfiguration": {},
                 "enableNonSslPort": false
+            }
+        },
+
+        {
+            "apiVersion": "2018-02-01",
+            "name": "[variables('webAppName')]",
+            "type": "Microsoft.Web/sites",
+            "location": "[parameters('location')]",
+            "tags": {},
+            "dependsOn": [
+                "[concat('Microsoft.Web/serverfarms/', variables('webAppHostingPlanName'))]"
+            ],
+            "properties": {
+                "name": "[variables('webAppName')]",
+                "siteConfig": {
+                    "appSettings": [
+                        {
+                            "name": "DOCKER_REGISTRY_SERVER_URL",
+                            "value": "[variables('webAppDockerRegistryUrl')]"
+                        },
+                        {
+                            "name": "DOCKER_REGISTRY_SERVER_USERNAME",
+                            "value": "[variables('webAppDockerRegistryUsername')]"
+                        },
+                        {
+                            "name": "DOCKER_REGISTRY_SERVER_PASSWORD",
+                            "value": "[variables('webAppDockerRegistryPassword')]"
+                        },
+                        {
+                            "name": "DATABASE_URL",
+                            "value": "[concat('postgresql://', parameters('databaseUser'), '@', variables('databaseName'), ':', parameters('databasePassword'), '@', reference(resourceId('Microsoft.DBforPostgreSQL/servers/', variables('databaseName'))).fullyQualifiedDomainName, '/postgres?ssl=true')]"
+                        },
+                        {
+                            "name": "REDIS_URL",
+                            "value": "[concat('redis://', variables('redisName'), '.redis.cache.windows.net:6380?password=', listKeys(resourceId('Microsoft.Cache/Redis', variables('redisName')), '2018-03-01').primaryKey)]"
+                        },
+                        {
+                            "name": "BASE_URL",
+                            "value": "[parameters('url')]"
+                        },
+                        {
+                            "name": "ADMIN_USER",
+                            "value": "[parameters('adminUser')]"
+                        },
+                        {
+                            "name": "ADMIN_PASSWORD",
+                            "value": "[parameters('adminPassword')]"
+                        },
+                        {
+                            "name": "PORT",
+                            "value": "80"
+                        }
+                    ],
+                    "linuxFxVersion": "[variables('webAppLinuxFXVersion')]",
+                    "alwaysOn": "[variables('webAppAlwaysOn')]"
+                },
+                "serverFarmId": "[variables('webAppHostingPlanName')]",
+                "clientAffinityEnabled": false
+            }
+        },
+
+        {
+            "apiVersion": "2018-02-01",
+            "name": "[variables('webAppHostingPlanName')]",
+            "type": "Microsoft.Web/serverfarms",
+            "location": "[parameters('location')]",
+            "kind": "linux",
+            "properties": {
+                "name": "[variables('webAppHostingPlanName')]",
+                "workerSize": "[variables('webAppHostingPlanWorkerSize')]",
+                "workerSizeId": "[variables('webAppHostingPlanWorkerSizeId')]",
+                "numberOfWorkers": "[variables('webAppHostingPlanNumberOfWorkers')]",
+                "reserved": true
+            },
+            "sku": {
+                "Tier": "[variables('webAppHostingPlanSkuTier')]",
+                "Name": "[variables('webAppHostingPlanSkuName')]"
             }
         }
     ],
