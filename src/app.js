@@ -14,7 +14,7 @@ const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'admin';
 
 const config = {
     title: 'DotNet2019',
-    year: '2019',
+    year: '',
     twitter: '@dotNetConfSpain',
     baseUrl: process.env.BASE_URL || 'http://localhost:8000'
 };

@@ -28,6 +28,7 @@
   },
   "homepage": "https://github.com/Sirikon/event-feedback#README",
   "dependencies": {
+    "@sindresorhus/slugify": "^0.9.1",
     "body-parser": "^1.18.2",
     "connect-redis": "^3.3.3",
     "ejs": "^2.5.7",

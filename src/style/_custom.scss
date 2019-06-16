@@ -35,6 +35,15 @@
     @media (min-width: 800px) {
         padding: 32px;
     }
+
+    ul {
+        list-style: square;
+        padding-left: 1.3em;
+
+        li {
+            line-height: 1.5em;
+        }
+    }
 }
 
 .bsr-talk-speaker-image {
@@ -45,5 +54,8 @@
 .bsr-talk-info {
     @media (min-width: 800px) {
         margin-bottom: 28px;
+        &.no-desc {
+            margin-bottom: 0;
+        }
     }
 }
