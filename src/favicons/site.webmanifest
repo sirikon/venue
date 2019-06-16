@@ -1,6 +1,6 @@
 {
-    "name": "BilboStack",
-    "short_name": "BilboStack",
+    "name": "",
+    "short_name": "",
     "icons": [
         {
             "src": "/android-chrome-192x192.png",
@@ -13,7 +13,7 @@
             "type": "image/png"
         }
     ],
-    "theme_color": "#542836",
-    "background_color": "#542836",
+    "theme_color": "#ffffff",
+    "background_color": "#ffffff",
     "display": "standalone"
 }
