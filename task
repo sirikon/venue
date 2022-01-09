@@ -9,22 +9,20 @@ def cli():
     @command
     def run():
         cmd('deno', 'run', *CONFIG, *IMPORT_MAP,
-            '-A', 'src/main.ts')
+            '-A', 'src/main.ts', cwd='back')
 
     @command
     def fmt():
-        cmd('deno', 'fmt', *CONFIG)
+        cmd('deno', 'fmt', *CONFIG, cwd='back')
 
     @command
     def lint():
-        cmd('deno', 'lint', *CONFIG)
+        cmd('deno', 'lint', *CONFIG, cwd='back')
 
     def compose(*args):
-        subprocess.run([
-            'docker-compose',
+        cmd('docker-compose',
             '--project-name', 'confpanion',
-            *args
-        ], cwd='docker', check=True)
+            *args, cwd='docker')
 
     def devenv(*args):
         compose('-f', 'docker-compose.devenv.yml', *args)
@@ -51,7 +49,7 @@ def cli():
 # fmt: off
 # https://gist.github.com/sirikon/d4327b6cc3de5cc244dbe5529d8f53ae
 import inspect, sys, os, subprocess; os.chdir(os.path.dirname(__file__));commands = []
-def cmd(*args): subprocess.run(args, check=True)
+def cmd(*args, **kwargs): subprocess.run(args, **kwargs, check=True)
 def spec(f): return inspect.getfullargspec(f)
 def command(func): commands.append(func); return func
 cli(); args = sys.argv[1:]
