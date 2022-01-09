@@ -1,12 +1,17 @@
 {
   "fmt": {
     "files": {
-      "include": ["src"]
+      "include": ["src/"],
+      "exclude": ["src/vendor/denox/superstruct"]
     }
   },
   "lint": {
     "files": {
-      "include": ["src"]
+      "include": ["src/"],
+      "exclude": ["src/vendor/denox/superstruct"]
+    },
+    "rules": {
+      "tags": ["recommended"]
     }
   }
 }

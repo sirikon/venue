@@ -1,23 +1,22 @@
 #!/usr/bin/env python3
 
+CONFIG = ['--config', 'deno.json']
+IMPORT_MAP = ['--import-map', 'src/import_map.json']
+
 def cli():
 
     @command
     def run():
-        cmd('deno', 'run', '-A',
-            '--config', 'deno.json',
-            '--import-map', 'src/import_map.json',
-            'src/main.ts')
+        cmd('deno', 'run', *CONFIG, *IMPORT_MAP,
+            '-A', 'src/main.ts')
 
     @command
     def fmt():
-        cmd('deno', 'fmt',
-            '--config', 'deno.json')
+        cmd('deno', 'fmt', *CONFIG)
 
     @command
     def lint():
-        cmd('deno', 'lint',
-            '--config', 'deno.json')
+        cmd('deno', 'lint', *CONFIG)
 
 
 
