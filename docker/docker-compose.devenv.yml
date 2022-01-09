@@ -1,0 +1,13 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:12-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - "../resources/db-migrations:/docker-entrypoint-initdb.d:ro"
+    ports:
+      - 5432:5432

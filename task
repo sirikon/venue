@@ -3,6 +3,7 @@
 CONFIG = ['--config', 'deno.json']
 IMPORT_MAP = ['--import-map', 'src/import_map.json']
 
+
 def cli():
 
     @command
@@ -17,6 +18,32 @@ def cli():
     @command
     def lint():
         cmd('deno', 'lint', *CONFIG)
+
+    def compose(*args):
+        subprocess.run([
+            'docker-compose',
+            '--project-name', 'confpanion',
+            *args
+        ], cwd='docker', check=True)
+
+    def devenv(*args):
+        compose('-f', 'docker-compose.devenv.yml', *args)
+
+    @command
+    def devenv_up():
+        devenv('up', '-d')
+
+    @command
+    def devenv_down():
+        devenv('down')
+
+    @command
+    def devenv_psql():
+        devenv('exec', 'db', 'psql', '-U', 'postgres')
+
+    command(devenv)
+    command(compose)
+
 
 
 
