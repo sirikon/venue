@@ -1,23 +1,23 @@
 #!/usr/bin/env python3
 
-CONFIG = ['--config', 'deno.json']
-IMPORT_MAP = ['--import-map', 'src/import_map.json']
+DENO_CONFIG = ['--config', 'deno.json']
+DENO_IMPORT_MAP = ['--import-map', 'src/import_map.json']
 
 
 def cli():
 
     @command
     def run():
-        cmd('deno', 'run', *CONFIG, *IMPORT_MAP,
+        cmd('deno', 'run', *DENO_CONFIG, *DENO_IMPORT_MAP,
             '-A', 'src/main.ts', cwd='back')
 
     @command
     def fmt():
-        cmd('deno', 'fmt', *CONFIG, cwd='back')
+        cmd('deno', 'fmt', *DENO_CONFIG, cwd='back')
 
     @command
     def lint():
-        cmd('deno', 'lint', *CONFIG, cwd='back')
+        cmd('deno', 'lint', *DENO_CONFIG, cwd='back')
 
     def compose(*args):
         cmd('docker-compose',

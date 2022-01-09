@@ -17,8 +17,5 @@
   },
   "[jsonc]": {
     "editor.defaultFormatter": "denoland.vscode-deno"
-  },
-  "[python]": {
-    "editor.tabSize": 4
   }
 }

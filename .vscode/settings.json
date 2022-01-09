@@ -1,0 +1,18 @@
+{
+  "editor.detectIndentation": false,
+  "editor.tabSize": 2,
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features",
+    "files.insertFinalNewline": true
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features",
+    "files.insertFinalNewline": true
+  },
+  "[python]": {
+    "editor.tabSize": 4
+  },
+  "files.exclude": {
+    "back": true
+  }
+}
