@@ -1,0 +1,41 @@
+#!/usr/bin/env python3
+
+def cli():
+
+    @command
+    def run():
+        cmd('deno', 'run', '-A',
+            '--config', 'deno.json',
+            '--import-map', 'src/import_map.json',
+            'src/main.ts')
+
+    @command
+    def fmt():
+        cmd('deno', 'fmt',
+            '--config', 'deno.json')
+
+    @command
+    def lint():
+        cmd('deno', 'lint',
+            '--config', 'deno.json')
+
+
+
+
+# fmt: off
+# https://gist.github.com/sirikon/d4327b6cc3de5cc244dbe5529d8f53ae
+import inspect, sys, os, subprocess; os.chdir(os.path.dirname(__file__));commands = []
+def cmd(*args): subprocess.run(args, check=True)
+def spec(f): return inspect.getfullargspec(f)
+def command(func): commands.append(func); return func
+cli(); args = sys.argv[1:]
+if len(args) == 0: print("Available commands:"); [print(' '.join([
+    f' {f.__name__}',
+    *[f'<{a}>' for a in spec(f).args],
+    *([f'<...{spec(f).varargs}>'] if spec(f).varargs is not None else [])
+])) for f in commands]; exit(0)
+matching_commands = [f for f in commands if f.__name__ == args[0]]
+if len(matching_commands) == 0: print(f'Unknown command "{args[0]}"');sys.exit(1)
+try: matching_commands[0](*args[1:])
+except KeyboardInterrupt: pass
+except subprocess.CalledProcessError as err: sys.exit(err.returncode)
