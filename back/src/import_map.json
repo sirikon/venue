@@ -1,5 +1,7 @@
 {
   "imports": {
-    "std/": "https://deno.land/std@0.120.0/"
+    "denox/": "./vendor/denox/",
+    "std/": "https://deno.land/std@0.120.0/",
+    "oak/": "https://deno.land/x/oak@v10.1.0/"
   }
 }

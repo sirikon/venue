@@ -1,1 +1,3 @@
-console.log("Henlo");
+import { webServer } from "./web/server.ts";
+
+await webServer();
