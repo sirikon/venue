@@ -11,5 +11,5 @@ export const webServer = async () => {
     console.log(`Listening on port ${e.port}`);
   });
 
-  await app.listen({ port: parseInt(config.CONFPANION_PORT) });
+  await app.listen({ port: config.CONFPANION_PORT });
 };
