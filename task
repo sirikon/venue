@@ -1,7 +1,15 @@
 #!/usr/bin/env python3
+import os
 
 DENO_CONFIG = ['--config', 'deno.json']
 DENO_IMPORT_MAP = ['--import-map', 'src/import_map.json']
+BACK_ENV = dict(
+    os.environ,
+    CONFPANION_DB_USER='postgres',
+    CONFPANION_DB_PASSWORD='postgres',
+    CONFPANION_DB_NAME='postgres',
+    CONFPANION_DB_HOST='127.0.0.1'
+)
 
 
 def cli():
@@ -9,7 +17,7 @@ def cli():
     @command
     def run():
         cmd('deno', 'run', *DENO_CONFIG, *DENO_IMPORT_MAP,
-            '-A', 'src/main.ts', cwd='back')
+            '-A', 'src/main.ts', cwd='back', env=BACK_ENV)
 
     @command
     def fmt():
