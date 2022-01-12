@@ -17,5 +17,10 @@
   },
   "[jsonc]": {
     "editor.defaultFormatter": "denoland.vscode-deno"
+  },
+  "[xml]": {
+    "editor.defaultFormatter": "DotJoshJohnson.xml",
+    "files.insertFinalNewline": true,
+    "editor.wordWrap": "on"
   }
 }
