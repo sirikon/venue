@@ -1,0 +1,12 @@
+body {
+  background-color: whitesmoke;
+  margin: 0;
+}
+
+.x-container {
+  display: block;
+  margin: auto;
+  max-width: 800px;
+  padding: 1px 1em;
+  background-color: white;
+}
