@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import os
+from datetime import datetime
 
 DENO_CONFIG = ['--config', 'deno.json']
 DENO_IMPORT_MAP = ['--import-map', 'src/import_map.json']
@@ -27,10 +28,10 @@ def cli():
     def lint():
         cmd('deno', 'lint', *DENO_CONFIG, cwd='back')
 
-    def compose(*args):
+    def compose(*args, **kwargs):
         cmd('docker-compose',
             '--project-name', 'venue',
-            *args, cwd='docker')
+            *args, **kwargs, cwd='docker')
 
     def devenv(*args):
         compose('-f', 'docker-compose.devenv.yml', *args)
@@ -49,6 +50,22 @@ def cli():
 
     command(devenv)
     command(compose)
+
+    @command
+    def build():
+        cmd('rm', '-rf', 'dist')
+        cmd('mkdir', '-p', 'dist')
+        cmd('deno', 'compile', *DENO_CONFIG, *DENO_IMPORT_MAP,
+            '-A', '--output', '../dist/venue',
+            './src/main.ts', cwd='back')
+        cmd('cp', '-r', 'resources', '../dist/resources', cwd='back')
+
+    @command
+    def build_docker():
+        compose('-f', 'docker-compose.build.yml', 'build', env=dict(
+            os.environ,
+            VENUE_TAG=datetime.now().strftime("%Y%m%d_%H%M%S")
+        ))
 
 
 

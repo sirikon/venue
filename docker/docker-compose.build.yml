@@ -1,0 +1,8 @@
+version: "3.9"
+
+services:
+  venue:
+    image: sirikon/venue:${VENUE_TAG:-dev}
+    build:
+      context: ../
+      dockerfile: ./docker/Dockerfile
