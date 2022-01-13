@@ -1,0 +1,35 @@
+<% layout('./_base.html', { title: `Venue | ${it.name}` }) %>
+
+<div class="x-talk">
+
+  <section class="x-talk-section is-boxed">
+    <h1 class="x-talk-title"><%= it.talk.name %></h1>
+    <div class="x-talk-info">
+      <span class="x-talk-info-track">
+        <%= it.talk.track %>
+      </span>
+      <span class="x-talk-info-when">
+        <%= `${it.talk.date.getUTCHours()}:${it.talk.date.getUTCMinutes()}` %>
+      </span>
+    </div>
+    <div class="x-talk-description">
+      <p><%= it.talk.description %></p>
+    </div>
+  </section>
+
+  <section class="x-talk-section x-talk-speaker">
+    <div class="x-talk-speaker-info">
+      <span class="x-talk-speaker-info-name"><%= it.talk.speaker_name %></span>
+      <span class="x-talk-speaker-info-title"><%= it.talk.speaker_title %></span>
+    </div>
+  </section>
+
+  <section class="x-talk-section is-boxed">
+    <h2 class="x-talk-section-title">Haz una pregunta</h2>
+  </section>
+
+  <section class="x-talk-section is-boxed">
+    <h2 class="x-talk-section-title">Valora la charla</h2>
+  </section>
+
+</div>

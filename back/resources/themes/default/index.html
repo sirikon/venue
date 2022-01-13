@@ -3,7 +3,7 @@
 <div class="x-talk-list">
 
   <% for(const talk of it.talks) { %>
-    <a class="x-talk-list-item" href="#">
+    <a class="x-talk-list-item" href="/talk/<%= talk.slug %>">
       <div class="x-talk-list-item-arrow">
         <%~ includeFile('./icons/chevron-right.svg') %>
       </div>
@@ -17,7 +17,7 @@
         <span class="x-talk-list-item-info-track">
           <%= talk.track %>
         </span>
-        <span class="x-talk-list-item-info-hour">
+        <span class="x-talk-list-item-info-when">
           <%= `${talk.date.getUTCHours()}:${talk.date.getUTCMinutes()}` %>
         </span>
       </div>

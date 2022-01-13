@@ -12,6 +12,15 @@ export const webServer = async () => {
     ctx.response.body = await render("index.html", { talks });
   });
 
+  router.get("/talk/:slug", async (ctx) => {
+    const talk = await talkStore.findBySlug(ctx.params.slug);
+    if (!talk) {
+      ctx.response.status = 404;
+      return;
+    }
+    ctx.response.body = await render("talk.html", { talk });
+  });
+
   router.get("/static/:path*", async (ctx) => {
     if (!ctx.params.path) {
       ctx.response.status = 404;

@@ -2,7 +2,7 @@
   --primary-color: #542836;
   --accent-color: #d09c2e;
   --bright-text-color: white;
-  --dark-text-color: black;
+  --dark-text-color: #333;
   --background-color: #eeeced;
   --bright-background-color: white;
 
@@ -100,7 +100,7 @@ body {
 }
 .x-talk-list-item-info-speaker,
 .x-talk-list-item-info-track,
-.x-talk-list-item-info-hour {
+.x-talk-list-item-info-when {
   font-size: 1em;
   font-weight: 700;
   white-space: nowrap;
@@ -109,6 +109,71 @@ body {
   color: var(--accent-color);
   margin: 0 0.6em;
 }
-.x-talk-list-item-info-hour {
+.x-talk-list-item-info-when {
+  color: var(--primary-color);
+}
+
+/* TALK */
+.x-talk-section {
+  --padding: 1em;
+
+  padding: var(--padding);
+  margin-top: var(--base-margin);
+}
+.x-talk-section-title {
+  font-size: 1.3em;
+  color: var(--primary-color);
+  margin: 0 0 var(--base-margin) 0;
+  font-weight: normal;
+}
+.x-talk-section.is-boxed {
+  background-color: white;
+}
+.x-talk-title {
+  font-size: 1.7em;
+  line-height: 1em;
+  font-weight: 700;
+  margin: 0;
+  color: var(--primary-color);
+}
+.x-talk-info {
+  margin-top: var(--base-margin);
+}
+.x-talk-info-track,
+.x-talk-info-when {
+  font-size: 1em;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.x-talk-info-track {
+  color: var(--accent-color);
+  margin: 0 0.6em 0 0;
+}
+.x-talk-description {
+  line-height: 1.4em;
+  color: var(--dark-text-color);
+}
+.x-talk-description > p {
+  margin: var(--base-margin) 0 0 0;
+}
+.x-talk-speaker {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.x-talk-speaker-info {
+  flex-grow: 1;
+}
+.x-talk-speaker-info-name {
+  display: block;
+  font-size: 1.4em;
+  line-height: 1em;
+  font-weight: bold;
+  color: var(--primary-color);
+}
+.x-talk-speaker-info-title {
+  margin: 0.5em 0 0 0;
+  display: inline-block;
+  line-height: 1.42;
   color: var(--primary-color);
 }
