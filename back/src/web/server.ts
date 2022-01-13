@@ -9,7 +9,6 @@ export const webServer = async () => {
 
   router.get("/", async (ctx) => {
     const talks = await talkStore.findAll();
-    talks.forEach(t => console.log(t.date.getUTCHours()));
     ctx.response.body = await render("index.html", { talks });
   });
 

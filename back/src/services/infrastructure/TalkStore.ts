@@ -1,16 +1,18 @@
-import { client } from "../../data/db.ts";
+import { withClient, WithClientFunc } from "../../data/db.ts";
 import { Talk } from "../../models/mod.ts";
 
 export class TalkStore {
   constructor(
-    private db: typeof client,
+    private withClient: WithClientFunc,
   ) {}
 
-  async findAll(): Promise<Talk[]> {
-    const result = await this.db.queryObject
-      `SELECT id, slug, name, description, speaker_name, speaker_title, track, date FROM talks`;
-    return result.rows as Talk[];
+  findAll(): Promise<Talk[]> {
+    return this.withClient(async (client) => {
+      const result = await client.queryObject
+        `SELECT id, slug, name, description, speaker_name, speaker_title, track, date FROM talks`;
+      return result.rows as Talk[];
+    });
   }
 }
 
-export const talkStore = new TalkStore(client);
+export const talkStore = new TalkStore(withClient);
