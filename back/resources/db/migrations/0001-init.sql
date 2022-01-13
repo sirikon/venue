@@ -1,6 +1,6 @@
 CREATE TABLE talks (
   id SERIAL PRIMARY KEY,
-  slug VARCHAR NOT NULL,
+  slug VARCHAR NOT NULL UNIQUE,
   name VARCHAR NOT NULL,
   description VARCHAR NOT NULL,
   speaker_name VARCHAR NOT NULL,
