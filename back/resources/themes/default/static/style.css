@@ -4,6 +4,9 @@
   --bright-text-color: white;
   --dark-text-color: black;
   --background-color: #eeeced;
+  --bright-background-color: white;
+
+  --base-margin: 10px;
 
   --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
@@ -38,4 +41,67 @@ body {
 }
 .x-header a {
   text-decoration: none;
+}
+
+/* FOOTER */
+.x-footer {
+  color: var(--primary-color);
+  padding: 25px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+/* TALK LIST */
+.x-talk-list-item {
+  --padding: 0.8em;
+  --right-padding-multiplier: 3;
+
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  position: relative;
+  background-color: var(--bright-background-color);
+  padding: var(--padding) calc(var(--padding) * var(--right-padding-multiplier))
+    var(--padding) calc(var(--padding) * 1.2);
+  margin-top: var(--base-margin);
+}
+.x-talk-list-item-arrow {
+  position: absolute;
+  right: calc(var(--padding) * (var(--right-padding-multiplier) / 2));
+  top: 50%;
+  transform: translateY(-50%) translateX(50%);
+}
+.x-talk-list-item-arrow svg {
+  fill: var(--accent-color);
+  height: 0.88em;
+  width: auto;
+}
+.x-talk-list-item-title {
+  margin: 0 0 0.4em 0;
+  color: var(--primary-color);
+  font-size: 1.3em;
+}
+.x-talk-list-item-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.x-talk-list-item-info-speaker {
+  color: var(--accent-color);
+  font-style: italic;
+  flex-grow: 1;
+}
+.x-talk-list-item-info-speaker,
+.x-talk-list-item-info-track,
+.x-talk-list-item-info-hour {
+  font-size: 1em;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.x-talk-list-item-info-track {
+  color: var(--accent-color);
+  margin: 0 0.6em;
+}
+.x-talk-list-item-info-hour {
+  color: var(--primary-color);
 }
