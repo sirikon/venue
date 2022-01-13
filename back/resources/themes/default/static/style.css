@@ -43,6 +43,11 @@ body {
   text-decoration: none;
 }
 
+/* BODY */
+.x-body {
+  padding: 0 var(--base-margin);
+}
+
 /* FOOTER */
 .x-footer {
   color: var(--primary-color);
