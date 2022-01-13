@@ -56,8 +56,7 @@ def cli():
         cmd('rm', '-rf', 'dist')
         cmd('mkdir', '-p', 'dist')
         cmd('deno', 'compile', *DENO_CONFIG, *DENO_IMPORT_MAP,
-            '-A', '--output', '../dist/venue',
-            './src/main.ts', cwd='back')
+            '-A', '--output', '../dist/venue', './src/main.ts', cwd='back')
         cmd('cp', '-r', 'resources', '../dist/resources', cwd='back')
 
     @command
