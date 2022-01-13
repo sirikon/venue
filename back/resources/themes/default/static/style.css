@@ -27,6 +27,11 @@ body {
   max-width: var(--max-width);
 }
 
+/* BODY */
+.x-body {
+  padding: 0 var(--base-margin);
+}
+
 /* HEADER */
 .x-header {
   background-color: var(--primary-color);
@@ -43,15 +48,10 @@ body {
   text-decoration: none;
 }
 
-/* BODY */
-.x-body {
-  padding: 0 var(--base-margin);
-}
-
 /* FOOTER */
 .x-footer {
   color: var(--primary-color);
-  padding: 25px;
+  padding: calc(var(--base-margin) * 2.5) 0;
   text-align: center;
   flex-shrink: 0;
 }
