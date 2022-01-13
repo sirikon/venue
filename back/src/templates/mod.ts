@@ -3,6 +3,7 @@ import { join } from "std/path/mod.ts";
 import config from "../config/mod.ts";
 
 Eta.configure({
+  cache: config.VENUE_TEMPLATE_CACHING,
   views: join(config.VENUE_THEMES_FOLDER, config.VENUE_THEME_NAME),
 });
 
