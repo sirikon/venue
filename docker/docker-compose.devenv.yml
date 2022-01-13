@@ -8,6 +8,6 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     volumes:
-      - "../back/resources/db-migrations:/docker-entrypoint-initdb.d:ro"
+      - "../back/resources/db/migrations:/docker-entrypoint-initdb.d:ro"
     ports:
       - 5432:5432

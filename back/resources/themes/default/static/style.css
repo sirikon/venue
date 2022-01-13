@@ -18,6 +18,8 @@ body {
   background-color: var(--background-color);
   font-family: var(--font-family);
   margin: 0;
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
 
 /* CONTAINER */

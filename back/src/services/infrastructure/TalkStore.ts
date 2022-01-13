@@ -8,7 +8,7 @@ export class TalkStore {
 
   async findAll(): Promise<Talk[]> {
     const result = await this.db.queryObject
-      `SELECT id, slug, name, description FROM talks`;
+      `SELECT id, slug, name, description, speaker_name, speaker_title, track, date FROM talks`;
     return result.rows as Talk[];
   }
 }

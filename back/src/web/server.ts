@@ -8,9 +8,9 @@ export const webServer = async () => {
   const router = new Router();
 
   router.get("/", async (ctx) => {
-    ctx.response.body = await render("index.html", {
-      talks: await talkStore.findAll(),
-    });
+    const talks = await talkStore.findAll();
+    talks.forEach(t => console.log(t.date.getUTCHours()));
+    ctx.response.body = await render("index.html", { talks });
   });
 
   router.get("/static/:path*", async (ctx) => {

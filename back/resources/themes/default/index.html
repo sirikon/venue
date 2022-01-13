@@ -2,40 +2,26 @@
 
 <div class="x-talk-list">
 
-  <a class="x-talk-list-item" href="#">
-    <div class="x-talk-list-item-arrow">
-      <%~ includeFile('./icons/chevron-right.svg') %>
-    </div>
-    <h3 class="x-talk-list-item-title">Charla de prueba</h3>
-    <div class="x-talk-list-item-info">
-      <span class="x-talk-list-item-info-speaker">John Doe</span>
-      <span class="x-talk-list-item-info-track">Track 1</span>
-      <span class="x-talk-list-item-info-hour">21:30</span>
-    </div>
-  </a>
-
-  <a class="x-talk-list-item" href="#">
-    <div class="x-talk-list-item-arrow">
-      <%~ includeFile('./icons/chevron-right.svg') %>
-    </div>
-    <h3 class="x-talk-list-item-title">Charla de prueba</h3>
-    <div class="x-talk-list-item-info">
-      <span class="x-talk-list-item-info-speaker">John Doe</span>
-      <span class="x-talk-list-item-info-track">Track 1</span>
-      <span class="x-talk-list-item-info-hour">21:30</span>
-    </div>
-  </a>
-
-  <a class="x-talk-list-item" href="#">
-    <div class="x-talk-list-item-arrow">
-      <%~ includeFile('./icons/chevron-right.svg') %>
-    </div>
-    <h3 class="x-talk-list-item-title">Charla de prueba</h3>
-    <div class="x-talk-list-item-info">
-      <span class="x-talk-list-item-info-speaker">John Doe</span>
-      <span class="x-talk-list-item-info-track">Track 1</span>
-      <span class="x-talk-list-item-info-hour">21:30</span>
-    </div>
-  </a>
+  <% for(const talk of it.talks) { %>
+    <a class="x-talk-list-item" href="#">
+      <div class="x-talk-list-item-arrow">
+        <%~ includeFile('./icons/chevron-right.svg') %>
+      </div>
+      <h3 class="x-talk-list-item-title">
+        <%= talk.name %>
+      </h3>
+      <div class="x-talk-list-item-info">
+        <span class="x-talk-list-item-info-speaker">
+          <%= talk.speaker_name %>
+        </span>
+        <span class="x-talk-list-item-info-track">
+          <%= talk.track %>
+        </span>
+        <span class="x-talk-list-item-info-hour">
+          <%= `${talk.date.getUTCHours()}:${talk.date.getUTCMinutes()}` %>
+        </span>
+      </div>
+    </a>
+  <% } %>
 
 </div>
