@@ -177,3 +177,54 @@ body {
   line-height: 1.42;
   color: var(--primary-color);
 }
+.x-talk-textarea {
+  display: block;
+  margin: auto;
+  width: 100%;
+  max-width: calc(var(--max-width) * 0.375);
+  resize: none;
+  height: calc(var(--max-width) * 0.1875);
+  border-color: rgba(0, 0, 0, 0.1);
+  border-style: solid;
+  border-width: 1px;
+  font-size: 1.2em;
+  padding: calc(var(--base-margin) * 1.5);
+  box-sizing: border-box;
+}
+.x-talk-button {
+  appearance: none;
+  -moz-appearance: none;
+  width: 100%;
+  max-width: calc(var(--max-width) * 0.375);
+  margin: var(--base-margin) auto 0 auto;
+  display: block;
+  font-size: 1.3em;
+  background-color: var(--accent-color);
+  color: var(--bright-text-color);
+  border: none;
+  padding: 0.4em;
+  cursor: pointer;
+}
+
+/* STARS */
+.x-stars {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: calc(var(--max-width) * 0.375);
+  margin: var(--base-margin) auto;
+}
+.x-stars > label {
+  cursor: pointer;
+}
+.x-stars > label > svg {
+  width: 2.5em;
+  height: 2.5em;
+  fill: var(--accent-color);
+}
+.x-stars > input {
+  display: none;
+}
+.x-stars > input:checked ~ label > svg {
+  fill: rgba(0, 0, 0, 0.05);
+}
