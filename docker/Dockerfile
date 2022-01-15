@@ -7,7 +7,7 @@ RUN apt-get update \
 
 RUN git clone \
   --branch v0.9.0 --depth 1 \
-  https://github.com/asdf-vm/asdf.git /asdf 
+  https://github.com/asdf-vm/asdf.git /asdf
 WORKDIR /app
 
 COPY .tool-versions .
