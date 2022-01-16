@@ -5,6 +5,7 @@ CREATE TABLE talks (
   description VARCHAR NOT NULL,
   speaker_name VARCHAR NOT NULL,
   speaker_title VARCHAR NOT NULL,
+  speaker_image VARCHAR,
   track VARCHAR NOT NULL,
   date TIMESTAMP WITH TIME ZONE
 );

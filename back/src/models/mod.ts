@@ -5,6 +5,7 @@ export type Talk = {
   description: string;
   speaker_name: string;
   speaker_title: string;
+  speaker_image: string | null;
   track: string;
   date: Date;
 };

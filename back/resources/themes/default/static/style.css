@@ -161,6 +161,16 @@ body {
   justify-content: center;
   align-items: center;
 }
+.x-talk-speaker-image {
+  flex-shrink: 0;
+  flex-grow: 0;
+  width: 100px;
+  height: 100px;
+  margin-right: 1em;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
 .x-talk-speaker-info {
   flex-grow: 1;
 }
