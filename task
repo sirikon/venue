@@ -9,7 +9,8 @@ BACK_ENV = dict(
     VENUE_DB_USER='postgres',
     VENUE_DB_PASSWORD='postgres',
     VENUE_DB_NAME='postgres',
-    VENUE_DB_HOST='127.0.0.1'
+    VENUE_DB_HOST='127.0.0.1',
+    VENUE_VISITOR_COOKIE_SECRET='secret'
 )
 
 

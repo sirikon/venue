@@ -1,25 +1,22 @@
 import { join } from "std/path/mod.ts";
 import { Application, Router, send } from "oak/mod.ts";
 import config from "../config/mod.ts";
-import { render } from "../templates/mod.ts";
-import { talkStore } from "../services/infrastructure/TalkStore.ts";
+import { ensureVisitorCookie } from "./visitor.ts";
+import routes from "./routes.ts";
 
 export const webServer = async () => {
+  const app = new Application({
+    keys: [config.VENUE_VISITOR_COOKIE_SECRET],
+  });
+
+  app.use(async (ctx, next) => {
+    await ensureVisitorCookie(ctx);
+    await next();
+  });
+
   const router = new Router();
 
-  router.get("/", async (ctx) => {
-    const talks = await talkStore.findAll();
-    ctx.response.body = await render("index.html", { talks });
-  });
-
-  router.get("/talk/:slug", async (ctx) => {
-    const talk = await talkStore.findBySlug(ctx.params.slug);
-    if (!talk) {
-      ctx.response.status = 404;
-      return;
-    }
-    ctx.response.body = await render("talk.html", { talk });
-  });
+  routes(router);
 
   router.get("/static/:path*", async (ctx) => {
     if (!ctx.params.path) {
@@ -35,7 +32,6 @@ export const webServer = async () => {
     });
   });
 
-  const app = new Application();
   app.use(router.routes());
   app.use(router.allowedMethods());
 

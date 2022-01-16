@@ -10,6 +10,7 @@ CREATE TABLE talks (
 );
 
 CREATE TABLE questions (
+  id SERIAL PRIMARY KEY,
   visitor_id UUID NOT NULL,
   talk_id INTEGER REFERENCES talks (id),
   question VARCHAR NOT NULL

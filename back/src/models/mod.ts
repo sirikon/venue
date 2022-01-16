@@ -8,3 +8,17 @@ export type Talk = {
   track: string;
   date: Date;
 };
+
+export type Question = {
+  id: number;
+  visitor_id: string;
+  talk_id: number;
+  question: string;
+};
+
+export type Rating = {
+  visitor_id: string;
+  talk_id: number;
+  rating: number;
+  comment: string;
+};
