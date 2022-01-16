@@ -1,7 +1,7 @@
 import { Router } from "oak/mod.ts";
 import { render } from "../templates/mod.ts";
 import { talkStore } from "../services/infrastructure/TalkStore.ts";
-import { assert, integer, string, type } from "denox/superstruct/index.ts";
+import { assert, string, type } from "denox/superstruct/index.ts";
 import { getVisitorId } from "./visitor.ts";
 import { questionStore } from "../services/infrastructure/QuestionStore.ts";
 import { ratingStore } from "../services/infrastructure/RatingStore.ts";
@@ -18,7 +18,11 @@ export default (router: Router) => {
       ctx.response.status = 404;
       return;
     }
-    ctx.response.body = await render("talk.html", { talk });
+    const existingRating = await ratingStore.getByTalkAndVisitor({
+      talk_id: talk.id,
+      visitor_id: await getVisitorId(ctx),
+    });
+    ctx.response.body = await render("talk.html", { talk, existingRating });
   });
 
   const PostQuestionBodyModel = type({

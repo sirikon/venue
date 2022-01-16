@@ -114,6 +114,21 @@ body {
 }
 
 /* TALK */
+.x-talk-notification {
+  padding: calc(var(--base-margin) * 1.5);
+  margin-top: var(--base-margin);
+  background-color: var(--accent-color);
+  color: var(--bright-text-color);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.x-talk-notification svg {
+  width: 20px;
+  height: auto;
+  fill: var(--bright-text-color);
+  margin-right: var(--base-margin);
+}
 .x-talk-section {
   --padding: 1em;
 
