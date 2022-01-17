@@ -24,8 +24,12 @@ export default (router: Router) => {
       talk_id: talk.id,
       visitor_id: await getVisitorId(ctx),
     });
-    const questionSent = getQuery(ctx)['q'] === '1';
-    ctx.response.body = await render("talk.html", { talk, existingRating, questionSent });
+    const questionSent = getQuery(ctx)["q"] === "1";
+    ctx.response.body = await render("talk.html", {
+      talk,
+      existingRating,
+      questionSent,
+    });
   });
 
   const PostQuestionBodyModel = type({

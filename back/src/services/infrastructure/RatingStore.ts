@@ -14,12 +14,12 @@ export class RatingStore {
         FROM ratings
         WHERE
           visitor_id = ${filter.visitor_id}
-          AND talk_id = ${filter.talk_id};`
+          AND talk_id = ${filter.talk_id};`;
       if (result.rows.length > 0) {
         return result.rows[0] as Rating;
       }
       return null;
-    })
+    });
   }
 
   saveRating(rating: Omit<Rating, "id">) {
