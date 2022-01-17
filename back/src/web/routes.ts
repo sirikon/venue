@@ -6,6 +6,7 @@ import { getVisitorId } from "./visitor.ts";
 import { questionStore } from "../services/infrastructure/QuestionStore.ts";
 import { ratingStore } from "../services/infrastructure/RatingStore.ts";
 import { queries } from "../services/infrastructure/Queries.ts";
+import { getQuery } from "oak/helpers.ts";
 
 export default (router: Router) => {
   router.get("/", async (ctx) => {
@@ -23,7 +24,8 @@ export default (router: Router) => {
       talk_id: talk.id,
       visitor_id: await getVisitorId(ctx),
     });
-    ctx.response.body = await render("talk.html", { talk, existingRating });
+    const questionSent = getQuery(ctx)['q'] === '1';
+    ctx.response.body = await render("talk.html", { talk, existingRating, questionSent });
   });
 
   const PostQuestionBodyModel = type({
@@ -45,7 +47,7 @@ export default (router: Router) => {
       visitor_id: visitorId,
       question: body.question,
     });
-    ctx.response.redirect(`/talk/${talk.slug}`);
+    ctx.response.redirect(`/talk/${talk.slug}?q=1`);
   });
 
   const PostRatingBodyModel = type({

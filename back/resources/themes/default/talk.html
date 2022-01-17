@@ -34,6 +34,13 @@
     </div>
   </section>
 
+  <% if (it.questionSent) { %>
+    <div class="x-talk-notification">
+      <%~ includeFile('./icons/check.svg') %>
+      <span>¡Gracias por tu pregunta!</span>
+    </div>
+  <% } %>
+
   <section class="x-talk-section is-boxed">
     <h2 class="x-talk-section-title">Haz una pregunta</h2>
     <form action="/talk/<%= it.talk.slug %>/question" method="POST" enctype="multipart/form-data">
