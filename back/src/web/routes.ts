@@ -5,10 +5,11 @@ import { assert, string, type } from "denox/superstruct/index.ts";
 import { getVisitorId } from "./visitor.ts";
 import { questionStore } from "../services/infrastructure/QuestionStore.ts";
 import { ratingStore } from "../services/infrastructure/RatingStore.ts";
+import { queries } from "../services/infrastructure/Queries.ts";
 
 export default (router: Router) => {
   router.get("/", async (ctx) => {
-    const talks = await talkStore.findAll();
+    const talks = await queries.homeTalks(await getVisitorId(ctx));
     ctx.response.body = await render("index.html", { talks });
   });
 

@@ -3,12 +3,13 @@
 <div class="x-talk-list">
 
   <% for(const talk of it.talks) { %>
-    <a class="x-talk-list-item" href="/talk/<%= talk.slug %>">
+    <a class="x-talk-list-item<%= talk.rated != null ? ' is-rated' : '' %>" href="/talk/<%= talk.slug %>">
       <div class="x-talk-list-item-arrow">
         <%~ includeFile('./icons/chevron-right.svg') %>
       </div>
       <h3 class="x-talk-list-item-title">
-        <%= talk.name %>
+        <%~ includeFile('./icons/check.svg') %>
+        <span><%= talk.name %></span>
       </h3>
       <div class="x-talk-list-item-info">
         <span class="x-talk-list-item-info-speaker">

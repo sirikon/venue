@@ -9,6 +9,6 @@ Eta.configure({
 
 Eta.templates.define("brand-name", Eta.compile(config.VENUE_BRAND_NAME));
 
-export const render = async (path: string, data?: Record<string, unknown>) => {
+export const render = async (path: string, data?: Record<string, unknown>): Promise<string> => {
   return (await Eta.renderFileAsync(path, data || {}))!;
 };
