@@ -3,12 +3,10 @@ import { render } from "../templates/mod.ts";
 import { assert, string, type } from "denox/superstruct/index.ts";
 import { getVisitorId } from "./visitor.ts";
 import { getQuery } from "oak/helpers.ts";
-import {
-  queries,
-  questionStore,
-  ratingStore,
-  talkStore,
-} from "../services/ioc.ts";
+import { queries } from "../services/infrastructure/Queries.ts";
+import { talkStore } from "../services/infrastructure/TalkStore.ts";
+import { ratingStore } from "../services/infrastructure/RatingStore.ts";
+import { questionStore } from "../services/infrastructure/QuestionStore.ts";
 
 export default (router: Router) => {
   router.get("/", async (ctx) => {

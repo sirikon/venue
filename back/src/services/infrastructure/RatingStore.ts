@@ -1,5 +1,6 @@
-import { WithClientFunc } from "../external/database_contract.ts";
+import { WithClientFunc } from "../external/database.ts";
 import { Rating } from "../../models/mod.ts";
+import { withClient } from "../external/database.ts";
 
 export class RatingStore {
   constructor(
@@ -30,3 +31,5 @@ export class RatingStore {
     });
   }
 }
+
+export const ratingStore = new RatingStore(withClient);

@@ -1,8 +1,16 @@
 import { Pool, PoolClient } from "postgres/mod.ts";
 import config from "../../config/mod.ts";
-import { DBClient, WithClientFunc } from "./database_contract.ts";
 
-export const pool = new Pool({
+export type DBClient = {
+  queryObject: <T>(
+    query: TemplateStringsArray,
+    ...args: unknown[]
+  ) => Promise<{ rows: T[] }>;
+};
+
+export type WithClientFunc = <T>(cb: (c: DBClient) => Promise<T>) => Promise<T>;
+
+const pool = new Pool({
   user: config.VENUE_DB_USER,
   password: config.VENUE_DB_PASSWORD,
   database: config.VENUE_DB_NAME,
