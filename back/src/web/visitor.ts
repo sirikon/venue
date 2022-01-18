@@ -1,4 +1,4 @@
-import { Context } from "https://deno.land/x/oak@v10.1.0/mod.ts";
+import { Context } from "oak/mod.ts";
 
 const VISITOR_COOKIE_NAME = "venue_visitor";
 

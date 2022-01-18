@@ -1,5 +1,6 @@
 import { Pool, PoolClient } from "postgres/mod.ts";
-import config from "../config/mod.ts";
+import config from "../../config/mod.ts";
+import { DBClient, WithClientFunc } from "./database_contract.ts";
 
 export const pool = new Pool({
   user: config.VENUE_DB_USER,
@@ -9,7 +10,9 @@ export const pool = new Pool({
   port: config.VENUE_DB_PORT,
 }, config.VENUE_DB_POOL_SIZE);
 
-export const withClient = async <T>(cb: (c: PoolClient) => Promise<T>) => {
+export const withClient: WithClientFunc = async <T>(
+  cb: (c: DBClient) => Promise<T>,
+) => {
   let client: PoolClient | null = null;
   try {
     client = await pool.connect();
@@ -18,4 +21,3 @@ export const withClient = async <T>(cb: (c: PoolClient) => Promise<T>) => {
     client && client.release();
   }
 };
-export type WithClientFunc = typeof withClient;

@@ -1,4 +1,4 @@
-import { withClient, WithClientFunc } from "../../data/db.ts";
+import { WithClientFunc } from "../external/database_contract.ts";
 import { Rating } from "../../models/mod.ts";
 
 export class RatingStore {
@@ -24,7 +24,7 @@ export class RatingStore {
 
   saveRating(rating: Omit<Rating, "id">) {
     return this.withClient(async (client) => {
-      return await client.queryArray`
+      return await client.queryObject`
         INSERT INTO ratings
           (visitor_id, talk_id, rating, comment)
         VALUES
@@ -33,5 +33,3 @@ export class RatingStore {
     });
   }
 }
-
-export const ratingStore = new RatingStore(withClient);

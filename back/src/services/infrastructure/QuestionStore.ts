@@ -1,4 +1,4 @@
-import { withClient, WithClientFunc } from "../../data/db.ts";
+import { WithClientFunc } from "../external/database_contract.ts";
 import { Question } from "../../models/mod.ts";
 
 export class QuestionStore {
@@ -8,7 +8,7 @@ export class QuestionStore {
 
   saveQuestion(question: Omit<Question, "id">) {
     return this.withClient(async (client) => {
-      return await client.queryArray`
+      return await client.queryObject`
         INSERT INTO questions
           (visitor_id, talk_id, question)
         VALUES
@@ -16,5 +16,3 @@ export class QuestionStore {
     });
   }
 }
-
-export const questionStore = new QuestionStore(withClient);

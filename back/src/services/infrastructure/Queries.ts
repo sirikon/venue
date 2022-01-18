@@ -1,5 +1,5 @@
-import { withClient, WithClientFunc } from "../../data/db.ts";
 import { Talk } from "../../models/mod.ts";
+import { WithClientFunc } from "../external/database_contract.ts";
 
 export class Queries {
   constructor(
@@ -17,5 +17,3 @@ export class Queries {
     });
   }
 }
-
-export const queries = new Queries(withClient);
