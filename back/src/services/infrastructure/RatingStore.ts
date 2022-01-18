@@ -8,17 +8,14 @@ export class RatingStore {
 
   getByTalkAndVisitor(filter: Pick<Rating, "visitor_id" | "talk_id">) {
     return this.withClient(async (client) => {
-      const result = await client.queryObject`
+      return await client.queryObject<Rating>`
         SELECT
           visitor_id, talk_id, rating, comment
         FROM ratings
         WHERE
           visitor_id = ${filter.visitor_id}
-          AND talk_id = ${filter.talk_id};`;
-      if (result.rows.length > 0) {
-        return result.rows[0] as Rating;
-      }
-      return null;
+          AND talk_id = ${filter.talk_id};`
+        .then((r) => r.rows.length > 0 ? r.rows[0] : null);
     });
   }
 

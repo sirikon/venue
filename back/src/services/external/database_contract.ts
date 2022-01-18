@@ -1,8 +1,8 @@
 export type DBClient = {
-  queryObject: (
+  queryObject: <T>(
     query: TemplateStringsArray,
     ...args: unknown[]
-  ) => Promise<{ rows: unknown[] }>;
+  ) => Promise<{ rows: T[] }>;
 };
 
 export type WithClientFunc = <T>(cb: (c: DBClient) => Promise<T>) => Promise<T>;

@@ -8,12 +8,12 @@ export class Queries {
 
   homeTalks(visitorId: string) {
     return this.withClient(async (client) => {
-      const result = await client.queryObject`
+      return await client.queryObject<Talk & { rated?: string }>`
         SELECT
           id, slug, name, description, speaker_name, speaker_title, speaker_image, track, date, r.rating as rated
         FROM talks t
-        LEFT JOIN ratings r on r.talk_id = t.id and r.visitor_id = ${visitorId};`;
-      return result.rows as (Talk & { rated?: string })[];
+        LEFT JOIN ratings r on r.talk_id = t.id and r.visitor_id = ${visitorId};`
+        .then((r) => r.rows);
     });
   }
 }
