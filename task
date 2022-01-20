@@ -68,8 +68,17 @@ def cli():
     def build_docker():
         compose('-f', 'docker-compose.build.yml', 'build', env=dict(
             os.environ,
+            VENUE_TAG='dev'
+        ))
+
+    @command
+    def publish_docker():
+        version = datetime.now().strftime("%Y%m%d_%H%M%S")
+        compose('-f', 'docker-compose.build.yml', 'build', env=dict(
+            os.environ,
             VENUE_TAG=datetime.now().strftime("%Y%m%d_%H%M%S")
         ))
+        cmd('docker', 'push', f'sirikon/venue:{version}')
 
 
 
