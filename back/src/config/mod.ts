@@ -1,24 +1,25 @@
-const PREFIX = "VENUE";
 const isTrue = (v: string) => v === "true";
 
-const getEnv = <K extends string, T = string>(
-  key: K,
-  opts?: { default?: string; map?: (value: string) => T },
-): { [key in K]: T } => {
+const getEnv = <KT extends string, VT = string>(
+  key: KT,
+  opts?: {
+    default?: string;
+    map?: (value: string) => VT;
+  },
+): { [key in KT]: VT } => {
   const value = Deno.env.get(key);
   const mapper = opts?.map || ((v: string) => v);
 
   if (value) {
-    const result = { [key]: mapper(value) };
-    return result as { [key in K]: T };
+    return { [key]: mapper(value) } as { [key in KT]: VT };
   }
   if (opts?.default) {
-    const result = { [key]: mapper(opts.default) };
-    return result as { [key in K]: T };
+    return { [key]: mapper(opts.default) } as { [key in KT]: VT };
   }
   throw new Error(`Missing required environment variable: ${key}`);
 };
 
+const PREFIX = "VENUE";
 export default {
   ...getEnv(`${PREFIX}_PORT`, { default: "8000", map: parseInt }),
   ...getEnv(`${PREFIX}_DB_USER`),
