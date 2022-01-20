@@ -3,7 +3,7 @@ const isTrue = (v: string) => v === "true";
 
 const getEnv = <K extends string, T = string>(
   key: K,
-  opts?: { default?: K; map?: (value: string) => T },
+  opts?: { default?: string; map?: (value: string) => T },
 ): { [key in K]: T } => {
   const value = Deno.env.get(key);
   const mapper = opts?.map || ((v: string) => v);
