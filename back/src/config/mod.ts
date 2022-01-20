@@ -21,6 +21,9 @@ const getEnv = <
   if (opts?.default) {
     return { [key]: mapper(opts.default) } as { [key in KT]: VT };
   }
+  if (!opts?.required) {
+    return { [key]: null } as { [key in KT]: (ReqT extends true ? VT : (VT | null)) };
+  }
   throw new Error(`Missing required environment variable: ${key}`);
 };
 
