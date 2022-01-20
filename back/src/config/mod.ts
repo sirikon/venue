@@ -1,12 +1,17 @@
 const isTrue = (v: string) => v === "true";
 
-const getEnv = <KT extends string, VT = string>(
+const getEnv = <
+  KT extends string,
+  VT = string,
+  ReqT extends boolean = true,
+>(
   key: KT,
   opts?: {
+    required?: ReqT;
     default?: string;
     map?: (value: string) => VT;
   },
-): { [key in KT]: VT } => {
+): { [key in KT]: (ReqT extends true ? VT : (VT | null)) } => {
   const value = Deno.env.get(key);
   const mapper = opts?.map || ((v: string) => v);
 
@@ -33,5 +38,5 @@ export default {
   ...getEnv(`${PREFIX}_THEME_NAME`, { default: "default" }),
   ...getEnv(`${PREFIX}_VISITOR_COOKIE_SECRET`),
   ...getEnv(`${PREFIX}_BRAND_NAME`),
-  ...getEnv(`${PREFIX}_BRAND_IMAGE`, { default: "" }),
+  ...getEnv(`${PREFIX}_BRAND_IMAGE`, { required: false }),
 };
