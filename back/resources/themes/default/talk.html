@@ -1,4 +1,7 @@
-<% layout('./_base.html', { title: `${it.talk.name} | ${include("brand-name")}` }) %>
+<% layout('./_base.html', {
+  title: `${it.talk.name} | ${include("brand-name")}`,
+  meta: includeFile('./talk_meta.html', { talk: it.talk })
+}) %>
 
 <div class="x-talk">
 

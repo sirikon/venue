@@ -1,0 +1,7 @@
+<meta name="twitter:card" content="summary" />
+<meta property="og:title" content="<%= it.talk.name %>. ¡Dame feedback!" />
+<meta property="og:type" content="website" />
+<% if (it.talk.speaker_image) { %>
+  <meta property="og:image" content="<%= it.talk.speaker_image %>">
+<% } %>
+<meta property="og:description" content="Por <%= it.talk.speaker_name %> en <%= include("brand-name") %>" />

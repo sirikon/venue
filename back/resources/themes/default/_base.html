@@ -5,12 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><%= it.title %></title>
     <link rel="stylesheet" href="/static/style.css">
+    <%~ it.meta || '' %>
   </head>
   <body>
 
     <header class="x-header">
       <div class="x-container">
-        <a href="/"><h1><%= include("brand-name") %></h1></a>
+        <% const brandImage = include("brand-image"); %>
+        <% if (brandImage) { %>
+          <a href="/" class="x-header-image">
+            <img src="<%= brandImage %>" alt="">
+          </a>
+        <% } else { %>
+          <a href="/">
+            <h1><%= include("brand-name") %></h1>
+          </a>
+        <% } %>
       </div>
     </header>
 

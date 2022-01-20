@@ -16,4 +16,5 @@ export default configFromEnvironment()
   .key(`${PREFIX}_THEME_NAME`, { default: "default" })
   .key(`${PREFIX}_VISITOR_COOKIE_SECRET`)
   .key(`${PREFIX}_BRAND_NAME`)
+  .key(`${PREFIX}_BRAND_IMAGE`, { default: "" })
   .read();

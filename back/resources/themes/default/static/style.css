@@ -42,12 +42,26 @@ body {
   justify-content: center;
   align-items: center;
 }
+.x-header .x-container {
+  height: 100%;
+}
 .x-header h1 {
   color: var(--bright-text-color);
   margin: 0;
 }
 .x-header a {
   text-decoration: none;
+}
+.x-header-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  box-sizing: border-box;
+  padding: calc(var(--base-margin) * 0.5);
+}
+.x-header-image img {
+  max-height: 100%;
 }
 
 /* FOOTER */

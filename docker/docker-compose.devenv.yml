@@ -11,3 +11,11 @@ services:
       - "../back/resources/db/migrations:/docker-entrypoint-initdb.d:ro"
     ports:
       - 5432:5432
+
+  statics:
+    image: nginx:1-alpine
+    restart: always
+    volumes:
+      - "../development-statics:/usr/share/nginx/html:ro"
+    ports:
+      - 8001:80

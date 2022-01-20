@@ -8,6 +8,7 @@ Eta.configure({
 });
 
 Eta.templates.define("brand-name", Eta.compile(config.VENUE_BRAND_NAME));
+Eta.templates.define("brand-image", Eta.compile(config.VENUE_BRAND_IMAGE));
 
 export const render = async (
   path: string,
