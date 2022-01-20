@@ -37,7 +37,8 @@
 
   <section class="x-talk-section x-talk-speaker">
     <% if (it.talk.speaker_image) { %>
-      <div class="x-talk-speaker-image" style="background-image: url(<%= it.talk.speaker_image %>);"></div>
+      <% const style = `style="background-image: url(${it.talk.speaker_image});"`; %>
+      <div class="x-talk-speaker-image" <%~ style %>></div>
     <% } %>
     <div class="x-talk-speaker-info">
       <span class="x-talk-speaker-info-name"><%= it.talk.speaker_name %></span>
