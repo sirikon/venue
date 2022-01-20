@@ -21,10 +21,12 @@ const getEnv = <
   if (opts?.default) {
     return { [key]: mapper(opts.default) } as { [key in KT]: VT };
   }
-  if (!opts?.required) {
-    return { [key]: null } as { [key in KT]: (ReqT extends true ? VT : (VT | null)) };
+  if (opts == null || opts.required == null || opts.required === true) {
+    throw new Error(`Missing required environment variable: ${key}`);
   }
-  throw new Error(`Missing required environment variable: ${key}`);
+  return { [key]: null } as {
+    [key in KT]: (ReqT extends true ? VT : (VT | null));
+  };
 };
 
 const PREFIX = "VENUE";
@@ -42,4 +44,6 @@ export default {
   ...getEnv(`${PREFIX}_VISITOR_COOKIE_SECRET`),
   ...getEnv(`${PREFIX}_BRAND_NAME`),
   ...getEnv(`${PREFIX}_BRAND_IMAGE`, { required: false }),
+  ...getEnv(`${PREFIX}_ADMIN_USERNAME`),
+  ...getEnv(`${PREFIX}_ADMIN_PASSWORD`),
 };

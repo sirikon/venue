@@ -3,6 +3,14 @@
   meta: includeFile('./talk_meta.html', { talk: it.talk })
 }) %>
 
+<% if (it.isAdmin) { %>
+  <p style="text-align: right;">
+    <a href="/talk/<%= it.talk.slug %>/questions">
+      <b>Questions >></b>
+    </a>
+  </p>
+<% } %>
+
 <div class="x-talk">
 
   <% if (it.existingRating) { %>

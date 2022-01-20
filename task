@@ -12,7 +12,9 @@ BACK_ENV = dict(
     VENUE_DB_HOST='127.0.0.1',
     VENUE_VISITOR_COOKIE_SECRET='secret',
     VENUE_BRAND_NAME='Venue DEV',
-    VENUE_BRAND_IMAGE='http://localhost:8001/brand.png'
+    VENUE_BRAND_IMAGE='http://localhost:8001/brand.png',
+    VENUE_ADMIN_USERNAME='admin',
+    VENUE_ADMIN_PASSWORD='admin',
 )
 
 

@@ -7,11 +7,34 @@ import { queries } from "../services/infrastructure/Queries.ts";
 import { talkStore } from "../services/infrastructure/TalkStore.ts";
 import { ratingStore } from "../services/infrastructure/RatingStore.ts";
 import { questionStore } from "../services/infrastructure/QuestionStore.ts";
+import { isAdmin, loginHandler } from "./admin.ts";
 
 export default (router: Router) => {
+  router.get("/admin", loginHandler);
+
+  router.get("/talk/:slug/questions", async (ctx) => {
+    if (!await isAdmin(ctx)) {
+      ctx.response.status = 401;
+      return;
+    }
+    const talk = await talkStore.findBySlug(ctx.params.slug);
+    if (!talk) {
+      ctx.response.status = 404;
+      return;
+    }
+    const questions = await queries.talkQuestions(talk);
+    ctx.response.body = await render("talk_questions.html", {
+      talk,
+      questions,
+    });
+  });
+
   router.get("/", async (ctx) => {
     const talks = await queries.homeTalks(await getVisitorId(ctx));
-    ctx.response.body = await render("index.html", { talks });
+    ctx.response.body = await render("index.html", {
+      talks,
+      isAdmin: await isAdmin(ctx),
+    });
   });
 
   router.get("/talk/:slug", async (ctx) => {
@@ -29,6 +52,7 @@ export default (router: Router) => {
       talk,
       existingRating,
       questionSent,
+      isAdmin: await isAdmin(ctx),
     });
   });
 

@@ -267,6 +267,53 @@ body {
   padding: 0.4em;
   cursor: pointer;
 }
+.x-talk-question-filter {
+  text-align: right;
+}
+.x-talk-question-list.is-fav-only
+.x-talk-question-list-item:not(.is-fav) {
+  display: none;
+}
+.x-talk-question-list-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid var(--primary-color);
+}
+.x-talk-question-list-item > p {
+  flex-grow: 1;
+}
+.x-talk-question-list-item-actions {
+  flex-shrink: 0;
+}
+
+.x-talk-question-list-item-actions-fav,
+.x-talk-question-list-item-actions-unfav {
+  padding: 0;
+}
+
+.x-talk-question-list-item-actions-fav svg,
+.x-talk-question-list-item-actions-unfav svg {
+  width: 2.3em;
+  height: auto;
+}
+
+.x-talk-question-list-item-actions-fav svg {
+  fill: gray;
+}
+.x-talk-question-list-item-actions-unfav svg {
+  fill: var(--accent-color);
+}
+
+.x-talk-question-list-item.is-fav
+.x-talk-question-list-item-actions-fav {
+  display: none;
+}
+.x-talk-question-list-item:not(.is-fav)
+.x-talk-question-list-item-actions-unfav {
+  display: none;
+}
 
 /* STARS */
 .x-stars {
