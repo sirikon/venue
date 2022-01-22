@@ -8,11 +8,13 @@ export class Queries {
 
   homeTalks(visitorId: string) {
     return this.withClient(async (client) => {
+      const cosa = "2".padStart(2, '0')
       return await client.queryObject<Talk & { rated?: string }>`
         SELECT
           id, slug, name, description, speaker_name, speaker_title, speaker_image, track, date, r.rating as rated
         FROM talks t
-        LEFT JOIN ratings r on r.talk_id = t.id and r.visitor_id = ${visitorId};`
+        LEFT JOIN ratings r on r.talk_id = t.id and r.visitor_id = ${visitorId}
+        ORDER BY date ASC;`
         .then((r) => r.rows);
     });
   }
@@ -23,7 +25,8 @@ export class Queries {
         SELECT
           id, visitor_id, talk_id, question
         FROM questions
-        WHERE talk_id = ${talk.id};`
+        WHERE talk_id = ${talk.id}
+        ORDER BY id DESC;`
         .then((r) => r.rows);
     });
   }
