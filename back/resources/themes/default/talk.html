@@ -13,6 +13,13 @@
 
 <div class="x-talk">
 
+  <% if (it.questionSent) { %>
+    <div class="x-talk-notification">
+      <%~ includeFile('./icons/check.svg') %>
+      <span>¡Gracias por tu pregunta!</span>
+    </div>
+  <% } %>
+
   <% if (it.existingRating) { %>
     <div class="x-talk-notification">
       <%~ includeFile('./icons/check.svg') %>
@@ -45,13 +52,6 @@
       <span class="x-talk-speaker-info-title"><%= it.talk.speaker_title %></span>
     </div>
   </section>
-
-  <% if (it.questionSent) { %>
-    <div class="x-talk-notification">
-      <%~ includeFile('./icons/check.svg') %>
-      <span>¡Gracias por tu pregunta!</span>
-    </div>
-  <% } %>
 
   <section class="x-talk-section is-boxed">
     <h2 class="x-talk-section-title">Haz una pregunta</h2>
