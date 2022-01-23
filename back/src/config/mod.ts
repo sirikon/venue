@@ -37,7 +37,7 @@ export default {
   ...getEnv(`${PREFIX}_DB_NAME`),
   ...getEnv(`${PREFIX}_DB_HOST`),
   ...getEnv(`${PREFIX}_DB_PORT`, { default: "5432", map: parseInt }),
-  ...getEnv(`${PREFIX}_DB_POOL_SIZE`, { default: "20", map: parseInt }),
+  ...getEnv(`${PREFIX}_DB_POOL_SIZE`, { default: "5", map: parseInt }),
   ...getEnv(`${PREFIX}_TEMPLATE_CACHING`, { default: "false", map: isTrue }),
   ...getEnv(`${PREFIX}_THEMES_FOLDER`, { default: "resources/themes" }),
   ...getEnv(`${PREFIX}_THEME_NAME`, { default: "default" }),
