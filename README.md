@@ -2,8 +2,9 @@
 
 (a.k.a. Venue)
 
-ℹ️ _Old version of the project is in branch `old`_
-ℹ️ _Custom versions for past events are in `custom/*` branches_
+ℹ️ _Old version of the project is in branch `old`_.
+
+ℹ️ _Custom versions for past events are in `custom/*` branches_.
 
 This software is intended to provide tools to event organizers. Including:
 
