@@ -46,4 +46,5 @@ export default {
   ...getEnv(`${PREFIX}_BRAND_IMAGE`, { required: false }),
   ...getEnv(`${PREFIX}_ADMIN_USERNAME`),
   ...getEnv(`${PREFIX}_ADMIN_PASSWORD`),
+  ...getEnv(`${PREFIX}_EXTRA_META`, { required: false }),
 };

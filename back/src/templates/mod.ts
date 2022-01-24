@@ -7,6 +7,7 @@ Eta.configure({
   views: join(config.VENUE_THEMES_FOLDER, config.VENUE_THEME_NAME),
 });
 
+Eta.templates.define("extra-meta", Eta.compile(config.VENUE_EXTRA_META || ""));
 Eta.templates.define("brand-name", Eta.compile(config.VENUE_BRAND_NAME));
 Eta.templates.define(
   "brand-image",
