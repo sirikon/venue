@@ -23,6 +23,11 @@ body {
   overflow-y: scroll;
 }
 
+img {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: optimizeQuality;
+}
+
 /* CONTAINER */
 .x-container {
   display: block;
