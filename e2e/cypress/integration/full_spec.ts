@@ -140,6 +140,80 @@ describe('Display talk ratings', () => {
   })
 })
 
+describe.only('Display talk questions', () => {
+  before(() => {
+    cy.clearCookies()
+    cy.task("executeSql", "DELETE FROM questions")
+  })
+  beforeEach(() => {
+    Cypress.Cookies.preserveOnce('venue_visitor', 'venue_visitor.sig', 'venue_admin', 'venue_admin.sig')
+  })
+  it('Login as admin', () => {
+    cy.visit("http://localhost:8000/admin", { headers: { 'authorization': 'Basic ' + btoa('admin:admin') } })
+  })
+  it('Verify login is successful', () => {
+    cy.get('p').first().contains('Hello Admin!')
+  })
+  it('Go to first talk questions', () => {
+    cy.get(".x-talk-list-item")
+      .first().click()
+      .get("[data-testid='questions-link']").first().click()
+  })
+  it('Verify information with many questions', () => {
+    cy.task("executeSql", "DELETE FROM questions")
+    cy.task("executeSql", `
+      INSERT INTO questions
+        (visitor_id, talk_id, question)
+      VALUES
+        ('11125052-06a6-4cd2-a755-55f87e8e121e', (SELECT id FROM talks WHERE slug = 'the-mother-of-all-demos'), 'question 5'),
+        ('11125052-06a6-4cd2-a755-55f87e8e121e', (SELECT id FROM talks WHERE slug = 'the-mother-of-all-demos'), 'question 4'),
+        ('11125052-06a6-4cd2-a755-55f87e8e121e', (SELECT id FROM talks WHERE slug = 'the-mother-of-all-demos'), 'question 3'),
+        ('11125052-06a6-4cd2-a755-55f87e8e121e', (SELECT id FROM talks WHERE slug = 'the-mother-of-all-demos'), 'question 2'),
+        ('11125052-06a6-4cd2-a755-55f87e8e121e', (SELECT id FROM talks WHERE slug = 'the-mother-of-all-demos'), 'question 1')
+    ;`)
+    cy.reload()
+    verifyQuestions([
+      "question 1",
+      "question 2",
+      "question 3",
+      "question 4",
+      "question 5",
+    ])
+  })
+  it('Verify interaction', () => {
+    cy.get('.x-talk-question-list-item-actions-fav').eq(2).click()
+    cy.get('.x-talk-question-list-item-actions-fav').eq(4).click()
+    verifyQuestions([
+      "question 1",
+      "question 2",
+      "question 3",
+      "question 4",
+      "question 5",
+    ])
+    verifyQuestions([
+      "question 3",
+      "question 5"
+    ], { favOnly: true })
+
+    cy.get('#see_fav_only').check()
+    cy.get('.x-talk-question-list.is-fav-only')
+    cy.get('.x-talk-question-list-item-actions-unfav').eq(4).click()
+    verifyQuestions([
+      "question 3"
+    ], { favOnly: true })
+
+    cy.get('#see_fav_only').uncheck()
+    cy.get('.x-talk-question-list:not(.is-fav-only)')
+
+    cy.get('#see_fav_only').check()
+    cy.reload()
+    cy.get('#see_fav_only:checked')
+    verifyQuestions([
+      "question 3"
+    ], { favOnly: true })
+  })
+})
+
 function chooseFirstTalk() {
   it('Visit the home', () => {
     cy.visit('http://localhost:8000')
@@ -166,5 +240,15 @@ function verifyRatings(average: string, stars: { [x: string]: number }, comments
     cy.get("@comments").eq(i)
       .find('p').contains(comments[i].comment)
       .find('.x-talk-comment-stars').contains(comments[i].rating)
+  }
+}
+
+function verifyQuestions(questions: string[], opts?: { favOnly?: boolean }) {
+  if (questions.length === 0) return;
+  cy.get(`.x-talk-question-list-item${opts?.favOnly ? '.is-fav' : ''}`).as("questions")
+
+  for (let i = 0; i < questions.length; i++) {
+    cy.get("@questions").eq(i)
+      .find("p").contains(questions[i])
   }
 }
