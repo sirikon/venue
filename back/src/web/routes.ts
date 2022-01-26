@@ -29,6 +29,23 @@ export default (router: Router) => {
     });
   });
 
+  router.get("/talk/:slug/ratings", async (ctx) => {
+    if (!await isAdmin(ctx)) {
+      ctx.response.status = 401;
+      return;
+    }
+    const talk = await talkStore.findBySlug(ctx.params.slug);
+    if (!talk) {
+      ctx.response.status = 404;
+      return;
+    }
+    const ratings = await queries.talkRatings(talk);
+    ctx.response.body = await render("talk_ratings.html", {
+      talk,
+      ratings,
+    });
+  });
+
   router.get("/", async (ctx) => {
     const talks = await queries.homeTalks(await getVisitorId(ctx));
     ctx.response.body = await render("index.html", {
