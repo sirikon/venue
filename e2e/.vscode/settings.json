@@ -9,11 +9,7 @@
     "editor.defaultFormatter": "vscode.json-language-features",
     "files.insertFinalNewline": true
   },
-  "[python]": {
-    "editor.tabSize": 4
-  },
-  "files.exclude": {
-    "back": true,
-    "e2e": true
+  "[typescript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
   }
 }
