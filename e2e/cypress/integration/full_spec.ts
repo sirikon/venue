@@ -46,7 +46,7 @@ describe('Choose a talk and rate it', () => {
   })
 })
 
-describe.only('Display talk ratings', () => {
+describe('Display talk ratings', () => {
   before(() => {
     cy.clearCookies()
     cy.task("executeSql", "DELETE FROM ratings")
