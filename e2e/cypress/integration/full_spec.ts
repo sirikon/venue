@@ -3,6 +3,7 @@ Cypress.Cookies.debug(true)
 describe('Choose a talk and send a question', () => {
   before(() => {
     cy.clearCookies()
+    cy.task("executeSql", "DELETE FROM questions")
   })
   beforeEach(() => {
     Cypress.Cookies.preserveOnce('venue_visitor', 'venue_visitor.sig')
@@ -20,11 +21,21 @@ describe('Choose a talk and send a question', () => {
   it('Verify success message', () => {
     cy.get('.x-talk-notification').first().contains("¡Gracias por tu pregunta!", { matchCase: true })
   })
+  it('Verify the question arrived', () => {
+    cy.visit("http://localhost:8000/admin", { headers: { 'authorization': 'Basic ' + btoa('admin:admin') } })
+    cy.get(".x-talk-list-item")
+      .first().click()
+      .get("[data-testid='questions-link']").first().click()
+    verifyQuestions([
+      "No one will ever use that thing called 'mouse'. Are you serious?"
+    ])
+  })
 })
 
 describe('Choose a talk and rate it', () => {
   before(() => {
     cy.clearCookies()
+    cy.task("executeSql", "DELETE FROM ratings")
   })
   beforeEach(() => {
     Cypress.Cookies.preserveOnce('venue_visitor', 'venue_visitor.sig')
@@ -43,6 +54,21 @@ describe('Choose a talk and rate it', () => {
   })
   it('Verify success message', () => {
     cy.get('.x-talk-notification').first().contains("¡Gracias por tu feedback!", { matchCase: true })
+  })
+  it('Verify the rating arrived', () => {
+    cy.visit("http://localhost:8000/admin", { headers: { 'authorization': 'Basic ' + btoa('admin:admin') } })
+    cy.get(".x-talk-list-item")
+      .first().click()
+      .get("[data-testid='ratings-link']").first().click()
+    verifyRatings('4', {
+      1: 0,
+      2: 0,
+      3: 0,
+      4: 1,
+      5: 0
+    }, [
+      { comment: "None of these things has any future, but it was fun.", rating: 4 }
+    ])
   })
 })
 
@@ -140,7 +166,7 @@ describe('Display talk ratings', () => {
   })
 })
 
-describe.only('Display talk questions', () => {
+describe('Display talk questions', () => {
   before(() => {
     cy.clearCookies()
     cy.task("executeSql", "DELETE FROM questions")
@@ -235,6 +261,7 @@ function verifyRatings(average: string, stars: { [x: string]: number }, comments
 
   if (comments.length === 0) return
   cy.get('.x-talk-comment').as("comments")
+  cy.get("@comments").should('have.length', comments.length)
 
   for (let i = 0; i < comments.length; i++) {
     cy.get("@comments").eq(i)
@@ -246,6 +273,7 @@ function verifyRatings(average: string, stars: { [x: string]: number }, comments
 function verifyQuestions(questions: string[], opts?: { favOnly?: boolean }) {
   if (questions.length === 0) return;
   cy.get(`.x-talk-question-list-item${opts?.favOnly ? '.is-fav' : ''}`).as("questions")
+  cy.get("@questions").should('have.length', questions.length)
 
   for (let i = 0; i < questions.length; i++) {
     cy.get("@questions").eq(i)
