@@ -12,6 +12,7 @@ WORKDIR /app
 
 COPY .tool-versions .
 RUN bash -c '. /asdf/asdf.sh && asdf plugin add deno'
+RUN bash -c '. /asdf/asdf.sh && asdf plugin add nodejs'
 RUN bash -c '. /asdf/asdf.sh && asdf install'
 
 COPY ./back ./back
