@@ -38,10 +38,10 @@
       </div>
 
       <div class="x-talk-rating-average">
-        <% const average = it.ratings.length === 0 ? '--' : it.ratings
+        <% const average = it.ratings.length === 0 ? null : it.ratings
             .map((r) => r.rating)
             .reduce((a, b) => a + b, 0) / it.ratings.length; %>
-        <span class="x-talk-rating-average-value"><%= Math.floor(average * 100) / 100 %></span><span class="x-talk-rating-average-max">/<%= maxStars %></span>
+        <span class="x-talk-rating-average-value"><%= average ? Math.floor(average * 100) / 100 : '--' %></span><span class="x-talk-rating-average-max">/<%= maxStars %></span>
       </div>
 
     </div>

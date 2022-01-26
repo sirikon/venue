@@ -5,10 +5,10 @@
 
 <% if (it.isAdmin) { %>
   <p style="text-align: right;">
-    <a href="/talk/<%= it.talk.slug %>/questions">
+    <a data-testid="questions-link" href="/talk/<%= it.talk.slug %>/questions">
       <b>Questions >></b>
     </a>|
-    <a href="/talk/<%= it.talk.slug %>/ratings">
+    <a data-testid="ratings-link" href="/talk/<%= it.talk.slug %>/ratings">
       <b>Ratings >></b>
     </a>
   </p>
