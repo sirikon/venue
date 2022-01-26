@@ -54,6 +54,8 @@ describe('Choose a talk and rate it', () => {
   })
   it('Verify success message', () => {
     cy.get('.x-talk-notification').first().contains("¡Gracias por tu feedback!", { matchCase: true })
+    cy.reload()
+    cy.get('.x-talk-notification').first().contains("¡Gracias por tu feedback!", { matchCase: true })
   })
   it('Verify the rating arrived', () => {
     cy.visit("http://localhost:8000/admin", { headers: { 'authorization': 'Basic ' + btoa('admin:admin') } })
