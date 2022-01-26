@@ -56,6 +56,19 @@ def cli():
     command(devenv)
     command(compose)
 
+    def e2e(*args):
+        cmd('npm', 'exec', *args, cwd='e2e',
+            # https://github.com/webpack/webpack/issues/14532#issuecomment-947012063
+            env=dict(os.environ, NODE_OPTIONS='--openssl-legacy-provider'))
+
+    @command
+    def e2e_open():
+        e2e('cypress', 'open')
+    
+    @command
+    def e2e_test():
+        e2e('cypress', 'run')
+
     @command
     def build():
         cmd('rm', '-rf', 'dist')
