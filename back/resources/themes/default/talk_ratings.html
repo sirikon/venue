@@ -56,9 +56,11 @@
     <p class="x-talk-section-advice">Coge aire, tómatelo con calma, y recuerda que si te hemos llamado para participar es por algo. Nos ha encantado tenerte por aquí.</p>
 
     <% for(const rating of it.ratings) { %>
-      <div class="x-talk-comment">
-        <p><%= rating.comment %> — <span class="x-talk-comment-stars"><%= rating.rating %><%~ includeFile('./icons/star.svg') %></span></p>
-      </div>
+      <% if (rating.comment) { %>
+        <div class="x-talk-comment">
+          <p><%= rating.comment %> — <span class="x-talk-comment-stars"><%= rating.rating %><%~ includeFile('./icons/star.svg') %></span></p>
+        </div>
+      <% } %>
     <% } %>
 
   </section>
