@@ -22,6 +22,9 @@ body {
   overflow-x: hidden;
   overflow-y: scroll;
 }
+@page {
+  margin: 0;
+}
 
 img {
   image-rendering: -webkit-optimize-contrast;
@@ -47,6 +50,9 @@ img {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+@media print {
+  .x-header { display: none; }
 }
 .x-header .x-container {
   height: 100%;
@@ -76,6 +82,9 @@ img {
   padding: calc(var(--base-margin) * 2.5) 0;
   text-align: center;
   flex-shrink: 0;
+}
+@media print {
+  .x-footer { display: none; }
 }
 
 /* TALK LIST */
