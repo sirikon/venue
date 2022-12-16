@@ -2,9 +2,9 @@ import { Client } from "pg"
 const client = new Client({
   host: "127.0.0.1",
   port: 5432,
-  database: "postgres",
-  user: "postgres",
-  password: "postgres"
+  database: "venue",
+  user: "venue",
+  password: "password"
 })
 const connection = client.connect()
 

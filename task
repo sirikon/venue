@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import os
-from os.path import abspath
+from os.path import abspath, exists
 from datetime import datetime
 
 BACK_CONFIG = ['--config', 'deno.json']
@@ -64,6 +64,8 @@ def cli():
         compose('-f', 'docker-compose.devenv.yml', *args)
 
     def e2e(*args):
+        if not exists('e2e/node_modules'):
+            cmd('npm', 'install', cwd='e2e')
         cmd('npm', 'exec', *args, cwd='e2e',
             # https://github.com/webpack/webpack/issues/14532#issuecomment-947012063
             env=dict(os.environ, NODE_OPTIONS='--openssl-legacy-provider'))
