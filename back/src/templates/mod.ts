@@ -1,6 +1,6 @@
 import * as Eta from "eta/mod.ts";
 import { join } from "std/path/mod.ts";
-import config from "../config/mod.ts";
+import config from "@/config/mod.ts";
 
 Eta.configure({
   cache: config.VENUE_TEMPLATE_CACHING,

@@ -1,13 +1,13 @@
 import { Router } from "oak/mod.ts";
-import { render } from "../templates/mod.ts";
+import { render } from "@/templates/mod.ts";
 import { assert, string, type } from "denox/superstruct/index.ts";
-import { getVisitorId } from "./visitor.ts";
+import { getVisitorId } from "@/web/visitor.ts";
 import { getQuery } from "oak/helpers.ts";
-import { queries } from "../services/infrastructure/Queries.ts";
-import { talkStore } from "../services/infrastructure/TalkStore.ts";
-import { ratingStore } from "../services/infrastructure/RatingStore.ts";
-import { questionStore } from "../services/infrastructure/QuestionStore.ts";
-import { isAdmin, loginHandler } from "./admin.ts";
+import { queries } from "@/services/infrastructure/Queries.ts";
+import { talkStore } from "@/services/infrastructure/TalkStore.ts";
+import { ratingStore } from "@/services/infrastructure/RatingStore.ts";
+import { questionStore } from "@/services/infrastructure/QuestionStore.ts";
+import { isAdmin, loginHandler } from "@/web/admin.ts";
 
 export default (router: Router) => {
   router.get("/admin", loginHandler);

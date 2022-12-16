@@ -1,5 +1,5 @@
 import { Pool, PoolClient } from "postgres/mod.ts";
-import config from "../../config/mod.ts";
+import config from "@/config/mod.ts";
 
 export type DBClient = {
   queryObject: <T>(

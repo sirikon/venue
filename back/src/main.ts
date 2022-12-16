@@ -1,3 +1,3 @@
-import { webServer } from "./web/server.ts";
+import { webServer } from "@/web/server.ts";
 
 await webServer();

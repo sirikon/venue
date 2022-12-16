@@ -1,4 +1,4 @@
-import { buildConfig } from "../vendor/denox/config/environment.ts";
+import { buildConfig } from "denox/config/environment.ts";
 
 const isTrue = (v: string) => v === "true";
 

@@ -1,6 +1,6 @@
 import { decode } from "std/encoding/base64.ts";
 import { Context } from "oak/mod.ts";
-import config from "../config/mod.ts";
+import config from "@/config/mod.ts";
 
 const BASIC_AUTH_REALM = `Login as admin to ${config.VENUE_BRAND_NAME}`;
 const ADMIN_COOKIE_NAME = "venue_admin";

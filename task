@@ -9,9 +9,9 @@ BACK_ENTRYPOINT = 'src/main.ts'
 BACK_HOME = 'back'
 BACK_ENV = dict(
     os.environ,
-    VENUE_DB_USER='postgres',
-    VENUE_DB_PASSWORD='postgres',
-    VENUE_DB_NAME='postgres',
+    VENUE_DB_USER='venue',
+    VENUE_DB_PASSWORD='password',
+    VENUE_DB_NAME='venue',
     VENUE_DB_HOST='127.0.0.1',
     VENUE_VISITOR_COOKIE_SECRET='secret',
     VENUE_BRAND_NAME='Venue DEV',

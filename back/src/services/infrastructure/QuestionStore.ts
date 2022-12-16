@@ -1,6 +1,5 @@
-import { WithClientFunc } from "../external/database.ts";
-import { Question } from "../../models/mod.ts";
-import { withClient } from "../external/database.ts";
+import { withClient, WithClientFunc } from "@/services/external/database.ts";
+import { Question } from "@/models/mod.ts";
 
 export class QuestionStore {
   constructor(

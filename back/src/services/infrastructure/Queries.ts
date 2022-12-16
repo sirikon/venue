@@ -1,5 +1,5 @@
-import { Question, Rating, Talk } from "../../models/mod.ts";
-import { withClient, WithClientFunc } from "../external/database.ts";
+import { Question, Rating, Talk } from "@/models/mod.ts";
+import { withClient, WithClientFunc } from "@/services/external/database.ts";
 
 export class Queries {
   constructor(
@@ -8,7 +8,6 @@ export class Queries {
 
   homeTalks(visitorId: string) {
     return this.withClient(async (client) => {
-      const cosa = "2".padStart(2, "0");
       return await client.queryObject<Talk & { rated?: string }>`
         SELECT
           id, slug, name, description, speaker_name, speaker_title, speaker_image, track, date, r.rating as rated

@@ -1,8 +1,8 @@
 import { join } from "std/path/mod.ts";
 import { Application, Router, send } from "oak/mod.ts";
-import config from "../config/mod.ts";
-import { ensureVisitorCookie } from "./visitor.ts";
-import routes from "./routes.ts";
+import config from "@/config/mod.ts";
+import { ensureVisitorCookie } from "@/web/visitor.ts";
+import routes from "@/web/routes.ts";
 
 export const webServer = async () => {
   const app = new Application({
