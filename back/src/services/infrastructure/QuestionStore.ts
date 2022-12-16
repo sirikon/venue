@@ -1,13 +1,15 @@
-import { withClient, WithClientFunc } from "@/services/external/database.ts";
 import { Question } from "@/models/mod.ts";
+import { Database } from "@/services/external/Database.ts";
+import { singleton } from "tsyringe";
 
+@singleton()
 export class QuestionStore {
   constructor(
-    private withClient: WithClientFunc,
+    private database: Database,
   ) {}
 
   saveQuestion(question: Omit<Question, "id">) {
-    return this.withClient(async (client) => {
+    return this.database.withClient(async (client) => {
       return await client.queryObject`
         INSERT INTO questions
           (visitor_id, talk_id, question)
@@ -16,5 +18,3 @@ export class QuestionStore {
     });
   }
 }
-
-export const questionStore = new QuestionStore(withClient);

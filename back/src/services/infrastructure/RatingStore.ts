@@ -1,13 +1,15 @@
-import { withClient, WithClientFunc } from "@/services/external/database.ts";
 import { Rating } from "@/models/mod.ts";
+import { Database } from "@/services/external/Database.ts";
+import { singleton } from "tsyringe";
 
+@singleton()
 export class RatingStore {
   constructor(
-    private withClient: WithClientFunc,
+    private database: Database,
   ) {}
 
   getByTalkAndVisitor(filter: Pick<Rating, "visitor_id" | "talk_id">) {
-    return this.withClient(async (client) => {
+    return this.database.withClient(async (client) => {
       return await client.queryObject<Rating>`
         SELECT
           visitor_id, talk_id, rating, comment
@@ -20,7 +22,7 @@ export class RatingStore {
   }
 
   saveRating(rating: Omit<Rating, "id">) {
-    return this.withClient(async (client) => {
+    return this.database.withClient(async (client) => {
       return await client.queryObject`
         INSERT INTO ratings
           (visitor_id, talk_id, rating, comment)
@@ -30,5 +32,3 @@ export class RatingStore {
     });
   }
 }
-
-export const ratingStore = new RatingStore(withClient);

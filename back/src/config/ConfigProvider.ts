@@ -1,8 +1,9 @@
 import { buildConfig } from "denox/config/environment.ts";
+import { singleton } from "tsyringe";
 
 const isTrue = (v: string) => v === "true";
 
-const config = buildConfig({
+const configBuilder = buildConfig({
   VENUE_PORT: {
     description: "Port to listen to",
     default: "8000",
@@ -64,5 +65,13 @@ const config = buildConfig({
     required: false,
   },
 });
+export type Config = ReturnType<typeof configBuilder["read"]>;
 
-export default config.read();
+@singleton()
+export class ConfigProvider {
+  private config = configBuilder.read();
+
+  public getConfig() {
+    return this.config;
+  }
+}

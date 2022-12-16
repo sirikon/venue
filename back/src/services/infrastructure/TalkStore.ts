@@ -1,13 +1,15 @@
-import { withClient, WithClientFunc } from "@/services/external/database.ts";
 import { Talk } from "@/models/mod.ts";
+import { Database } from "@/services/external/Database.ts";
+import { singleton } from "tsyringe";
 
+@singleton()
 export class TalkStore {
   constructor(
-    private withClient: WithClientFunc,
+    private database: Database,
   ) {}
 
   findBySlug(slug: string): Promise<Talk | null> {
-    return this.withClient(async (client) => {
+    return this.database.withClient(async (client) => {
       return await client.queryObject<Talk>`
         SELECT
           id, slug, name, description, speaker_name, speaker_title, speaker_image, track, date
@@ -16,5 +18,3 @@ export class TalkStore {
     });
   }
 }
-
-export const talkStore = new TalkStore(withClient);

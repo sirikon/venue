@@ -1,13 +1,15 @@
 import { Question, Rating, Talk } from "@/models/mod.ts";
-import { withClient, WithClientFunc } from "@/services/external/database.ts";
+import { Database } from "@/services/external/Database.ts";
+import { singleton } from "tsyringe";
 
+@singleton()
 export class Queries {
   constructor(
-    private withClient: WithClientFunc,
+    private database: Database,
   ) {}
 
   homeTalks(visitorId: string) {
-    return this.withClient(async (client) => {
+    return this.database.withClient(async (client) => {
       return await client.queryObject<Talk & { rated?: string }>`
         SELECT
           id, slug, name, description, speaker_name, speaker_title, speaker_image, track, date, r.rating as rated
@@ -19,7 +21,7 @@ export class Queries {
   }
 
   talkQuestions(talk: Pick<Talk, "id">) {
-    return this.withClient(async (client) => {
+    return this.database.withClient(async (client) => {
       return await client.queryObject<Question>`
         SELECT
           id, visitor_id, talk_id, question
@@ -31,7 +33,7 @@ export class Queries {
   }
 
   talkRatings(talk: Pick<Talk, "id">) {
-    return this.withClient(async (client) => {
+    return this.database.withClient(async (client) => {
       return await client.queryObject<Rating>`
         SELECT
           visitor_id, talk_id, rating, comment
@@ -41,5 +43,3 @@ export class Queries {
     });
   }
 }
-
-export const queries = new Queries(withClient);
