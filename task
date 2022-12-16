@@ -40,15 +40,6 @@ def cli():
     def lint():
         cmd('deno', 'lint', *BACK_CONFIG, cwd=BACK_HOME)
 
-    def compose(*args, **kwargs):
-        cmd('docker', 'compose',
-            '--project-name', 'venue',
-            '--project-directory', abspath('.'),
-            *args, **kwargs, cwd='docker')
-
-    def devenv(*args):
-        compose('-f', 'docker-compose.devenv.yml', *args)
-
     @command
     def devenv_up():
         devenv('up', '-d')
@@ -61,8 +52,16 @@ def cli():
     def devenv_psql():
         devenv('exec', 'db', 'psql', '-U', 'postgres')
 
-    command(devenv)
-    command(compose)
+    @command
+    def compose(*args, **kwargs):
+        cmd('docker', 'compose',
+            '--project-name', 'venue',
+            '--project-directory', abspath('.'),
+            *args, **kwargs, cwd='docker')
+
+    @command
+    def devenv(*args):
+        compose('-f', 'docker-compose.devenv.yml', *args)
 
     def e2e(*args):
         cmd('npm', 'exec', *args, cwd='e2e',
@@ -81,9 +80,13 @@ def cli():
     def build():
         cmd('rm', '-rf', 'dist')
         cmd('mkdir', '-p', 'dist')
-        cmd('deno', 'compile', *BACK_CONFIG,
-            '-A', '--output', '../dist/venue', './src/main.ts', cwd='back')
-        cmd('cp', '-r', 'resources', '../dist/resources', cwd='back')
+        cmd('deno', 'compile',
+            *BACK_CONFIG,
+            *BACK_PERMS,
+            '--output', '../dist/venue',
+            BACK_ENTRYPOINT,
+            cwd=BACK_HOME)
+        cmd('cp', '-r', 'resources', '../dist/resources', cwd=BACK_HOME)
 
     @command
     def build_docker():
