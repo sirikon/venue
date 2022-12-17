@@ -345,6 +345,21 @@
     "https://esm.sh/v99/tsyringe@4.7.0/dist/typings/types/interceptor-options.d.ts": "f6f5806539814f2761021d84d57b7911a8448e7a4cece700b22ac4622f9c4c68",
     "https://esm.sh/v99/tsyringe@4.7.0/dist/typings/types/lifecycle.d.ts": "c442590ef92fcb502f7762f61913c0db9027839a63f04b12fcd687996853e2f0",
     "https://esm.sh/v99/tsyringe@4.7.0/dist/typings/types/registration-options.d.ts": "b07eadb87aa3accb097690adce5575b3e0efa66d2e8d893b5a913c8a44f97ba3",
-    "https://esm.sh/v99/tsyringe@4.7.0/dist/typings/types/transform.d.ts": "0bce4a5303f795de76667a9f1a1f27eea3ac35cb373ff2fb5447b6c83017192c"
+    "https://esm.sh/v99/tsyringe@4.7.0/dist/typings/types/transform.d.ts": "0bce4a5303f795de76667a9f1a1f27eea3ac35cb373ff2fb5447b6c83017192c",
+    "https://esm.sh/v99/zod@3.20.2/deno/zod.js": "4e1c7e6ae3b866c33bfebc0c6886cb22ce577dd9ebf53cebdbd8fa8a7ab4d739",
+    "https://esm.sh/v99/zod@3.20.2/index.d.ts": "b51c954b9557b1dcb03b2bf34cd136e710cb9aa276e686cac0e291249590a52a",
+    "https://esm.sh/v99/zod@3.20.2/lib/ZodError.d.ts": "c53bb6e3d82b7813bed0096be4185d253c8f7d32db9c8960bc7f06980f86261e",
+    "https://esm.sh/v99/zod@3.20.2/lib/errors.d.ts": "5ec2790f877581637c058eb5bbb72e855a078620d0781d2a6a8f308fe1d5436f",
+    "https://esm.sh/v99/zod@3.20.2/lib/external.d.ts": "91cec2fe1e1fb2574812a29a57ad2c39a1e69b0fa1179547382c92649fc5c66e",
+    "https://esm.sh/v99/zod@3.20.2/lib/helpers/enumUtil.d.ts": "f672c876c1a04a223cf2023b3d91e8a52bb1544c576b81bf64a8fec82be9969c",
+    "https://esm.sh/v99/zod@3.20.2/lib/helpers/errorUtil.d.ts": "98a9cc18f661d28e6bd31c436e1984f3980f35e0f0aa9cf795c54f8ccb667ffe",
+    "https://esm.sh/v99/zod@3.20.2/lib/helpers/parseUtil.d.ts": "d3dbfc2f2fbf2c1bdea72db72f9f5c95d2ca5b4d32c9e229764ebaba0920203c",
+    "https://esm.sh/v99/zod@3.20.2/lib/helpers/partialUtil.d.ts": "7da6f1e431746c5364ebe6703f5d3a844ab0495e2a8cedc0a29cced52d6284a1",
+    "https://esm.sh/v99/zod@3.20.2/lib/helpers/typeAliases.d.ts": "5487b97cfa28b26b4a9ef0770f872bdbebd4c46124858de00f242c3eed7519f4",
+    "https://esm.sh/v99/zod@3.20.2/lib/helpers/util.d.ts": "bb98c05ae5cb9bd7cb7ad76fe517251a661787a6f24337b842f47faf393f79c7",
+    "https://esm.sh/v99/zod@3.20.2/lib/index.d.ts": "0f86f053aecd06054359e146b6cd800fee9bf82905f8afb47f1fe774fd37311e",
+    "https://esm.sh/v99/zod@3.20.2/lib/locales/en.d.ts": "f8ec1611afb8d132c6c71822718805866890cf2071025153af97508eff24e4b6",
+    "https://esm.sh/v99/zod@3.20.2/lib/types.d.ts": "744e3c65de31c5f7f8e79f9a37e1e372c9043a5ca130ec1038180ba4c9941f1f",
+    "https://esm.sh/zod@3.20.2?pin=v99": "c936f1f736f34307dc19640159c780723d8ecc5fbcc68a67a1cfbb559c6e11cb"
   }
 }

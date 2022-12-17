@@ -1,12 +1,13 @@
 {
   "imports": {
     "@/": "./",
-    "denox/": "./vendor/denox/",
+    "denox/": "./vendor/denox/lib/",
     "std/": "https://deno.land/std@0.168.0/",
     "oak/": "https://deno.land/x/oak@v11.1.0/",
     "eta/": "https://deno.land/x/eta@v1.12.3/",
     "postgres/": "https://deno.land/x/postgres@v0.17.0/",
     "reflect_metadata/": "https://deno.land/x/reflect_metadata@v0.1.12/",
-    "tsyringe": "https://esm.sh/tsyringe@4.7.0?pin=v99"
+    "tsyringe": "https://esm.sh/tsyringe@4.7.0?pin=v99",
+    "zod": "https://esm.sh/zod@3.20.2?pin=v99"
   }
 }

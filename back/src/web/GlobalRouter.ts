@@ -1,6 +1,5 @@
 import { Router } from "oak/mod.ts";
 import { getQuery } from "oak/helpers.ts";
-import { assert, string, type } from "denox/superstruct/index.ts";
 import { getVisitorId } from "@/web/visitor.ts";
 import { AdminController } from "@/web/AdminController.ts";
 import { TalkStore } from "@/services/infrastructure/TalkStore.ts";
@@ -9,6 +8,7 @@ import { TemplateEngine } from "@/templates/TemplateEngine.ts";
 import { RatingStore } from "@/services/infrastructure/RatingStore.ts";
 import { QuestionStore } from "@/services/infrastructure/QuestionStore.ts";
 import { singleton } from "tsyringe";
+import { z } from "zod";
 
 @singleton()
 export class GlobalRouter {
@@ -96,8 +96,8 @@ export class GlobalRouter {
       });
     });
 
-    const PostQuestionBodyModel = type({
-      question: string(),
+    const PostQuestionBodyModel = z.object({
+      question: z.string(),
     });
 
     router.post("/talk/:slug/question", async (ctx) => {
@@ -107,8 +107,8 @@ export class GlobalRouter {
         return;
       }
       const bodyReader = ctx.request.body({ type: "form-data" });
-      const body = (await bodyReader.value.read()).fields;
-      assert(body, PostQuestionBodyModel);
+      const bodyRaw = (await bodyReader.value.read()).fields;
+      const body = PostQuestionBodyModel.parse(bodyRaw);
       const visitorId = await getVisitorId(ctx);
       await this.questionStore.saveQuestion({
         talk_id: talk.id,
@@ -118,9 +118,9 @@ export class GlobalRouter {
       ctx.response.redirect(`/talk/${talk.slug}?q=1`);
     });
 
-    const PostRatingBodyModel = type({
-      rating: string(),
-      comment: string(),
+    const PostRatingBodyModel = z.object({
+      rating: z.string(),
+      comment: z.string(),
     });
 
     router.post("/talk/:slug/rating", async (ctx) => {
@@ -130,8 +130,8 @@ export class GlobalRouter {
         return;
       }
       const bodyReader = ctx.request.body({ type: "form-data" });
-      const body = (await bodyReader.value.read()).fields;
-      assert(body, PostRatingBodyModel);
+      const bodyRaw = (await bodyReader.value.read()).fields;
+      const body = PostRatingBodyModel.parse(bodyRaw);
       const visitorId = await getVisitorId(ctx);
       const rating = parseInt(body.rating);
       if (rating < 1 || rating > 5) {
