@@ -1,5 +1,5 @@
 import { Question } from "@/models/mod.ts";
-import { Database } from "@/services/external/Database.ts";
+import { Database } from "@/services/data/Database.ts";
 import { singleton } from "tsyringe";
 
 @singleton()

@@ -4,10 +4,12 @@ import { ensureVisitorCookie } from "@/web/visitor.ts";
 import { GlobalRouter } from "@/web/GlobalRouter.ts";
 import { ConfigProvider } from "@/config/ConfigProvider.ts";
 import { singleton } from "tsyringe";
+import { Logger } from "@/services/logging/Logger.ts";
 
 @singleton()
 export class WebServer {
   constructor(
+    private log: Logger,
     private configProvider: ConfigProvider,
     private globalRouter: GlobalRouter,
   ) {}
@@ -44,7 +46,7 @@ export class WebServer {
     app.use(router.allowedMethods());
 
     app.addEventListener("listen", (e) => {
-      console.log(`Listening on port ${e.port}`);
+      this.log.info(`Listening on http://${e.hostname}:${e.port}`);
     });
 
     await app.listen({ port: config.VENUE_PORT });

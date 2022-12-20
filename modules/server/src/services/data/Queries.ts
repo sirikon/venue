@@ -1,6 +1,6 @@
 import { Question, Rating, Talk } from "@/models/mod.ts";
-import { Database } from "@/services/external/Database.ts";
 import { singleton } from "tsyringe";
+import { Database } from "@/services/data/Database.ts";
 
 @singleton()
 export class Queries {

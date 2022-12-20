@@ -1,13 +1,11 @@
 {
   "fmt": {
     "files": {
-      "include": ["src/"],
       "exclude": ["src/vendor/denox/superstruct"]
     }
   },
   "lint": {
     "files": {
-      "include": ["src/"],
       "exclude": ["src/vendor/denox/superstruct"]
     },
     "rules": {
