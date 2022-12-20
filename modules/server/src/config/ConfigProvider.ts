@@ -6,7 +6,7 @@ const isTrue = (v: string) => v === "true";
 const configBuilder = buildConfig({
   VENUE_PORT: {
     description: "Port to listen to",
-    default: "8000",
+    default: "80",
     map: parseInt,
   },
   VENUE_DB_USER: {

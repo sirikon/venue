@@ -10,6 +10,7 @@ SERVER_PERMS = ['-A']
 SERVER_ENTRYPOINT = join(SERVER_HOME, 'src/main.ts')
 SERVER_ENV = dict(
     os.environ,
+    VENUE_PORT='8000',
     VENUE_DB_USER='venue',
     VENUE_DB_PASSWORD='password',
     VENUE_DB_NAME='venue',
