@@ -1,3 +1,3 @@
 [submodule "back/src/vendor/denox"]
-	path = back/src/vendor/denox
+	path = modules/server/src/vendor/denox
 	url = ../denox

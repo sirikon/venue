@@ -2,13 +2,13 @@ import { Router } from "oak/mod.ts";
 import { getQuery } from "oak/helpers.ts";
 import { getVisitorId } from "@/web/visitor.ts";
 import { AdminController } from "@/web/AdminController.ts";
-import { TalkStore } from "@/services/infrastructure/TalkStore.ts";
-import { Queries } from "@/services/infrastructure/Queries.ts";
-import { TemplateEngine } from "@/templates/TemplateEngine.ts";
-import { RatingStore } from "@/services/infrastructure/RatingStore.ts";
-import { QuestionStore } from "@/services/infrastructure/QuestionStore.ts";
 import { singleton } from "tsyringe";
 import { z } from "zod";
+import { Queries } from "@/services/data/Queries.ts";
+import { TalkStore } from "@/services/data/TalkStore.ts";
+import { RatingStore } from "@/services/data/RatingStore.ts";
+import { QuestionStore } from "@/services/data/QuestionStore.ts";
+import { TemplateEngine } from "@/services/templates/TemplateEngine.ts";
 
 @singleton()
 export class GlobalRouter {
