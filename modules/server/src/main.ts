@@ -3,6 +3,7 @@ import { container } from "tsyringe";
 
 import { WebServer } from "@/web/WebServer.ts";
 import { Logger } from "@/services/logging/Logger.ts";
+import { DatabaseMigrator } from "./services/data/DatabaseMigrator.ts";
 
 const log = container.resolve(Logger);
 
@@ -17,6 +18,7 @@ Deno.addSignalListener("SIGINT", () => {
 });
 
 try {
+  console.log(await container.resolve(DatabaseMigrator).migrate());
   await container.resolve(WebServer).start();
 } catch (err) {
   log.error("Error during server initialization", err);

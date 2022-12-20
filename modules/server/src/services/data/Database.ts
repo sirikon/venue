@@ -3,10 +3,8 @@ import { ConfigProvider } from "@/config/ConfigProvider.ts";
 import { singleton } from "tsyringe";
 
 export type DBClient = {
-  queryObject: <T>(
-    query: TemplateStringsArray,
-    ...args: unknown[]
-  ) => Promise<{ rows: T[] }>;
+  queryObject: PoolClient["queryObject"];
+  createTransaction: PoolClient["createTransaction"];
 };
 
 export type WithClientFunc = <T>(cb: (c: DBClient) => Promise<T>) => Promise<T>;

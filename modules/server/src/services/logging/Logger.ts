@@ -27,7 +27,7 @@ export class Logger {
     const errorMessage = (() => {
       if (!err) return null;
       if (err instanceof Error) {
-        return err.stack || err.message;
+        return errorToString(err);
       }
       return "" + err;
     })();
@@ -46,4 +46,20 @@ export class Logger {
       } ${settings.textColor(message)}`
       : `${settings.header}: ${message}`;
   }
+}
+
+function errorToString(err: Error): string {
+  const errorToLines = (err: Error, prefix?: string): string[] => {
+    const lines = [
+      (prefix || "") + (err.stack || err.message),
+    ];
+    if (err.cause) {
+      const causeLines = err.cause instanceof Error
+        ? errorToLines(err.cause, "Caused by ")
+        : ["Caused by " + err.cause];
+      lines.push(...causeLines);
+    }
+    return lines;
+  };
+  return errorToLines(err).join("\n");
 }

@@ -5,8 +5,6 @@ services:
     environment:
       POSTGRES_USER: venue
       POSTGRES_PASSWORD: password
-    volumes:
-      - "./modules/server/resources/db/migrations:/docker-entrypoint-initdb.d:ro"
     ports:
       - 5432:5432
 
