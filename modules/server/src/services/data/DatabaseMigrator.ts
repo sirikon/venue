@@ -39,6 +39,7 @@ export class DatabaseMigrator {
   }
 
   private async applyMigration(name: string, sql: string) {
+    this.log.info(`Applying migration ${name}`);
     await this.db.withClient(async (client) => {
       const transaction = client.createTransaction(
         `migration-${name}`,

@@ -17,7 +17,6 @@ const log = container.resolve(Logger);
 globalThis.addEventListener("unhandledrejection", (e) => {
   e.preventDefault();
   log.error("Unhandled rejection", e.reason);
-  Deno.exit(1);
 });
 
 Deno.addSignalListener("SIGINT", () => {
