@@ -11,7 +11,7 @@ type LogLevelSetting = {
 
 const logLevelSettings: Record<LogLevel, LogLevelSetting> = {
   info: { header: "INFO", headerColor: c.brightBlue, textColor: c.dim },
-  warning: { header: "WARN", headerColor: c.brightMagenta, textColor: c.reset },
+  warning: { header: "WARN", headerColor: c.brightMagenta, textColor: c.dim },
   error: { header: "ERROR", headerColor: c.brightRed, textColor: c.reset },
 };
 const maxHeaderSize = Object.entries(logLevelSettings)
@@ -19,8 +19,14 @@ const maxHeaderSize = Object.entries(logLevelSettings)
 
 @singleton()
 export class Logger {
+  private textEncoder = new TextEncoder();
+
   public info(message: string) {
     this.line("info", message);
+  }
+
+  public warn(message: string) {
+    this.line("warning", message);
   }
 
   public error(message: string, err?: unknown): void {
@@ -35,7 +41,9 @@ export class Logger {
   }
 
   public line(level: LogLevel, message: string) {
-    console.log(this.buildLine(level, message));
+    Deno.stdout.write(
+      this.textEncoder.encode(this.buildLine(level, message) + "\n"),
+    );
   }
 
   private buildLine(level: LogLevel, message: string) {
@@ -43,8 +51,8 @@ export class Logger {
     return c.getColorEnabled()
       ? `${
         c.bold(settings.headerColor(settings.header.padStart(maxHeaderSize)))
-      } ${settings.textColor(message)}`
-      : `${settings.header}: ${message}`;
+      } ${settings.textColor(c.stripColor(message))}`
+      : `${settings.header}: ${c.stripColor(message)}`;
   }
 }
 
