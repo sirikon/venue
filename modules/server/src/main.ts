@@ -10,7 +10,7 @@ import { container } from "tsyringe";
 
 import { WebServer } from "@/web/WebServer.ts";
 import { Logger, LogLevel } from "@/services/logging/Logger.ts";
-import { DatabaseMigrator } from "./services/data/DatabaseMigrator.ts";
+import { DatabaseMigrator } from "@/services/data/DatabaseMigrator.ts";
 
 const log = container.resolve(Logger);
 
