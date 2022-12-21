@@ -32,12 +32,21 @@ def cli():
 
     @command
     def run():
-        cmd('deno', 'run', '--watch',
+        cmd('deno', 'run',
+            '--watch', '--cached-only',
             *SERVER_CONFIG,
             *SERVER_PERMS,
             SERVER_ENTRYPOINT,
             cwd=SERVER_HOME,
             env=SERVER_ENV)
+
+    @command
+    def cache():
+        cmd('deno', 'cache',
+            '--lock-write',
+            *SERVER_CONFIG,
+            SERVER_ENTRYPOINT,
+            cwd=SERVER_HOME)
 
     @command
     def fmt():

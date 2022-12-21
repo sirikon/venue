@@ -1,13 +1,5 @@
 {
-  "fmt": {
-    "files": {
-      "exclude": ["src/vendor/denox/superstruct"]
-    }
-  },
   "lint": {
-    "files": {
-      "exclude": ["src/vendor/denox/superstruct"]
-    },
     "rules": {
       "tags": ["recommended"]
     }

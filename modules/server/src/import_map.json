@@ -2,7 +2,7 @@
   "imports": {
     "@/": "./",
     "denox/": "./vendor/denox/lib/",
-    "std/": "https://deno.land/std@0.168.0/",
+    "std/": "https://deno.land/std@0.170.0/",
     "oak/": "https://deno.land/x/oak@v11.1.0/",
     "eta/": "https://deno.land/x/eta@v1.12.3/",
     "postgres/": "https://deno.land/x/postgres@v0.17.0/",
