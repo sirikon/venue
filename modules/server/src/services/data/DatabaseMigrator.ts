@@ -15,7 +15,7 @@ export class DatabaseMigrator {
     const changelog = await this.getChangelog();
     for await (const migration of this.getMigrations()) {
       const migrationName = basename(migration);
-      if (!changelog.rows.find((r) => r.name === migrationName)) {
+      if (!changelog.find((m) => m.name === migrationName)) {
         const migrationSql = await Deno.readTextFile(migration);
         await this.applyMigration(migrationName, migrationSql);
       }
@@ -34,7 +34,7 @@ export class DatabaseMigrator {
     return await this.db.withClient(async (client) => {
       return await client.queryObject<{ name: string }>`
         SELECT name FROM venue_changelog;
-      `;
+      `.then((r) => r.rows);
     });
   }
 
