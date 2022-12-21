@@ -31,6 +31,12 @@ const configBuilder = buildConfig({
     default: "5",
     map: parseInt,
   },
+  VENUE_DB_SEED: {
+    description:
+      "Seed database with example data. Normally you'll need this for development or evaluation purposes only.",
+    default: "false",
+    map: isTrue,
+  },
   VENUE_TEMPLATE_CACHING: {
     description: "Enable template caching",
     default: "false",

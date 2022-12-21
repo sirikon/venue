@@ -2,22 +2,31 @@ import { singleton } from "tsyringe";
 import { Database } from "@/services/data/Database.ts";
 import { basename, join } from "std/path/mod.ts";
 import { Logger } from "@/services/logging/Logger.ts";
+import { ConfigProvider } from "../../config/ConfigProvider.ts";
 
 @singleton()
 export class DatabaseMigrator {
   constructor(
     private log: Logger,
+    private configProvider: ConfigProvider,
     private db: Database,
   ) {}
 
   public async migrate() {
+    const config = await this.configProvider.getConfig();
     await this.ensureChangelogTable();
     const changelog = await this.getChangelog();
-    for await (const migration of this.getMigrations()) {
+    for (const migration of await this.getMigrations()) {
       const migrationName = basename(migration);
+      if (migrationName.endsWith(".seed.sql") && !config.VENUE_DB_SEED) {
+        continue;
+      }
       if (!changelog.find((m) => m.name === migrationName)) {
         const migrationSql = await Deno.readTextFile(migration);
+        this.log.info(`Migration ${migrationName}: Applying`);
         await this.applyMigration(migrationName, migrationSql);
+      } else {
+        this.log.info(`Migration ${migrationName}: Aready applied`);
       }
     }
   }
@@ -39,7 +48,6 @@ export class DatabaseMigrator {
   }
 
   private async applyMigration(name: string, sql: string) {
-    this.log.info(`Applying migration ${name}`);
     await this.db.withClient(async (client) => {
       const transaction = client.createTransaction(
         `migration-${name}`,
@@ -68,13 +76,16 @@ export class DatabaseMigrator {
     });
   }
 
-  private async *getMigrations() {
+  private async getMigrations() {
     const migrationsPath = join(Deno.cwd(), "resources/db/migrations");
     const files = Deno.readDir(migrationsPath);
+    const result = [];
     for await (const file of files) {
       if (file.isFile) {
-        yield join(migrationsPath, file.name);
+        result.push(join(migrationsPath, file.name));
       }
     }
+    result.sort();
+    return result;
   }
 }

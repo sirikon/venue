@@ -15,6 +15,7 @@ SERVER_ENV = dict(
     VENUE_DB_PASSWORD='password',
     VENUE_DB_NAME='venue',
     VENUE_DB_HOST='127.0.0.1',
+    VENUE_DB_SEED='true',
     VENUE_VISITOR_COOKIE_SECRET='secret',
     VENUE_BRAND_NAME='Venue DEV',
     VENUE_BRAND_IMAGE='http://localhost:8001/brand.png',
@@ -31,7 +32,7 @@ def cli():
 
     @command
     def run():
-        cmd('deno', 'run',
+        cmd('deno', 'run', '--watch',
             *SERVER_CONFIG,
             *SERVER_PERMS,
             SERVER_ENTRYPOINT,
