@@ -2,7 +2,7 @@ import { singleton } from "tsyringe";
 import { Database } from "@/services/data/Database.ts";
 import { basename, join } from "std/path/mod.ts";
 import { Logger } from "@/services/logging/Logger.ts";
-import { ConfigProvider } from "../../config/ConfigProvider.ts";
+import { ConfigProvider } from "@/services/config/ConfigProvider.ts";
 
 @singleton()
 export class DatabaseMigrator {

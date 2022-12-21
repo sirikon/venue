@@ -2,7 +2,7 @@ import { join } from "std/path/mod.ts";
 import { Application, send } from "oak/mod.ts";
 import { ensureVisitorCookie } from "@/web/visitor.ts";
 import { GlobalRouter } from "@/web/GlobalRouter.ts";
-import { ConfigProvider } from "@/config/ConfigProvider.ts";
+import { ConfigProvider } from "@/services/config/ConfigProvider.ts";
 import { singleton } from "tsyringe";
 import { Logger } from "@/services/logging/Logger.ts";
 

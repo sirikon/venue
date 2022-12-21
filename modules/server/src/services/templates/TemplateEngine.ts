@@ -1,6 +1,6 @@
 import * as Eta from "eta/mod.ts";
 import { join } from "std/path/mod.ts";
-import { ConfigProvider } from "@/config/ConfigProvider.ts";
+import { ConfigProvider } from "@/services/config/ConfigProvider.ts";
 import { singleton } from "tsyringe";
 
 @singleton()

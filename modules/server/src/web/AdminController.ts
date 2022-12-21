@@ -1,7 +1,7 @@
 import { decode } from "std/encoding/base64.ts";
 import { Context } from "oak/mod.ts";
-import { Config, ConfigProvider } from "@/config/ConfigProvider.ts";
 import { singleton } from "tsyringe";
+import { Config, ConfigProvider } from "@/services/config/ConfigProvider.ts";
 
 const ADMIN_COOKIE_NAME = "venue_admin";
 

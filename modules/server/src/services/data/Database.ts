@@ -1,6 +1,6 @@
 import { Pool, PoolClient } from "postgres/mod.ts";
-import { ConfigProvider } from "@/config/ConfigProvider.ts";
 import { singleton } from "tsyringe";
+import { ConfigProvider } from "@/services/config/ConfigProvider.ts";
 
 export type DBClient = {
   queryObject: PoolClient["queryObject"];
