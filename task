@@ -83,12 +83,31 @@ def cli():
         distPath = abspath('dist')
         cmd('rm', '-rf', distPath)
         cmd('mkdir', '-p', distPath)
-        cmd('deno', 'compile',
-            *SERVER_CONFIG,
-            *SERVER_PERMS,
-            '--output', join(distPath, 'venue'),
-            SERVER_ENTRYPOINT,
-            cwd=SERVER_HOME)
+
+        # https://github.com/denoland/deno/issues/15119
+        compilation_bug_workaround = True
+
+        if compilation_bug_workaround:
+            cmd('deno', 'bundle',
+                *SERVER_CONFIG,
+                SERVER_ENTRYPOINT,
+                join(distPath, 'venue.js'),
+                cwd=SERVER_HOME)
+            cmd('deno', 'compile',
+                *SERVER_CONFIG,
+                *SERVER_PERMS,
+                '--output', join(distPath, 'venue'),
+                join(distPath, 'venue.js'),
+                cwd=SERVER_HOME)
+            cmd('rm', join(distPath, 'venue.js'))
+        else:
+            cmd('deno', 'compile',
+                *SERVER_CONFIG,
+                *SERVER_PERMS,
+                '--output', join(distPath, 'venue'),
+                SERVER_ENTRYPOINT,
+                cwd=SERVER_HOME)
+
         cmd('cp', '-r',
             join(SERVER_HOME, 'resources'),
             join(distPath, 'resources'))
