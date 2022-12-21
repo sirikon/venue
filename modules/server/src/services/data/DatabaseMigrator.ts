@@ -13,7 +13,7 @@ export class DatabaseMigrator {
   ) {}
 
   public async migrate() {
-    const config = await this.configProvider.getConfig();
+    const config = this.configProvider.getConfig();
     await this.ensureChangelogTable();
     const changelog = await this.getChangelog();
     for (const migration of await this.getMigrations()) {
