@@ -1,14 +1,10 @@
-version: "3.9"
-
 services:
   db:
     image: postgres:12-alpine
     restart: always
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-    volumes:
-      - "../back/resources/db/migrations:/docker-entrypoint-initdb.d:ro"
+      POSTGRES_USER: venue
+      POSTGRES_PASSWORD: password
     ports:
       - 5432:5432
 
@@ -16,6 +12,6 @@ services:
     image: nginx:1-alpine
     restart: always
     volumes:
-      - "../development-statics:/usr/share/nginx/html:ro"
+      - "./modules/development-statics:/usr/share/nginx/html:ro"
     ports:
       - 8001:80

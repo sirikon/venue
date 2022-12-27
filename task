@@ -1,15 +1,20 @@
 #!/usr/bin/env python3
 import os
+from os.path import abspath, join, exists
 from datetime import datetime
 
-DENO_CONFIG = ['--config', 'deno.json']
-DENO_IMPORT_MAP = ['--import-map', 'src/import_map.json']
-BACK_ENV = dict(
+SERVER_HOME = abspath(join('modules', 'server'))
+SERVER_CONFIG = ['--config', join(SERVER_HOME, 'deno.json')]
+SERVER_PERMS = ['-A']
+SERVER_ENTRYPOINT = join(SERVER_HOME, 'src', 'main.ts')
+SERVER_ENV = dict(
     os.environ,
-    VENUE_DB_USER='postgres',
-    VENUE_DB_PASSWORD='postgres',
-    VENUE_DB_NAME='postgres',
+    VENUE_PORT='8000',
+    VENUE_DB_USER='venue',
+    VENUE_DB_PASSWORD='password',
+    VENUE_DB_NAME='venue',
     VENUE_DB_HOST='127.0.0.1',
+    VENUE_DB_SEED='true',
     VENUE_VISITOR_COOKIE_SECRET='secret',
     VENUE_BRAND_NAME='Venue DEV',
     VENUE_BRAND_IMAGE='http://localhost:8001/brand.png',
@@ -17,29 +22,45 @@ BACK_ENV = dict(
     VENUE_ADMIN_PASSWORD='admin',
 )
 
+E2E_HOME = abspath(join('modules', 'e2e'))
+
+DOCKER_HOME = abspath('docker')
+
 
 def cli():
 
     @command
     def run():
-        cmd('deno', 'run', *DENO_CONFIG, *DENO_IMPORT_MAP,
-            '-A', 'src/main.ts', cwd='back', env=BACK_ENV)
+        cmd('deno', 'run',
+            '--watch', '--cached-only',
+            *SERVER_CONFIG,
+            *SERVER_PERMS,
+            SERVER_ENTRYPOINT,
+            cwd=SERVER_HOME,
+            env=SERVER_ENV)
+
+    @command
+    def cache():
+        cmd('deno', 'cache',
+            *SERVER_CONFIG,
+            SERVER_ENTRYPOINT,
+            cwd=SERVER_HOME)
+
+    @command
+    def lock():
+        cmd('deno', 'cache',
+            '--lock-write',
+            *SERVER_CONFIG,
+            SERVER_ENTRYPOINT,
+            cwd=SERVER_HOME)
 
     @command
     def fmt():
-        cmd('deno', 'fmt', *DENO_CONFIG, cwd='back')
+        cmd('deno', 'fmt', *SERVER_CONFIG, cwd=SERVER_HOME)
 
     @command
     def lint():
-        cmd('deno', 'lint', *DENO_CONFIG, cwd='back')
-
-    def compose(*args, **kwargs):
-        cmd('docker-compose',
-            '--project-name', 'venue',
-            *args, **kwargs, cwd='docker')
-
-    def devenv(*args):
-        compose('-f', 'docker-compose.devenv.yml', *args)
+        cmd('deno', 'lint', *SERVER_CONFIG, cwd=SERVER_HOME)
 
     @command
     def devenv_up():
@@ -53,29 +74,58 @@ def cli():
     def devenv_psql():
         devenv('exec', 'db', 'psql', '-U', 'postgres')
 
-    command(devenv)
-    command(compose)
-
-    def e2e(*args):
-        cmd('npm', 'exec', *args, cwd='e2e',
-            # https://github.com/webpack/webpack/issues/14532#issuecomment-947012063
-            env=dict(os.environ, NODE_OPTIONS='--openssl-legacy-provider'))
+    @command
+    def devenv(*args):
+        compose('-f', 'docker-compose.devenv.yml', *args)
 
     @command
     def e2e_open():
         e2e('cypress', 'open')
-    
+
     @command
     def e2e_run():
         e2e('cypress', 'run')
 
+    def e2e(*args):
+        if not exists(join(E2E_HOME, 'node_modules')):
+            cmd('npm', 'install', cwd=E2E_HOME)
+        cmd('npm', 'exec', *args, cwd=E2E_HOME,
+            # https://github.com/webpack/webpack/issues/14532#issuecomment-947012063
+            env=dict(os.environ, NODE_OPTIONS='--openssl-legacy-provider'))
+
     @command
     def build():
-        cmd('rm', '-rf', 'dist')
-        cmd('mkdir', '-p', 'dist')
-        cmd('deno', 'compile', *DENO_CONFIG, *DENO_IMPORT_MAP,
-            '-A', '--output', '../dist/venue', './src/main.ts', cwd='back')
-        cmd('cp', '-r', 'resources', '../dist/resources', cwd='back')
+        distPath = abspath('dist')
+        cmd('rm', '-rf', distPath)
+        cmd('mkdir', '-p', distPath)
+
+        # https://github.com/denoland/deno/issues/15119
+        compilation_bug_workaround = True
+
+        if compilation_bug_workaround:
+            cmd('deno', 'bundle',
+                *SERVER_CONFIG,
+                SERVER_ENTRYPOINT,
+                join(distPath, 'venue.js'),
+                cwd=SERVER_HOME)
+            cmd('deno', 'compile',
+                *SERVER_CONFIG,
+                *SERVER_PERMS,
+                '--output', join(distPath, 'venue'),
+                join(distPath, 'venue.js'),
+                cwd=SERVER_HOME)
+            cmd('rm', join(distPath, 'venue.js'))
+        else:
+            cmd('deno', 'compile',
+                *SERVER_CONFIG,
+                *SERVER_PERMS,
+                '--output', join(distPath, 'venue'),
+                SERVER_ENTRYPOINT,
+                cwd=SERVER_HOME)
+
+        cmd('cp', '-r',
+            join(SERVER_HOME, 'resources'),
+            join(distPath, 'resources'))
 
     @command
     def build_docker():
@@ -93,7 +143,12 @@ def cli():
         ))
         cmd('docker', 'push', f'sirikon/venue:{version}')
 
-
+    @command
+    def compose(*args, **kwargs):
+        cmd('docker', 'compose',
+            '--project-name', 'venue-dev',
+            '--project-directory', abspath('.'),
+            *args, **kwargs, cwd=DOCKER_HOME)
 
 
 

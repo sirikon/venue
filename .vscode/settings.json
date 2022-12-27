@@ -11,9 +11,5 @@
   },
   "[python]": {
     "editor.tabSize": 4
-  },
-  "files.exclude": {
-    "back": true,
-    "e2e": true
   }
 }

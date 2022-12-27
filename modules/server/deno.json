@@ -1,0 +1,12 @@
+{
+  "lint": {
+    "rules": {
+      "tags": ["recommended"]
+    }
+  },
+  "lock": "src/lock.json",
+  "importMap": "src/import_map.json",
+  "compilerOptions": {
+    "emitDecoratorMetadata": true
+  }
+}
