@@ -1,10 +1,9 @@
-import { setConsoleHijack } from "@/consoleHijack.ts";
 import "reflect_metadata/mod.ts";
+import { setConsoleHijackLogger } from "denox/logging/consoleHijack.ts";
 import { container } from "tsyringe";
-
 import { WebServer } from "@/web/WebServer.ts";
-import { Logger, LogLevel } from "@/services/logging/Logger.ts";
 import { DatabaseMigrator } from "@/services/data/DatabaseMigrator.ts";
+import { Logger } from "denox/logging/Logger.ts";
 
 const log = container.resolve(Logger);
 
@@ -17,14 +16,7 @@ Deno.addSignalListener("SIGINT", () => {
   log.info("Shutting down");
 });
 
-setConsoleHijack((method, data) => {
-  const level: LogLevel = (() => {
-    if (method === "warn") return "warning";
-    if (method === "error") return "warning";
-    return "info";
-  })();
-  log.line(level, `console.${method}: ${data}`);
-});
+setConsoleHijackLogger(log);
 
 try {
   await container.resolve(DatabaseMigrator).migrate();

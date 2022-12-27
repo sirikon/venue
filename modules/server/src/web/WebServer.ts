@@ -4,7 +4,7 @@ import { ensureVisitorCookie } from "@/web/visitor.ts";
 import { GlobalRouter } from "@/web/GlobalRouter.ts";
 import { ConfigProvider } from "@/services/config/ConfigProvider.ts";
 import { singleton } from "tsyringe";
-import { Logger } from "@/services/logging/Logger.ts";
+import { Logger } from "denox/logging/Logger.ts";
 
 @singleton()
 export class WebServer {

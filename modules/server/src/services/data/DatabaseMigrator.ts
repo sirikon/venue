@@ -1,8 +1,8 @@
 import { singleton } from "tsyringe";
 import { Database } from "@/services/data/Database.ts";
 import { basename, join } from "std/path/mod.ts";
-import { Logger } from "@/services/logging/Logger.ts";
 import { ConfigProvider } from "@/services/config/ConfigProvider.ts";
+import { Logger } from "denox/logging/Logger.ts";
 
 @singleton()
 export class DatabaseMigrator {
