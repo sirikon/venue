@@ -14,7 +14,7 @@ RUN asdf plugin add nodejs
 WORKDIR /app
 COPY .tool-versions .
 RUN asdf install
-COPY ./back ./back
+COPY ./modules/server ./modules/server
 COPY task .
 RUN ./task build
 
