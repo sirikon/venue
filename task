@@ -3,11 +3,10 @@ import os
 from os.path import abspath, join, exists
 from datetime import datetime
 
-SERVER_HOME = abspath('modules/server')
-
-SERVER_CONFIG = ['--config', 'deno.json']
+SERVER_HOME = abspath(join('modules', 'server'))
+SERVER_CONFIG = ['--config', join(SERVER_HOME, 'deno.json')]
 SERVER_PERMS = ['-A']
-SERVER_ENTRYPOINT = join(SERVER_HOME, 'src/main.ts')
+SERVER_ENTRYPOINT = join(SERVER_HOME, 'src', 'main.ts')
 SERVER_ENV = dict(
     os.environ,
     VENUE_PORT='8000',
@@ -23,7 +22,7 @@ SERVER_ENV = dict(
     VENUE_ADMIN_PASSWORD='admin',
 )
 
-E2E_HOME = abspath('modules/e2e')
+E2E_HOME = abspath(join('modules', 'e2e'))
 
 DOCKER_HOME = abspath('docker')
 
@@ -42,6 +41,13 @@ def cli():
 
     @command
     def cache():
+        cmd('deno', 'cache',
+            *SERVER_CONFIG,
+            SERVER_ENTRYPOINT,
+            cwd=SERVER_HOME)
+
+    @command
+    def lock():
         cmd('deno', 'cache',
             '--lock-write',
             *SERVER_CONFIG,
