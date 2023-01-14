@@ -1,3 +1,9 @@
+import random
+import string
+import subprocess
+from os.path import abspath, join
+
+
 class SshConnection(object):
     def __init__(self, user, host):
         self.id = generate_connection_id()
@@ -27,18 +33,18 @@ class SshConnection(object):
         cmd('ssh', '-qF', self.config_path, '-O', 'exit', self.host)
         cmd('rm', '-rf', self.temp_path)
 
-    def ssh(self, script, **kwargs):
+    def exec(self, script, **kwargs):
         return cmd('ssh', '-qtF', self.config_path, self.host, script, **kwargs)
 
-    def scp(self, files, destination):
+    def send(self, files, destination):
         cmd('scp', '-F', self.config_path, '-r',
             *files, f'{self.host}:{destination}')
 
     def writeFile(self, file, content):
-        self.ssh(f"printf '%s' '{content}' > '{file}'")
+        self.exec(f"printf '%s' '{content}' > '{file}'")
 
     def readFile(self, file):
-        return self.ssh(
+        return self.exec(
             f"if [ -f '{file}' ]; then cat '{file}'; fi", capture_output=True, text=True).stdout
 
 
@@ -46,3 +52,7 @@ def generate_connection_id():
     return ''.join(
         random.choice(string.ascii_lowercase)
         for i in range(16))
+
+
+def cmd(*args, check=True, **kwargs):
+    return subprocess.run(args, check=check, **kwargs)
