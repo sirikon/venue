@@ -6,6 +6,8 @@ services:
       - "80:80"
       - "443:443"
       - "443:443/udp"
+    environment:
+      DOMAIN: ${DOMAIN}
     volumes:
       - /opt/venue/statics:/venue/statics:ro
       - /opt/venue/deploy/Caddyfile:/etc/caddy/Caddyfile:ro
@@ -29,7 +31,7 @@ services:
       VENUE_DB_HOST: db
       VENUE_VISITOR_COOKIE_SECRET: ${VENUE_VISITOR_COOKIE_SECRET}
       VENUE_BRAND_NAME: ${VENUE_BRAND_NAME}
-      VENUE_BRAND_IMAGE: ${DOMAIN}/custom-static/brand.png
+      VENUE_BRAND_IMAGE: https://${DOMAIN}/custom-static/brand.png
       VENUE_ADMIN_USERNAME: admin
       VENUE_ADMIN_PASSWORD: ${VENUE_ADMIN_PASSWORD}
 
