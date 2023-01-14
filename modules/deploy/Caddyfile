@@ -1,0 +1,12 @@
+https://{$DOMAIN} {
+  encode gzip
+
+  handle /custom-static/* {
+    root * /venue/statics
+    file_server
+  }
+
+  handle {
+    reverse_proxy venue
+  }
+}

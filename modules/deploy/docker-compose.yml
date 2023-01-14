@@ -1,0 +1,39 @@
+services:
+  caddy:
+    image: caddy:2-alpine
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - /opt/venue/statics:/venue/statics:ro
+      - /opt/venue/deploy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - /opt/venue/deploy/caddy_state/data:/data
+      - /opt/venue/deploy/caddy_state/config:/config
+
+  db:
+    image: postgres:12-bullseye
+    restart: always
+    environment:
+      POSTGRES_USER: venue
+      POSTGRES_PASSWORD: ${VENUE_DB_PASSWORD}
+  
+  venue:
+    image: sirikon/venue:${VENUE_VERSION}
+    restart: always
+    environment:
+      VENUE_DB_USER: venue
+      VENUE_DB_PASSWORD: ${VENUE_DB_PASSWORD}
+      VENUE_DB_NAME: venue
+      VENUE_DB_HOST: db
+      VENUE_VISITOR_COOKIE_SECRET: ${VENUE_VISITOR_COOKIE_SECRET}
+      VENUE_BRAND_NAME: ${VENUE_BRAND_NAME}
+      VENUE_BRAND_IMAGE: ${DOMAIN}/custom-static/brand.png
+      VENUE_ADMIN_USERNAME: admin
+      VENUE_ADMIN_PASSWORD: ${VENUE_ADMIN_PASSWORD}
+
+volumes:
+  caddy_data:
+    external: true
+  caddy_config:
