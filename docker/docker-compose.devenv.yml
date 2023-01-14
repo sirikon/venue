@@ -1,6 +1,6 @@
 services:
   db:
-    image: postgres:12-alpine
+    image: postgres:12-bullseye
     restart: always
     environment:
       POSTGRES_USER: venue
@@ -9,7 +9,7 @@ services:
       - 5432:5432
 
   statics:
-    image: nginx:1-alpine
+    image: nginx:1
     restart: always
     volumes:
       - "./modules/development-statics:/usr/share/nginx/html:ro"
