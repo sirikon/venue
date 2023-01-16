@@ -15,6 +15,7 @@ WORKDIR /app
 COPY .tool-versions .
 RUN asdf install
 COPY ./modules/server ./modules/server
+COPY scripts/ ./scripts
 COPY task .
 RUN ./task build
 
