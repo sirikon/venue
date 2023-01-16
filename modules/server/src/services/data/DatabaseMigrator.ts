@@ -1,26 +1,25 @@
 import { singleton } from "tsyringe";
 import { Database } from "@/services/data/Database.ts";
 import { basename, join } from "std/path/mod.ts";
-import { ConfigProvider } from "@/services/config/ConfigProvider.ts";
+import { Config, ConfigProvider } from "@/services/config/ConfigProvider.ts";
 import { Logger } from "denox/logging/Logger.ts";
 
 @singleton()
 export class DatabaseMigrator {
+  private config: Config;
   constructor(
     private log: Logger,
     private configProvider: ConfigProvider,
     private db: Database,
-  ) {}
+  ) {
+    this.config = this.configProvider.getConfig();
+  }
 
   public async migrate() {
-    const config = this.configProvider.getConfig();
     await this.ensureChangelogTable();
     const changelog = await this.getChangelog();
     for (const migration of await this.getMigrations()) {
       const migrationName = basename(migration);
-      if (migrationName.endsWith(".seed.sql") && !config.VENUE_DB_SEED) {
-        continue;
-      }
       if (!changelog.find((m) => m.name === migrationName)) {
         const migrationSql = await Deno.readTextFile(migration);
         this.log.info(`Migration ${migrationName}: Applying`);
@@ -77,15 +76,33 @@ export class DatabaseMigrator {
   }
 
   private async getMigrations() {
-    const migrationsPath = join(Deno.cwd(), "resources/db/migrations");
-    const files = Deno.readDir(migrationsPath);
-    const result = [];
-    for await (const file of files) {
-      if (file.isFile) {
-        result.push(join(migrationsPath, file.name));
+    return [
+      ...(await this.getMigrationsFrom("resources/db/migrations"))
+        .filter((migration) => {
+          if (!basename(migration).endsWith(".seed.sql")) return true;
+          return this.config.VENUE_DB_SEED;
+        }),
+      ...(await this.getMigrationsFrom("resources/db/custom-migrations")),
+    ];
+  }
+
+  private async getMigrationsFrom(path: string) {
+    try {
+      const migrationsPath = join(Deno.cwd(), path);
+      const files = Deno.readDir(migrationsPath);
+      const result = [];
+      for await (const file of files) {
+        if (file.isFile) {
+          result.push(join(migrationsPath, file.name));
+        }
       }
+      result.sort();
+      return result;
+    } catch (err) {
+      if (err instanceof Deno.errors.NotFound) {
+        return [];
+      }
+      throw err;
     }
-    result.sort();
-    return result;
   }
 }
