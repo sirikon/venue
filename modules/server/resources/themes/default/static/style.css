@@ -143,29 +143,27 @@ img {
 .x-talk-list-item-info {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-end;
 }
 .x-talk-list-item-info-speaker,
 .x-talk-list-item-info-track,
 .x-talk-list-item-info-when {
   font-size: 1em;
   font-weight: 700;
-  white-space: nowrap;
 }
 .x-talk-list-item-info-speaker {
   color: var(--speaker-name-color);
   font-weight: 600;
   flex-grow: 1;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
 }
 .x-talk-list-item-info-track {
   color: var(--accent-color);
   margin: 0 0.6em;
+  white-space: nowrap;
 }
 .x-talk-list-item-info-when {
   color: var(--primary-color);
+  white-space: nowrap;
 }
 
 /* TALK */
