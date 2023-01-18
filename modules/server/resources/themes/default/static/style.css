@@ -156,6 +156,9 @@ img {
   color: var(--speaker-name-color);
   font-weight: 600;
   flex-grow: 1;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 .x-talk-list-item-info-track {
   color: var(--accent-color);
