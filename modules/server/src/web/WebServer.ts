@@ -5,11 +5,13 @@ import { GlobalRouter } from "@/web/GlobalRouter.ts";
 import { ConfigProvider } from "@/services/config/ConfigProvider.ts";
 import { singleton } from "tsyringe";
 import { Logger } from "denox/logging/Logger.ts";
+import { Measurer } from "../services/logging/Measurer.ts";
 
 @singleton()
 export class WebServer {
   constructor(
     private log: Logger,
+    private measurer: Measurer,
     private configProvider: ConfigProvider,
     private globalRouter: GlobalRouter,
   ) {}
@@ -19,6 +21,13 @@ export class WebServer {
 
     const app = new Application({
       keys: [config.VENUE_VISITOR_COOKIE_SECRET],
+    });
+
+    app.use(async (ctx, next) => {
+      await this.measurer.measure(
+        `${ctx.request.method} ${ctx.request.url}`,
+        next,
+      );
     });
 
     app.use(async (ctx, next) => {

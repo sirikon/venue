@@ -70,6 +70,11 @@ const configBuilder = buildConfig({
     description: "Extra meta elements to be added on top of <head>",
     required: false,
   },
+  VENUE_LOG_TIME_MEASURE: {
+    description: "Enable to get time measurements logged",
+    required: false,
+    map: isTrue,
+  },
 });
 export type Config = ReturnType<typeof configBuilder["read"]>;
 

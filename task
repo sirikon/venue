@@ -22,6 +22,7 @@ SERVER_ENV = dict(
     VENUE_BRAND_IMAGE='http://localhost:8001/brand.png',
     VENUE_ADMIN_USERNAME='admin',
     VENUE_ADMIN_PASSWORD='admin',
+    VENUE_LOG_TIME_MEASURE='false'
 )
 
 E2E_HOME = abspath(join('modules', 'e2e'))
