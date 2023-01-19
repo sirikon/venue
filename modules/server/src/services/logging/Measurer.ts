@@ -12,11 +12,11 @@ export class Measurer {
     this.config = this.configProvider.getConfig();
   }
 
-  public measure<T>(name: string, cb: () => Promise<T>): Promise<T> {
+  public async measure<T>(name: string, cb: () => Promise<T>): Promise<T> {
     if (!this.config.VENUE_LOG_TIME_MEASURE) return cb();
     const start = performance.now();
     try {
-      return cb();
+      return await cb();
     } finally {
       const end = performance.now();
       const result = Math.round((end - start) * 100) / 100;
