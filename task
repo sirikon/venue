@@ -3,8 +3,6 @@ import os
 from os.path import abspath, join, exists
 from datetime import datetime
 
-from scripts.ssh import SshConnection
-
 SERVER_HOME = abspath(join('modules', 'server'))
 SERVER_CONFIG = ['--config', join(SERVER_HOME, 'deno.json')]
 SERVER_PERMS = ['-A']
