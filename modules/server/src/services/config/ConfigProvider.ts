@@ -70,6 +70,14 @@ const configBuilder = buildConfig({
     description: "Extra meta elements to be added on top of <head>",
     required: false,
   },
+  VENUE_BEFORE_TALKS_HTML_PATH: {
+    description: "Path to an HTML file that will be included right before talk listings",
+    required: false
+  },
+  VENUE_AFTER_TALKS_HTML_PATH: {
+    description: "Path to an HTML file that will be included right after talk listings",
+    required: false
+  },
   VENUE_LOG_TIME_MEASURE: {
     description: "Enable to get time measurements logged",
     required: false,

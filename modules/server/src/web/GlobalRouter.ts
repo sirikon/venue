@@ -9,17 +9,23 @@ import { TalkStore } from "@/services/data/TalkStore.ts";
 import { RatingStore } from "@/services/data/RatingStore.ts";
 import { QuestionStore } from "@/services/data/QuestionStore.ts";
 import { TemplateEngine } from "@/services/templates/TemplateEngine.ts";
+import { Config, ConfigProvider } from "../services/config/ConfigProvider.ts";
 
 @singleton()
 export class GlobalRouter {
+  private config: Config;
+
   constructor(
+    private configProvider: ConfigProvider,
     private adminController: AdminController,
     private queries: Queries,
     private talkStore: TalkStore,
     private ratingStore: RatingStore,
     private questionStore: QuestionStore,
     private templateEngine: TemplateEngine,
-  ) {}
+  ) {
+    this.config = this.configProvider.getConfig();
+  }
 
   public getRouter() {
     const router = new Router();
@@ -70,10 +76,14 @@ export class GlobalRouter {
     });
 
     router.get("/", async (ctx) => {
+      const beforeTalks = this.getBeforeTalksHtml();
+      const afterTalks = this.getAfterTalksHtml();
       const talks = await this.queries.homeTalks(await getVisitorId(ctx));
       ctx.response.body = await this.templateEngine.render("index.html", {
         talks,
         isAdmin: await this.adminController.isAdmin(ctx),
+        beforeTalks: await beforeTalks,
+        afterTalks: await afterTalks,
       });
     });
 
@@ -148,5 +158,17 @@ export class GlobalRouter {
     });
 
     return router;
+  }
+
+  private async getBeforeTalksHtml() {
+    return this.config.VENUE_BEFORE_TALKS_HTML_PATH != null
+      ? await Deno.readTextFile(this.config.VENUE_BEFORE_TALKS_HTML_PATH)
+      : "";
+  }
+
+  private async getAfterTalksHtml() {
+    return this.config.VENUE_AFTER_TALKS_HTML_PATH != null
+      ? await Deno.readTextFile(this.config.VENUE_AFTER_TALKS_HTML_PATH)
+      : "";
   }
 }
