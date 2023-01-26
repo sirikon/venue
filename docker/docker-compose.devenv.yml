@@ -14,4 +14,4 @@ services:
     volumes:
       - "./modules/development-statics:/usr/share/nginx/html:ro"
     ports:
-      - 8001:80
+      - 0.0.0.0:8001:80
