@@ -9,6 +9,8 @@ jobs:
         with:
           submodules: recursive
       - name: Login into ghcr.io
+        if: github.ref == 'refs/heads/master'
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin
       - name: Publish
+        if: github.ref == 'refs/heads/master'
         run: ./task publish_docker
