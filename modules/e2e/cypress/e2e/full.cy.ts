@@ -1,15 +1,15 @@
 Cypress.Cookies.debug(true)
 
-describe('Choose a talk and send a question', () => {
-  before(() => {
-    cy.clearCookies()
+it('Choose a talk and send a question', () => {
+  cy.session('send question', () => {
     cy.task("executeSql", "DELETE FROM questions")
-  })
-  beforeEach(() => {
-    Cypress.Cookies.preserveOnce('venue_visitor', 'venue_visitor.sig')
-  })
-  chooseFirstTalk()
-  it('Ask something', () => {
+
+    cy.visit('http://localhost:8000')
+    cy.get(".x-talk-list-item").first().click()
+
+    cy.get('.x-talk-title').contains("The Mother of All Demos", { matchCase: true })
+    cy.get('.x-talk-description').contains("The live demonstration featured the introduction", { matchCase: true })
+    
     cy.get('.x-talk-section').eq(2).as("section")
     cy.get('@section').find('.x-talk-textarea').first().as("textarea")
     cy.get('@section').find('.x-talk-button').first().as("send")
@@ -17,11 +17,9 @@ describe('Choose a talk and send a question', () => {
     cy.get("@textarea").scrollIntoView({ duration: 250, easing: 'swing' })
     cy.get("@textarea").type("No one will ever use that thing called 'mouse'. Are you serious?")
     cy.get("@send").click()
-  })
-  it('Verify success message', () => {
+
     cy.get('.x-talk-notification').first().contains("¡Gracias por tu pregunta!", { matchCase: true })
-  })
-  it('Verify the question arrived', () => {
+
     cy.visit("http://localhost:8000/admin", { headers: { 'authorization': 'Basic ' + btoa('admin:admin') } })
     cy.get(".x-talk-list-item")
       .first().click()
@@ -32,16 +30,16 @@ describe('Choose a talk and send a question', () => {
   })
 })
 
-describe('Choose a talk and rate it', () => {
-  before(() => {
-    cy.clearCookies()
+it('Choose a talk and rate it', () => {
+  cy.session('rate talk', () => {
     cy.task("executeSql", "DELETE FROM ratings")
-  })
-  beforeEach(() => {
-    Cypress.Cookies.preserveOnce('venue_visitor', 'venue_visitor.sig')
-  })
-  chooseFirstTalk()
-  it('Rate it', () => {
+
+    cy.visit('http://localhost:8000')
+    cy.get(".x-talk-list-item").first().click()
+
+    cy.get('.x-talk-title').contains("The Mother of All Demos", { matchCase: true })
+    cy.get('.x-talk-description').contains("The live demonstration featured the introduction", { matchCase: true })
+
     cy.get('.x-talk-section').eq(3).as("section")
     cy.get('@section').find('label[for="star-4"]').first().as("4stars")
     cy.get('@section').find('.x-talk-textarea').first().as("textarea")
@@ -51,13 +49,11 @@ describe('Choose a talk and rate it', () => {
     cy.get("@textarea").scrollIntoView({ duration: 250, easing: 'swing' })
     cy.get("@textarea").type("None of these things has any future, but it was fun.")
     cy.get("@send").click()
-  })
-  it('Verify success message', () => {
+
     cy.get('.x-talk-notification').first().contains("¡Gracias por tu feedback!", { matchCase: true })
     cy.reload()
     cy.get('.x-talk-notification').first().contains("¡Gracias por tu feedback!", { matchCase: true })
-  })
-  it('Verify the rating arrived', () => {
+
     cy.visit("http://localhost:8000/admin", { headers: { 'authorization': 'Basic ' + btoa('admin:admin') } })
     cy.get(".x-talk-list-item")
       .first().click()
@@ -74,26 +70,14 @@ describe('Choose a talk and rate it', () => {
   })
 })
 
-describe('Display talk ratings', () => {
-  before(() => {
-    cy.clearCookies()
+it('Display talk ratings', () => {
+  cy.session('display talk ratings', () => {
     cy.task("executeSql", "DELETE FROM ratings")
-  })
-  beforeEach(() => {
-    Cypress.Cookies.preserveOnce('venue_visitor', 'venue_visitor.sig', 'venue_admin', 'venue_admin.sig')
-  })
-  it('Login as admin', () => {
     cy.visit("http://localhost:8000/admin", { headers: { 'authorization': 'Basic ' + btoa('admin:admin') } })
-  })
-  it('Verify login is successful', () => {
     cy.get('p').first().contains('Hello Admin!')
-  })
-  it('Go to first talk ratings', () => {
     cy.get(".x-talk-list-item")
       .first().click()
       .get("[data-testid='ratings-link']").first().click()
-  })
-  it('Verify information with no ratings', () => {
     verifyRatings('--', {
       1: 0,
       2: 0,
@@ -101,8 +85,6 @@ describe('Display talk ratings', () => {
       4: 0,
       5: 0
     }, [])
-  })
-  it('Verify information with one rating', () => {
     cy.task("executeSql", "DELETE FROM ratings")
     cy.task("executeSql", `
       INSERT INTO ratings
@@ -120,8 +102,6 @@ describe('Display talk ratings', () => {
     }, [
       { comment: 'henlo', rating: 4 }
     ])
-  })
-  it('Verify information with many ratings', () => {
     cy.task("executeSql", "DELETE FROM ratings")
     cy.task("executeSql", `
       INSERT INTO ratings
@@ -168,26 +148,14 @@ describe('Display talk ratings', () => {
   })
 })
 
-describe('Display talk questions', () => {
-  before(() => {
-    cy.clearCookies()
+it('Display talk questions', () => {
+  cy.session('display-talk-questions', () => {
     cy.task("executeSql", "DELETE FROM questions")
-  })
-  beforeEach(() => {
-    Cypress.Cookies.preserveOnce('venue_visitor', 'venue_visitor.sig', 'venue_admin', 'venue_admin.sig')
-  })
-  it('Login as admin', () => {
     cy.visit("http://localhost:8000/admin", { headers: { 'authorization': 'Basic ' + btoa('admin:admin') } })
-  })
-  it('Verify login is successful', () => {
     cy.get('p').first().contains('Hello Admin!')
-  })
-  it('Go to first talk questions', () => {
     cy.get(".x-talk-list-item")
       .first().click()
       .get("[data-testid='questions-link']").first().click()
-  })
-  it('Verify information with many questions', () => {
     cy.task("executeSql", "DELETE FROM questions")
     cy.task("executeSql", `
       INSERT INTO questions
@@ -207,8 +175,6 @@ describe('Display talk questions', () => {
       "question 4",
       "question 5",
     ])
-  })
-  it('Verify interaction', () => {
     cy.get('.x-talk-question-list-item-actions-fav').eq(2).click()
     cy.get('.x-talk-question-list-item-actions-fav').eq(4).click()
     verifyQuestions([
@@ -241,19 +207,6 @@ describe('Display talk questions', () => {
     ], { favOnly: true })
   })
 })
-
-function chooseFirstTalk() {
-  it('Visit the home', () => {
-    cy.visit('http://localhost:8000')
-  })
-  it('Navigate thru first talk', () => {
-    cy.get(".x-talk-list-item").first().click()
-  })
-  it('Verify information', () => {
-    cy.get('.x-talk-title').contains("The Mother of All Demos", { matchCase: true })
-    cy.get('.x-talk-description').contains("The live demonstration featured the introduction", { matchCase: true })
-  })
-}
 
 function verifyRatings(average: string, stars: { [x: string]: number }, comments: { comment: string, rating: number }[]) {
   cy.get('.x-talk-rating-average-value').contains(average)
