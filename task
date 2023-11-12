@@ -144,7 +144,7 @@ def cli():
             os.environ,
             VENUE_TAG=datetime.now().strftime("%Y%m%d_%H%M%S")
         ))
-        cmd('docker', 'push', f'sirikon/venue:{version}')
+        cmd('docker', 'push', f'ghcr.io/sirikon/bilbostack-app:{version}')
 
     @command
     def compose(*args, **kwargs):

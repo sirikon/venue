@@ -8,5 +8,5 @@ jobs:
         uses: actions/checkout@v4
         with:
           submodules: recursive
-      - name: Build
-        run: ./task build_docker
+      - name: Publish
+        run: ./task publish_docker
