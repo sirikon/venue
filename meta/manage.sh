@@ -2,4 +2,4 @@
 set -euo pipefail
 
 cd src
-../.venv/bin/python manage.py migrate
+exec ../.venv/bin/python manage.py "$@"

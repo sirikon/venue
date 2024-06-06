@@ -9,3 +9,8 @@ services:
       POSTGRES_DB: venue
       POSTGRES_USER: venue
       POSTGRES_PASSWORD: venue
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      interval: 1s
+      timeout: 1s
+      retries: 100
