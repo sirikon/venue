@@ -1,9 +1,7 @@
-# https://docs.djangoproject.com/en/5.0/topics/http/urls/
+from django.urls import path
 
-from django.contrib import admin
-from django.urls import include, path
+from . import views
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
-    path("", include("venue_core.urls")),
+    path("", views.index, name="index"),
 ]

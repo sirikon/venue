@@ -21,7 +21,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    "venue_core.apps.VenueCoreConfig",
+    "venue.apps.VenueConfig",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -40,7 +40,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = "venue.urls"
+ROOT_URLCONF = "venue_site.urls"
 
 TEMPLATES = [
     {
@@ -58,7 +58,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "venue.wsgi.application"
+WSGI_APPLICATION = "venue_site.wsgi.application"
 
 
 # Database

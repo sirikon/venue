@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class VenueCoreConfig(AppConfig):
+class VenueConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'venue_core'
+    name = 'venue'
