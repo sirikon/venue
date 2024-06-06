@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-cd src
-exec ../.venv/bin/python manage.py "$@"
+root="$(pwd)"
+mkdir -p .workdir
+cd .workdir
+exec "$root/.venv/bin/python" "$root/src/manage.py" "$@"

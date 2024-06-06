@@ -1,8 +1,9 @@
 # https://docs.djangoproject.com/en/5.0/ref/settings/
-
+from os import getcwd
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+CWD = Path(getcwd()).resolve()
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -17,6 +18,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+
+MEDIA_ROOT = CWD / "serve" / "media"
+MEDIA_URL = "/media/"
 
 # Application definition
 
