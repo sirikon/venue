@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.postgres.aggregates import ArrayAgg
 
-from venue.models import Question, Speaker, Talk
+from venue.models import Question, Rating, Speaker, Talk
 
 
 def index(request):
@@ -45,5 +45,11 @@ def talk_question(request, slug):
         return redirect("talk", slug, permanent=False)
 
 
-def talk_rating(request):
-    pass
+def talk_rating(request, slug):
+    if request.method == "POST":
+        talk = Talk.objects.filter(slug=slug).first()
+        rating = int(request.POST.get("rating"))
+        comment = request.POST.get("comment")
+        Rating.objects.create(talk=talk, rating=rating, comment=comment).save()
+        messages.add_message(request, messages.INFO, "¡Gracias por su valoración!")
+        return redirect("talk", slug, permanent=False)
