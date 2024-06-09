@@ -39,7 +39,7 @@ class Question(models.Model):
     question = models.TextField()
 
     def __str__(self) -> str:
-        return f"\"{self.question}\""
+        return f'"{self.question}"'
 
 
 class Rating(models.Model):
@@ -47,3 +47,6 @@ class Rating(models.Model):
     # visitor = models.ForeignKey(Visitor, on_delete=models.CASCADE)
     rating = models.PositiveSmallIntegerField()
     comment = models.TextField()
+
+    def __str__(self) -> str:
+        return f'{self.rating}/5: "{self.comment}"'
