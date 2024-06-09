@@ -12,6 +12,9 @@
     "[python]": {
         "editor.defaultFormatter": "ms-python.black-formatter"
     },
+    "[html]": {
+        "editor.defaultFormatter": "vscode.html-language-features"
+    },
     "files.exclude": {
         "**/__pycache__": true
     }
