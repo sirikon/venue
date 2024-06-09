@@ -1,8 +1,5 @@
-from django.db.models import OuterRef
-from django.http import HttpResponse
 from django.shortcuts import render
 from django.contrib.postgres.aggregates import ArrayAgg
-from django.contrib.postgres.expressions import ArraySubquery
 
 from venue.models import Speaker, Talk
 
