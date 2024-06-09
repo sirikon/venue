@@ -1,0 +1,109 @@
+{% extends "venue/base.html" %}
+
+{% block title %}{{ talk.name }} | {{ BRAND_NAME }}{% endblock %}
+
+{% block body %}
+<div class="x-talk">
+    <section class="x-talk-section is-boxed">
+        <h1 class="x-talk-title">
+            {{ talk.name }}
+        </h1>
+        <div class="x-talk-info">
+            <span class="x-talk-info-track">
+                {{ talk.track.name }}
+            </span>
+            <span class="x-talk-info-when">
+                {{ talk.date|date:'H:i' }}
+            </span>
+        </div>
+        <div class="x-talk-description">
+            <p>{{ talk.description }}</p>
+        </div>
+    </section>
+
+    {% for speaker in talk.speakers.all %}
+    <section class="x-talk-section x-talk-speaker">
+        <div class="x-talk-speaker-image" style="background-image:url({{ speaker.image.url }});;"></div>
+        <div class="x-talk-speaker-info">
+            <span class="x-talk-speaker-info-name">
+                {{ speaker.name }}
+            </span>
+            <span class="x-talk-speaker-info-title">
+                {{ speaker.title }}
+            </span>
+        </div>
+    </section>
+    {% endfor %}
+
+    <section class="x-talk-section is-boxed">
+        <h2 class="x-talk-section-title">Haz una pregunta</h2>
+        <form action="{% url 'talk_question' talk.slug %}" method="POST" enctype="multipart/form-data">
+            <textarea class="x-talk-textarea" name="question" maxlength="600"
+                placeholder="¿Qué quieres preguntar?"></textarea>
+            <input class="x-talk-button" type="submit" value="Enviar">
+        </form>
+    </section>
+
+    <section class="x-talk-section is-boxed">
+        <h2 class="x-talk-section-title">Valora la charla</h2>
+        <form action="{% url 'talk_rating' talk.slug %}" method="POST" enctype="multipart/form-data">
+            <div class="x-stars">
+                <label for="star-1">
+                    {% include "venue/icons/star.svg" %}
+                </label>
+                <input id="star-1" type="radio" name="rating" value="1" checked="checked">
+                <label for="star-2">
+                    {% include "venue/icons/star.svg" %}
+                </label>
+                <input id="star-2" type="radio" name="rating" value="2" checked="checked">
+                <label for="star-3">
+                    {% include "venue/icons/star.svg" %}
+                </label>
+                <input id="star-3" type="radio" name="rating" value="3" checked="checked">
+                <label for="star-4">
+                    {% include "venue/icons/star.svg" %}
+                </label>
+                <input id="star-4" type="radio" name="rating" value="4">
+                <label for="star-5">
+                    {% include "venue/icons/star.svg" %}
+                </label>
+                <input id="star-5" type="radio" name="rating" value="5">
+            </div>
+            <textarea class="x-talk-textarea" name="comment" maxlength="600"
+                placeholder="Deja un comentario... si lo ves oportuno :)"></textarea>
+            <input class="x-talk-button" type="submit" value="Enviar">
+        </form>
+    </section>
+
+</div>
+{% endblock %}
+
+<!-- 
+  
+    <section class="x-talk-section is-boxed">
+      <h2 class="x-talk-section-title">Haz una pregunta</h2>
+      <form action="/talk/<%= it.talk.slug %>/question" method="POST" enctype="multipart/form-data">
+        <textarea class="x-talk-textarea" name="question" maxlength="600" placeholder="¿Qué quieres preguntar?"></textarea>
+        <input class="x-talk-button" type="submit" value="Enviar">
+      </form>
+    </section>
+  
+    <% if (!it.existingRating) { %>
+      <section class="x-talk-section is-boxed">
+        <h2 class="x-talk-section-title">Valora la charla</h2>
+        <form action="/talk/<%= it.talk.slug %>/rating" method="POST" enctype="multipart/form-data">
+          <div class="x-stars">
+            <% const maxStars = 5 %>
+            <% for(let i = 1; i <= maxStars; i++) { %>
+              <label for="star-<%= i %>"><%~ includeFile('./icons/star.svg') %></label>
+              <input id="star-<%= i %>" type="radio" name="rating" value="<%= i %>" <% if (i === Math.ceil(maxStars / 2)) { %> checked="checked" <% } %>>
+            <% } %>
+          </div>
+          <textarea class="x-talk-textarea" name="comment" maxlength="600" placeholder="Deja un comentario... si lo ves oportuno :)"></textarea>
+          <input class="x-talk-button" type="submit" value="Enviar">
+        </form>
+      </section>
+    <% } %>
+  
+  </div>
+   -->

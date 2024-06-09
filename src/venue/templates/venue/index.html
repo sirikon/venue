@@ -6,7 +6,7 @@
 <div class="x-talk-list">
 
     {% for talk in talks %}
-    <a class="x-talk-list-item" href="#">
+    <a class="x-talk-list-item" href="{% url 'talk' talk.slug %}">
         <div class="x-talk-list-item-arrow">
             {% include "venue/icons/chevron-right.svg" %}
         </div>
