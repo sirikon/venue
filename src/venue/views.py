@@ -1,8 +1,10 @@
+from django.db.models import OuterRef
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.contrib.postgres.aggregates import ArrayAgg
+from django.contrib.postgres.expressions import ArraySubquery
 
-from venue.models import Talk
+from venue.models import Speaker, Talk
 
 
 def index(request):
@@ -15,7 +17,25 @@ def index(request):
 
 
 def talk(request, slug):
-    talk = Talk.objects.filter(slug=slug).first()
+    talk = (
+        Talk.objects.filter(slug=slug)
+        .annotate(
+            speakers_ids=ArrayAgg("speakers"),
+        )
+        .values(
+            "name",
+            "slug",
+            "date",
+            "track__name",
+            "description",
+            "speakers_ids",
+        )
+        .first()
+    )
+    talk["speakers"] = Speaker.objects.filter(pk__in=talk["speakers_ids"]).values(
+        "name", "title", "image"
+    )
+    print(talk)
     return render(request, "venue/talk.html", {"talk": talk})
 
 

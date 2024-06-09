@@ -1,4 +1,5 @@
 {% extends "venue/base.html" %}
+{% load static %}
 
 {% block title %}{{ talk.name }} | {{ BRAND_NAME }}{% endblock %}
 
@@ -10,7 +11,7 @@
         </h1>
         <div class="x-talk-info">
             <span class="x-talk-info-track">
-                {{ talk.track.name }}
+                {{ talk.track__name }}
             </span>
             <span class="x-talk-info-when">
                 {{ talk.date|date:'H:i' }}
@@ -21,9 +22,9 @@
         </div>
     </section>
 
-    {% for speaker in talk.speakers.all %}
+    {% for speaker in talk.speakers %}
     <section class="x-talk-section x-talk-speaker">
-        <div class="x-talk-speaker-image" style="background-image:url({{ speaker.image.url }});;"></div>
+        <div class="x-talk-speaker-image" style="background-image:url({% get_media_prefix %}{{ speaker.image }});;"></div>
         <div class="x-talk-speaker-info">
             <span class="x-talk-speaker-info-name">
                 {{ speaker.name }}
@@ -77,33 +78,3 @@
 
 </div>
 {% endblock %}
-
-<!-- 
-  
-    <section class="x-talk-section is-boxed">
-      <h2 class="x-talk-section-title">Haz una pregunta</h2>
-      <form action="/talk/<%= it.talk.slug %>/question" method="POST" enctype="multipart/form-data">
-        <textarea class="x-talk-textarea" name="question" maxlength="600" placeholder="¿Qué quieres preguntar?"></textarea>
-        <input class="x-talk-button" type="submit" value="Enviar">
-      </form>
-    </section>
-  
-    <% if (!it.existingRating) { %>
-      <section class="x-talk-section is-boxed">
-        <h2 class="x-talk-section-title">Valora la charla</h2>
-        <form action="/talk/<%= it.talk.slug %>/rating" method="POST" enctype="multipart/form-data">
-          <div class="x-stars">
-            <% const maxStars = 5 %>
-            <% for(let i = 1; i <= maxStars; i++) { %>
-              <label for="star-<%= i %>"><%~ includeFile('./icons/star.svg') %></label>
-              <input id="star-<%= i %>" type="radio" name="rating" value="<%= i %>" <% if (i === Math.ceil(maxStars / 2)) { %> checked="checked" <% } %>>
-            <% } %>
-          </div>
-          <textarea class="x-talk-textarea" name="comment" maxlength="600" placeholder="Deja un comentario... si lo ves oportuno :)"></textarea>
-          <input class="x-talk-button" type="submit" value="Enviar">
-        </form>
-      </section>
-    <% } %>
-  
-  </div>
-   -->
