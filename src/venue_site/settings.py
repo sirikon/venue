@@ -1,6 +1,8 @@
 # https://docs.djangoproject.com/en/5.0/ref/settings/
-from os import getcwd
+from os import getcwd, environ
 from pathlib import Path
+
+DEVENV_FIXTURES = environ.get("VENUE_DEVENV_FIXTURES")
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 CWD = Path(getcwd()).resolve()
@@ -21,6 +23,8 @@ ALLOWED_HOSTS = []
 
 MEDIA_ROOT = CWD / "serve" / "media"
 MEDIA_URL = "/media/"
+
+FIXTURE_DIRS = [*([DEVENV_FIXTURES] if DEVENV_FIXTURES is not None else [])]
 
 # Application definition
 
