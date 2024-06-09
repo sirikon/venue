@@ -23,6 +23,12 @@
     </header>
 
     <div class="x-container x-body">
+        {% for message in messages %}
+        <div class="x-talk-notification">
+            {% include "venue/icons/check.svg" %}
+            <span>{{ message }}</span>
+        </div>
+        {% endfor %}
         {% block body %}{% endblock %}
     </div>
 

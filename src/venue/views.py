@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib import messages
 from django.contrib.postgres.aggregates import ArrayAgg
 
-from venue.models import Speaker, Talk
+from venue.models import Question, Speaker, Talk
 
 
 def index(request):
@@ -32,12 +33,16 @@ def talk(request, slug):
     talk["speakers"] = Speaker.objects.filter(pk__in=talk["speakers_ids"]).values(
         "name", "title", "image"
     )
-    print(talk)
     return render(request, "venue/talk.html", {"talk": talk})
 
 
-def talk_question(request):
-    pass
+def talk_question(request, slug):
+    if request.method == "POST":
+        talk = Talk.objects.filter(slug=slug).first()
+        question = request.POST.get("question")
+        Question.objects.create(talk=talk, question=question).save()
+        messages.add_message(request, messages.INFO, "¡Gracias por su pregunta!")
+        return redirect("talk", slug, permanent=False)
 
 
 def talk_rating(request):
