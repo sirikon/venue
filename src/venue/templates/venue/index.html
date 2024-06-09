@@ -1,1 +1,32 @@
-<h1>Hello!</h1>
+{% extends "venue/base.html" %}
+
+{% block title %}{{ BRAND_NAME }}{% endblock %}
+
+{% block body %}
+<div class="x-talk-list">
+
+    {% for talk in talks %}
+    <a class="x-talk-list-item" href="#">
+        <div class="x-talk-list-item-arrow">
+            {% include "venue/icons/chevron-right.svg" %}
+        </div>
+        <h3 class="x-talk-list-item-title">
+            <span>{{ talk.name }}</span>
+        </h3>
+        <div class="x-talk-list-item-info">
+            <span class="x-talk-list-item-info-speaker">
+                {{ talk.speakers_names|join:', ' }}
+            </span>
+            <span class="x-talk-list-item-info-track">
+                {{ talk.track__name }}
+            </span>
+            <span class="x-talk-list-item-info-when">
+                {{ talk.date|date:'H:i' }}
+            </span>
+        </div>
+    </a>
+    {% endfor %}
+
+
+</div>
+{% endblock %}

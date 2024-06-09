@@ -1,0 +1,39 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'venue/style.css' %}">
+</head>
+
+<body>
+
+    <header class="x-header">
+        <div class="x-container">
+            <a href="/">
+                <h1>
+                    {{ BRAND_NAME }}
+                </h1>
+            </a>
+        </div>
+    </header>
+
+    <div class="x-container x-body">
+        {% block body %}{% endblock %}
+    </div>
+
+    <footer class="x-footer">
+        <div class="x-container x-body">
+            <span>
+                {{ BRAND_NAME }}
+            </span>
+        </div>
+    </footer>
+
+</body>
+
+</html>
