@@ -27,7 +27,7 @@
           <%= talk.track %>
         </span>
         <span class="x-talk-list-item-info-when">
-          <%= `${talk.date.getUTCHours()}:${talk.date.getUTCMinutes().toString().padEnd(2,'0')}` %>
+          <%= `${talk.date.getUTCHours()}:${talk.date.getUTCMinutes().toString().padStart(2,'0')}` %>
         </span>
       </div>
     </a>

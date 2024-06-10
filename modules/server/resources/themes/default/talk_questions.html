@@ -11,7 +11,7 @@
         <%= it.talk.track %>
       </span>
       <span class="x-talk-info-when">
-        <%= `${it.talk.date.getUTCHours()}:${it.talk.date.getUTCMinutes().toString().padEnd(2,'0')}` %>
+        <%= `${it.talk.date.getUTCHours()}:${it.talk.date.getUTCMinutes().toString().padStart(2,'0')}` %>
       </span>
     </div>
   </section>
