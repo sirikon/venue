@@ -56,6 +56,10 @@ const configBuilder = buildConfig({
   VENUE_BRAND_NAME: {
     description: "Brand name",
   },
+  VENUE_HEADER_TITLE: {
+    description: "Alternative title to use on the header",
+    required: false,
+  },
   VENUE_BRAND_IMAGE: {
     description: "Absolute URL to the brand image",
     required: false,

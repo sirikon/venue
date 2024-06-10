@@ -19,6 +19,7 @@ export class TemplateEngine {
       Eta.compile(config.VENUE_EXTRA_META || ""),
     );
     Eta.templates.define("brand-name", Eta.compile(config.VENUE_BRAND_NAME));
+    Eta.templates.define("header-title", Eta.compile(config.VENUE_HEADER_TITLE || config.VENUE_BRAND_NAME));
     Eta.templates.define(
       "brand-image",
       Eta.compile(config.VENUE_BRAND_IMAGE || ""),
