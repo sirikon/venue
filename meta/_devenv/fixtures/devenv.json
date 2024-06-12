@@ -1,8 +1,17 @@
 [
     {
+        "model": "venue.event",
+        "pk": 1,
+        "fields": {
+            "domain": "127.0.0.1",
+            "name": "Test Event"
+        }
+    },
+    {
         "model": "venue.speaker",
         "pk": 1,
         "fields": {
+            "event_id": 1,
             "name": "Douglas Engelbart",
             "title": "Inventor of the mouse",
             "image": "speakers/engelbart.jpg"
@@ -12,6 +21,7 @@
         "model": "venue.speaker",
         "pk": 2,
         "fields": {
+            "event_id": 1,
             "name": "Gary Bernhardt",
             "title": "Destroy all software",
             "image": "speakers/bernhardt.jpg"
@@ -21,6 +31,7 @@
         "model": "venue.track",
         "pk": 1,
         "fields": {
+            "event_id": 1,
             "name": "Main Track"
         }
     },

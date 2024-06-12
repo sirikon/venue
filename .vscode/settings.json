@@ -15,6 +15,9 @@
     "[html]": {
         "editor.defaultFormatter": "vscode.html-language-features"
     },
+    "[css]": {
+        "editor.defaultFormatter": "vscode.css-language-features"
+    },
     "files.exclude": {
         "**/__pycache__": true
     }
