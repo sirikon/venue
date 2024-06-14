@@ -11,7 +11,7 @@
 <div class="x-talk-list">
 
   <% for(const talk of it.talks) { %>
-    <a class="x-talk-list-item<%= talk.rated != null ? ' is-rated' : '' %>" href="/talk/<%= talk.slug %>">
+    <a class="x-talk-list-item<%= talk.rated != null ? ' is-rated' : '' %>" href="/talk/<%= talk.slug %>" data-talk-slug="<%= talk.slug %>">
       <div class="x-talk-list-item-arrow">
         <%~ includeFile('./icons/chevron-right.svg') %>
       </div>
