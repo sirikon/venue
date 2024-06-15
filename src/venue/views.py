@@ -57,7 +57,7 @@ def talk_question(request, slug):
         question = request.POST.get("question")
         if question is None:
             raise BadRequest()
-        if question == "":
+        if question.strip() == "":
             return redirect("talk", slug, permanent=False)
 
         talk = get_talk_query(get_event(request), slug).first()
