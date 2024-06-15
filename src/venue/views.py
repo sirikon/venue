@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.postgres.aggregates import ArrayAgg
 from django.http.request import split_domain_port
+from django.core.exceptions import BadRequest
 
 from venue.models import Question, Rating, Speaker, Talk, Event
 
@@ -53,8 +54,13 @@ def talk(request, slug):
 
 def talk_question(request, slug):
     if request.method == "POST":
-        talk = get_talk_query(get_event(request), slug).first()
         question = request.POST.get("question")
+        if question is None:
+            raise BadRequest()
+        if question == "":
+            return redirect("talk", slug, permanent=False)
+
+        talk = get_talk_query(get_event(request), slug).first()
         Question.objects.create(talk=talk, question=question).save()
         messages.add_message(request, messages.INFO, "¡Gracias por su pregunta!")
         return redirect("talk", slug, permanent=False)
@@ -62,9 +68,16 @@ def talk_question(request, slug):
 
 def talk_rating(request, slug):
     if request.method == "POST":
-        talk = get_talk_query(get_event(request), slug).first()
         rating = int(request.POST.get("rating"))
         comment = request.POST.get("comment")
+        if rating is None or comment is None:
+            raise BadRequest()
+        if rating < 1 or rating > 5:
+            raise BadRequest()
+        if len(comment) > 600:
+            raise BadRequest()
+
+        talk = get_talk_query(get_event(request), slug).first()
         Rating.objects.create(talk=talk, rating=rating, comment=comment).save()
         messages.add_message(request, messages.INFO, "¡Gracias por su valoración!")
         return redirect("talk", slug, permanent=False)

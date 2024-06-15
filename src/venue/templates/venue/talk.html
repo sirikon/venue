@@ -41,7 +41,7 @@
         <h2 class="x-talk-section-title">Haz una pregunta</h2>
         <form action="{% url 'talk_question' talk.slug %}" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
-            <textarea class="x-talk-textarea" name="question" maxlength="600"
+            <textarea class="x-talk-textarea" name="question" maxlength="600" required
                 placeholder="¿Qué quieres preguntar?"></textarea>
             <input class="x-talk-button" type="submit" value="Enviar">
         </form>
