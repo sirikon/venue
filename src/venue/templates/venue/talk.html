@@ -4,7 +4,7 @@
 {% block title %}{{ talk.name }} | {{ EVENT.name }}{% endblock %}
 
 {% block body %}
-<div class="x-talk">
+<div class="x-talk" data-talk-slug="{{ talk.slug }}">
     <section class="x-talk-section is-boxed">
         <h1 class="x-talk-title">
             {{ talk.name }}
@@ -37,7 +37,7 @@
     </section>
     {% endfor %}
 
-    <section class="x-talk-section is-boxed">
+    <section class="x-talk-section is-boxed" data-section="question">
         <h2 class="x-talk-section-title">Haz una pregunta</h2>
         <form action="{% url 'talk_question' talk.slug %}" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
@@ -47,7 +47,7 @@
         </form>
     </section>
 
-    <section class="x-talk-section is-boxed">
+    <section class="x-talk-section is-boxed" data-section="rating">
         <h2 class="x-talk-section-title">Valora la charla</h2>
         <form action="{% url 'talk_rating' talk.slug %}" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
