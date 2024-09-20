@@ -26,6 +26,9 @@ class Talk(models.Model):
     date = models.DateTimeField()
     speakers = models.ManyToManyField(Speaker)
 
+    class Meta:
+        ordering = ["date"]
+
     def __str__(self) -> str:
         return self.name
 

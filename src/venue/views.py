@@ -17,8 +17,10 @@ def get_talk_query(slug):
 
 
 def index(request):
-    talks = Talk.objects.annotate(speakers_names=ArrayAgg("speakers__name")).values(
-        "name", "slug", "date", "track__name", "speakers_names"
+    talks = (
+        Talk.objects.order_by("date")
+        .annotate(speakers_names=ArrayAgg("speakers__name"))
+        .values("name", "slug", "date", "track__name", "speakers_names")
     )
     return render(request, "venue/index.html", {"talks": talks})
 
