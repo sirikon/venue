@@ -35,6 +35,20 @@ argon2 = ["argon2-cffi (>=19.1.0)"]
 bcrypt = ["bcrypt"]
 
 [[package]]
+name = "django-constance"
+version = "4.1.1"
+description = "Django live settings with pluggable backends, including Redis."
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "django_constance-4.1.1-py3-none-any.whl", hash = "sha256:ff92bade3d059885aa2fe36c3e8ec4f60d8dee5d1a76b763b24e725a562bfa09"},
+    {file = "django_constance-4.1.1.tar.gz", hash = "sha256:068d8e2c8f647264aa4093f721a6ee5df7fde2c96fff2dd6272b5a38f939307e"},
+]
+
+[package.extras]
+redis = ["redis"]
+
+[[package]]
 name = "django-js-asset"
 version = "2.2.0"
 description = "script tag with additional attributes for django.forms.Media"
@@ -330,4 +344,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "1a80f548ad8d5d7eec211c2e881d59fd9f4ceabb88b278f74c6049fb986ae103"
+content-hash = "b3b25918843dad91c731cce19d9e7441d830be65fe6e97972900b35ab878581d"

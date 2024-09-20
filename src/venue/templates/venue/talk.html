@@ -1,7 +1,7 @@
 {% extends "venue/base.html" %}
 {% load static %}
 
-{% block title %}{{ talk.name }} | Event Name{% endblock %}
+{% block title %}{{ talk.name }} | {{ config.EVENT_NAME }}{% endblock %}
 
 {% block body %}
 <div class="x-talk" data-talk-slug="{{ talk.slug }}">
