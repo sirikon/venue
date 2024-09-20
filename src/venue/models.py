@@ -1,4 +1,5 @@
 from django.db import models
+from django_prose_editor.fields import ProseEditorField
 
 
 class Track(models.Model):
@@ -21,7 +22,7 @@ class Talk(models.Model):
     track = models.ForeignKey(Track, on_delete=models.RESTRICT)
     name = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200)
-    description = models.TextField(blank=True)
+    description = ProseEditorField(blank=True)
     date = models.DateTimeField()
     speakers = models.ManyToManyField(Speaker)
 
