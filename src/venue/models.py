@@ -2,13 +2,7 @@ from django.contrib.postgres.fields import ArrayField
 from django.db import models
 
 
-class Event(models.Model):
-    domain = models.CharField(max_length=100)
-    name = models.CharField(max_length=100)
-
-
 class Track(models.Model):
-    event = models.ForeignKey(Event, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
 
     def __str__(self) -> str:
@@ -16,7 +10,6 @@ class Track(models.Model):
 
 
 class Speaker(models.Model):
-    event = models.ForeignKey(Event, on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
     title = models.TextField()
     image = models.ImageField(upload_to="speakers")

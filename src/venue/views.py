@@ -4,7 +4,7 @@ from django.contrib.postgres.aggregates import ArrayAgg
 from django.http.request import split_domain_port
 from django.core.exceptions import BadRequest
 
-from venue.models import Question, Rating, Speaker, Talk, Event
+from venue.models import Question, Rating, Speaker, Talk
 
 
 def get_domain(request):
@@ -12,27 +12,20 @@ def get_domain(request):
     return domain
 
 
-def get_event(request):
-    return Event.objects.filter(domain=get_domain(request)).values("id", "name").first()
-
-
-def get_talk_query(event, slug):
-    return Talk.objects.filter(slug=slug, track__event_id=event["id"])
+def get_talk_query(slug):
+    return Talk.objects.filter(slug=slug)
 
 
 def index(request):
-    event = get_event(request)
-    talks = (
-        Talk.objects.filter(track__event_id=event["id"])
-        .annotate(speakers_names=ArrayAgg("speakers__name"))
-        .values("name", "slug", "date", "track__name", "speakers_names")
+    talks = Talk.objects.annotate(speakers_names=ArrayAgg("speakers__name")).values(
+        "name", "slug", "date", "track__name", "speakers_names"
     )
     return render(request, "venue/index.html", {"talks": talks})
 
 
 def talk(request, slug):
     talk = (
-        get_talk_query(get_event(request), slug)
+        get_talk_query(slug)
         .annotate(
             speakers_ids=ArrayAgg("speakers"),
         )
@@ -60,7 +53,7 @@ def talk_question(request, slug):
         if question.strip() == "":
             return redirect("talk", slug, permanent=False)
 
-        talk = get_talk_query(get_event(request), slug).first()
+        talk = get_talk_query(slug).first()
         Question.objects.create(talk=talk, question=question).save()
         messages.add_message(request, messages.INFO, "¡Gracias por su pregunta!")
         return redirect("talk", slug, permanent=False)
@@ -77,7 +70,7 @@ def talk_rating(request, slug):
         if len(comment) > 600:
             raise BadRequest()
 
-        talk = get_talk_query(get_event(request), slug).first()
+        talk = get_talk_query(slug).first()
         Rating.objects.create(talk=talk, rating=rating, comment=comment).save()
         messages.add_message(request, messages.INFO, "¡Gracias por su valoración!")
         return redirect("talk", slug, permanent=False)
