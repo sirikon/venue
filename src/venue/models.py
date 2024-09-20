@@ -1,4 +1,3 @@
-from django.contrib.postgres.fields import ArrayField
 from django.db import models
 
 
@@ -30,13 +29,16 @@ class Talk(models.Model):
         return self.name
 
 
-# class Visitor(models.Model):
-#     uuid = models.UUIDField(primary_key=True)
+class Visitor(models.Model):
+    id = models.UUIDField(primary_key=True)
+
+    def __str__(self) -> str:
+        return self.id.hex
 
 
 class Question(models.Model):
     talk = models.ForeignKey(Talk, on_delete=models.CASCADE)
-    # visitor = models.ForeignKey(Visitor, on_delete=models.CASCADE)
+    visitor = models.ForeignKey(Visitor, on_delete=models.CASCADE)
     question = models.TextField()
 
     def __str__(self) -> str:
@@ -45,7 +47,7 @@ class Question(models.Model):
 
 class Rating(models.Model):
     talk = models.ForeignKey(Talk, on_delete=models.CASCADE)
-    # visitor = models.ForeignKey(Visitor, on_delete=models.CASCADE)
+    visitor = models.ForeignKey(Visitor, on_delete=models.CASCADE)
     rating = models.PositiveSmallIntegerField()
     comment = models.TextField()
 

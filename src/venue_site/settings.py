@@ -46,6 +46,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "venue.middleware.visitor_middleware"
 ]
 
 MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"

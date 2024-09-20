@@ -4,7 +4,7 @@ from django.contrib.postgres.aggregates import ArrayAgg
 from django.http.request import split_domain_port
 from django.core.exceptions import BadRequest
 
-from venue.models import Question, Rating, Speaker, Talk
+from venue.models import Question, Rating, Speaker, Talk, Visitor
 
 
 def get_domain(request):
@@ -53,8 +53,9 @@ def talk_question(request, slug):
         if question.strip() == "":
             return redirect("talk", slug, permanent=False)
 
+        visitor, _ = Visitor.objects.get_or_create(id=request.session["visitor_id"])
         talk = get_talk_query(slug).first()
-        Question.objects.create(talk=talk, question=question).save()
+        Question.objects.create(talk=talk, question=question, visitor=visitor).save()
         messages.add_message(request, messages.INFO, "¡Gracias por su pregunta!")
         return redirect("talk", slug, permanent=False)
 
@@ -70,7 +71,10 @@ def talk_rating(request, slug):
         if len(comment) > 600:
             raise BadRequest()
 
+        visitor, _ = Visitor.objects.get_or_create(id=request.session["visitor_id"])
         talk = get_talk_query(slug).first()
-        Rating.objects.create(talk=talk, rating=rating, comment=comment).save()
+        Rating.objects.create(
+            talk=talk, rating=rating, comment=comment, visitor=visitor
+        ).save()
         messages.add_message(request, messages.INFO, "¡Gracias por su valoración!")
         return redirect("talk", slug, permanent=False)
