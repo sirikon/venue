@@ -5,18 +5,9 @@ from django.dispatch import receiver
 from .models import Talk, Speaker, Track, Visitor, Rating, Question
 
 
-@receiver(config_updated)
-def constance_updated(*args, **kwargs):
-    set_admin_titles()
-
-
-def set_admin_titles():
-    admin.site.site_header = config.EVENT_NAME
-    admin.site.site_title = config.EVENT_NAME
-    admin.site.index_title = "Administration"
-
-
-set_admin_titles()
+admin.site.site_header = "Venue"
+admin.site.site_title = "Venue"
+admin.site.index_title = "Administration"
 
 
 @admin.register(Talk)

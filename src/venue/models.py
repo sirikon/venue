@@ -55,5 +55,8 @@ class Rating(models.Model):
     rating = models.PositiveSmallIntegerField()
     comment = models.TextField()
 
+    class Meta:
+        unique_together = ("talk", "visitor")
+
     def __str__(self) -> str:
         return f'{self.rating}/5: "{self.comment}"'

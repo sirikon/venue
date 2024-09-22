@@ -1,3 +1,4 @@
+from django.http import HttpRequest
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.postgres.aggregates import ArrayAgg
@@ -25,13 +26,14 @@ def index(request):
     return render(request, "venue/index.html", {"talks": talks})
 
 
-def talk(request, slug):
+def talk(request: HttpRequest, slug):
     talk = (
         get_talk_query(slug)
         .annotate(
             speakers_ids=ArrayAgg("speakers"),
         )
         .values(
+            "pk",
             "name",
             "slug",
             "date",
@@ -44,7 +46,14 @@ def talk(request, slug):
     talk["speakers"] = Speaker.objects.filter(pk__in=talk["speakers_ids"]).values(
         "name", "title", "image"
     )
-    return render(request, "venue/talk.html", {"talk": talk})
+    return render(
+        request,
+        "venue/talk.html",
+        {
+            "talk": talk,
+            "talk_rated": request.session.get("talk_rated_" + str(talk["pk"]), False),
+        },
+    )
 
 
 def talk_question(request, slug):
@@ -78,5 +87,5 @@ def talk_rating(request, slug):
         Rating.objects.create(
             talk=talk, rating=rating, comment=comment, visitor=visitor
         ).save()
-        messages.add_message(request, messages.INFO, "¡Gracias por su valoración!")
+        request.session["talk_rated_" + str(talk.pk)] = True
         return redirect("talk", slug, permanent=False)
