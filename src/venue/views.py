@@ -17,12 +17,16 @@ def get_talk_query(slug):
     return Talk.objects.filter(slug=slug)
 
 
-def index(request):
+def index(request: HttpRequest):
     talks = (
         Talk.objects.order_by("date")
         .annotate(speakers_names=ArrayAgg("speakers__name"))
-        .values("name", "slug", "date", "track__name", "speakers_names")
+        .values("pk", "name", "slug", "date", "track__name", "speakers_names")
     )
+    talks = [
+        {**talk, "rated": request.session.get("talk_rated_" + str(talk["pk"]), False)}
+        for talk in talks
+    ]
     return render(request, "venue/index.html", {"talks": talks})
 
 
