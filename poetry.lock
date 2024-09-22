@@ -36,13 +36,13 @@ bcrypt = ["bcrypt"]
 
 [[package]]
 name = "django-constance"
-version = "4.1.1"
+version = "4.1.2"
 description = "Django live settings with pluggable backends, including Redis."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "django_constance-4.1.1-py3-none-any.whl", hash = "sha256:ff92bade3d059885aa2fe36c3e8ec4f60d8dee5d1a76b763b24e725a562bfa09"},
-    {file = "django_constance-4.1.1.tar.gz", hash = "sha256:068d8e2c8f647264aa4093f721a6ee5df7fde2c96fff2dd6272b5a38f939307e"},
+    {file = "django_constance-4.1.2-py3-none-any.whl", hash = "sha256:bd8e847a5a6225cfc69da9d87de909dbb765e4150507eb3f555327ba32ac6fd6"},
+    {file = "django_constance-4.1.2.tar.gz", hash = "sha256:52163529d4b1be4404d4f8568c6742f76f4d4fc90dc31355849ea2c1e0c525d7"},
 ]
 
 [package.extras]
