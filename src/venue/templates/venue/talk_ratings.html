@@ -1,0 +1,78 @@
+{% extends "venue/base.html" %}
+{% load static %}
+
+{% block title %}Questions | {{ talk.name }} | {{ config.EVENT_NAME }}{% endblock %}
+
+{% block admin_menu %}
+{% include "venue/_talk_admin_menu.html" %}
+{% endblock %}
+
+{% block body %}
+<div class="x-talk" data-talk-slug="{{ talk.slug }}">
+    <section class="x-talk-section is-boxed">
+        <h1 class="x-talk-title">
+            {{ talk.name }}
+        </h1>
+        <div class="x-talk-info">
+            <span class="x-talk-info-track">
+                {{ talk.track__name }}
+            </span>
+            <span class="x-talk-info-when">
+                {{ talk.date|date:'H:i' }}
+            </span>
+        </div>
+    </section>
+
+    <section class="x-talk-section">
+        <div class="x-talk-rating">
+
+            <div class="x-talk-rating-stars">
+                <div class="x-talk-rating-stars-numbers">
+                    {% for i in summary.count_per_rating %}
+                    <span>{{ i }}</span>
+                    {% endfor %}
+                </div>
+                <div class="x-talk-rating-stars-bars">
+                    {% for i in summary.stars_per_rating %}
+                    <div>
+                        {% for _ in i %}
+                        {% include "venue/icons/star.svg" %}
+                        {% endfor %}
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="x-talk-rating-average">
+                <span class="x-talk-rating-average-value">{% if summary.average != 0 %}{{ summary.average|floatformat:"-2" }}{% else %}--{% endif %}</span><span
+                    class="x-talk-rating-average-max">/{{ summary.max }}</span>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="x-talk-section is-boxed">
+        <h2 class="x-talk-section-title">
+            Comentarios
+        </h2>
+
+        <p class="x-talk-section-advice">A continuación aparecen todos los comentarios que la gente ha puesto
+            acompañando a la nota de la charla. Por desgracia, a veces hay que lidiar con los comentarios de personas
+            que no tienen sus capacidades sociales del todo desarrolladas, que son incapaces de valorar el esfuerzo de
+            los demás, o que simplemente son tóxicas.</p>
+        <p class="x-talk-section-advice">Coge aire, tómatelo con calma, y recuerda que si te hemos llamado para
+            participar es por algo. Nos ha encantado tenerte por aquí.</p>
+
+        {% for rating in ratings %}
+        <div class="x-talk-comment">
+            <p>
+                {{ rating.comment }} — <span class="x-talk-comment-stars">
+                    {{ rating.rating }}
+                    {% include "venue/icons/star.svg" %}
+                </span>
+            </p>
+        </div>
+        {% endfor %}
+    </section>
+</div>
+{% endblock %}

@@ -1,0 +1,111 @@
+{% extends "venue/base.html" %}
+{% load static %}
+
+{% block title %}Questions | {{ talk.name }} | {{ config.EVENT_NAME }}{% endblock %}
+
+{% block admin_menu %}
+{% include "venue/_talk_admin_menu.html" %}
+{% endblock %}
+
+{% block body %}
+<div class="x-talk" data-talk-slug="{{ talk.slug }}">
+    <section class="x-talk-section is-boxed">
+        <h1 class="x-talk-title">
+            {{ talk.name }}
+        </h1>
+        <div class="x-talk-info">
+            <span class="x-talk-info-track">
+                {{ talk.track__name }}
+            </span>
+            <span class="x-talk-info-when">
+                {{ talk.date|date:'H:i' }}
+            </span>
+        </div>
+    </section>
+
+    <section class="x-talk-section is-boxed">
+        <h2 class="x-talk-section-title">
+            Preguntas recibidas
+        </h2>
+
+        <form class="x-talk-question-filter">
+            <label for="see_fav_only">Mostrar solo favoritos</label>
+            <input type="checkbox" id="see_fav_only" onchange="checkboxChangeHandler()">
+        </form>
+
+        <div class="x-talk-question-list">
+            {% for question in questions %}
+            <div class="x-talk-question-list-item" data-question-id="{{ question.pk }}">
+                <p>
+                    {{ question.question }}
+                </p>
+                <div class="x-talk-question-list-item-actions">
+                    <button class="x-talk-question-list-item-actions-fav" type="button"
+                        data-question-id="{{ question.pk }}" onclick="setFav(this, true)">
+                        {% include "venue/icons/star.svg" %}
+                    </button>
+                    <button class="x-talk-question-list-item-actions-unfav" type="button"
+                        data-question-id="{{ question.pk }}" onclick="setFav(this, false)">
+                        {% include "venue/icons/star.svg" %}
+                    </button>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+    </section>
+</div>
+
+<script type="text/javascript">
+
+    const seeFavOnlyCheckbox = document.getElementById("see_fav_only");
+    const questionListDiv = document.querySelector(".x-talk-question-list");
+
+    const storedState = localStorage.getItem("fav_state");
+    const state = storedState ? JSON.parse(storedState) : {
+        seeFavOnly: false,
+        favs: []
+    }
+
+    function render() {
+        seeFavOnlyCheckbox.checked = state.seeFavOnly;
+
+        questionListDiv.classList.toggle("is-fav-only", state.seeFavOnly);
+        document.querySelectorAll(".x-talk-question-list-item").forEach((el) => {
+            const questionId = parseInt(el.getAttribute("data-question-id"));
+            el.classList.toggle("is-fav", state.favs.indexOf(questionId) >= 0);
+        });
+    }
+
+    function saveState() {
+        localStorage.setItem("fav_state", JSON.stringify(state));
+    }
+
+    function checkboxChangeHandler() {
+        state.seeFavOnly = seeFavOnlyCheckbox.checked;
+
+        saveState();
+        render();
+    }
+
+    function setFav(el, value) {
+        const questionId = parseInt(el.getAttribute("data-question-id"));
+
+        const favIndex = state.favs.indexOf(questionId);
+        if (favIndex >= 0 && !value) {
+            state.favs.splice(favIndex, 1);
+        }
+
+        if (favIndex === -1 && value) {
+            state.favs.push(questionId);
+        }
+
+        saveState();
+        render();
+    }
+
+    render();
+
+</script>
+
+{% endblock %}

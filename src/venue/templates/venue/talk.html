@@ -1,0 +1,97 @@
+{% extends "venue/base.html" %}
+{% load static %}
+
+{% block title %}{{ talk.name }} | {{ config.EVENT_NAME }}{% endblock %}
+
+{% block admin_menu %}
+{% include "venue/_talk_admin_menu.html" %}
+{% endblock %}
+
+{% block body %}
+
+{% if talk_rated %}
+<div class="x-talk-notification">
+    {% include "venue/icons/check.svg" %}
+    <span>¡Gracias por su valoración!</span>
+</div>
+{% endif %}
+
+<div class="x-talk" data-talk-slug="{{ talk.slug }}">
+    <section class="x-talk-section is-boxed">
+        <h1 class="x-talk-title">
+            {{ talk.name }}
+        </h1>
+        <div class="x-talk-info">
+            <span class="x-talk-info-track">
+                {{ talk.track__name }}
+            </span>
+            <span class="x-talk-info-when">
+                {{ talk.date|date:'H:i' }}
+            </span>
+        </div>
+        <div class="x-talk-description">
+            {{ talk.description|safe }}
+        </div>
+    </section>
+
+    {% for speaker in talk.speakers %}
+    <section class="x-talk-section x-talk-speaker">
+        <div class="x-talk-speaker-image" style="background-image:url({% get_media_prefix %}{{ speaker.image }});;">
+        </div>
+        <div class="x-talk-speaker-info">
+            <span class="x-talk-speaker-info-name">
+                {{ speaker.name }}
+            </span>
+            <span class="x-talk-speaker-info-title">
+                {{ speaker.title }}
+            </span>
+        </div>
+    </section>
+    {% endfor %}
+
+    <section class="x-talk-section is-boxed" data-section="question">
+        <h2 class="x-talk-section-title">Haz una pregunta</h2>
+        <form action="{% url 'talk_question' talk.slug %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <textarea class="x-talk-textarea" name="question" maxlength="600" required
+                placeholder="¿Qué quieres preguntar?"></textarea>
+            <input class="x-talk-button" type="submit" value="Enviar">
+        </form>
+    </section>
+
+    {% if not talk_rated %}
+    <section class="x-talk-section is-boxed" data-section="rating">
+        <h2 class="x-talk-section-title">Valora la charla</h2>
+        <form action="{% url 'talk_rating' talk.slug %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="x-stars">
+                <label for="star-1">
+                    {% include "venue/icons/star.svg" %}
+                </label>
+                <input id="star-1" type="radio" name="rating" value="1" checked="checked">
+                <label for="star-2">
+                    {% include "venue/icons/star.svg" %}
+                </label>
+                <input id="star-2" type="radio" name="rating" value="2" checked="checked">
+                <label for="star-3">
+                    {% include "venue/icons/star.svg" %}
+                </label>
+                <input id="star-3" type="radio" name="rating" value="3" checked="checked">
+                <label for="star-4">
+                    {% include "venue/icons/star.svg" %}
+                </label>
+                <input id="star-4" type="radio" name="rating" value="4">
+                <label for="star-5">
+                    {% include "venue/icons/star.svg" %}
+                </label>
+                <input id="star-5" type="radio" name="rating" value="5">
+            </div>
+            <textarea class="x-talk-textarea" name="comment" maxlength="600"
+                placeholder="Deja un comentario... si lo ves oportuno :)"></textarea>
+            <input class="x-talk-button" type="submit" value="Enviar">
+        </form>
+    </section>
+    {% endif %}
+
+</div>
+{% endblock %}

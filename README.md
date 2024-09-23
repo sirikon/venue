@@ -1,40 +1,28 @@
-# BilboStack App
+# Venue
 
-(a.k.a. Venue)
-
-ℹ️ _Old version of the project is in branch `old`. Custom versions for past events are in `custom/*` branches_.
-
-This software is intended to provide tools to event organizers. Including:
+Provide tools to event organizers. Including:
 
 - Talk listing with details.
 - Talk rating with comments.
-- Talk question submission. Questions can be seen by event organizers.
+  - A summary page for each talk with all the ratings and an average.
+- Talk question submission.
+  - Questions can be seen by event organizers.
+- A backoffice to manage everything.
 
-## Requirements
+## Branches
 
-[ASDF](https://asdf-vm.com/) is recommended for getting the correct version of
-most of the dependencies.
+This project underwent many versions and rewrites. Here's a quick guide:
 
-If not using ASDF, check dependencies versions in [.tool-versions](./.tool-versions).
-
-- Deno (backend).
-- Docker (development environment and building Docker releases).
-
-Also the [task](./task) file is used to work with the project and is written
-with **Python 3**. It's an extra dependency just for that, but you probably have it
-installed already.
+- Currently developed branch is `master`.
+- An old version based on Deno is in branch `old/deno`.
+- An older version based on Node is in branch `old/node`.
+- Custom versions for past events are in `custom/*` branches.
 
 ## Development
 
+Requires Docker and assumes that all the tools listed in [.tool-versions](./.tool-versions) are installed.
+
 ```bash
-# Spin up a development environment
-./task devenv_up
-# Run the application
-./task run
-# Formatter and linter
-./task fmt
-./task lint
-# Build locally or using docker
-./task build
-./task build_docker
+./meta/setup.sh
+./meta/start.sh
 ```

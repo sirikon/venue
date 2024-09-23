@@ -1,0 +1,537 @@
+:root {
+    --primary-color: #0e3046;
+    --accent-color: #d09c2e;
+    --bright-text-color: white;
+    --dark-text-color: #333;
+    --background-color: #eeeced;
+    --bright-background-color: white;
+
+    --base-margin: 10px;
+
+    --font-family: Roboto, sans-serif;
+    --max-width: 800px;
+    --navbar-height: 60px;
+
+    --speaker-name-color: #d90368;
+}
+
+body {
+    background-color: var(--background-color);
+    font-family: var(--font-family);
+    margin: 0;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+@page {
+    margin: 0;
+}
+
+img {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: optimizeQuality;
+}
+
+/* CONTAINER */
+.x-container {
+    display: block;
+    margin: auto;
+    max-width: var(--max-width);
+}
+
+/* BODY */
+.x-body {
+    padding: 0 var(--base-margin);
+}
+
+/* HEADER */
+.x-header {
+    background-color: var(--primary-color);
+    height: var(--navbar-height);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media print {
+    .x-header {
+        display: none;
+    }
+}
+
+.x-header .x-container {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.x-header h1 {
+    color: var(--bright-text-color);
+    margin: 0;
+}
+
+.x-header a {
+    text-decoration: none;
+}
+
+.x-header-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    box-sizing: border-box;
+    padding: calc(var(--base-margin) * 0.5);
+}
+
+.x-header-image img {
+    max-height: 100%;
+}
+
+/* FOOTER */
+.x-footer {
+    color: var(--primary-color);
+    padding: calc(var(--base-margin) * 2.5) 0;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+@media print {
+    .x-footer {
+        display: none;
+    }
+}
+
+/* TALK LIST */
+.x-talk-list-item {
+    --padding: 0.8em;
+    --right-padding-multiplier: 3;
+
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    position: relative;
+    background-color: var(--bright-background-color);
+    padding: var(--padding) calc(var(--padding) * var(--right-padding-multiplier)) var(--padding) calc(var(--padding) * 1.2);
+    margin-top: var(--base-margin);
+}
+
+.x-talk-list-item-arrow {
+    position: absolute;
+    right: calc(var(--padding) * (var(--right-padding-multiplier) / 2));
+    top: 50%;
+    transform: translateY(-50%) translateX(50%);
+}
+
+.x-talk-list-item-arrow svg {
+    fill: var(--accent-color);
+    height: 0.88em;
+    width: auto;
+}
+
+.x-talk-list-item-title {
+    margin: 0 0 0.4em 0;
+    color: var(--primary-color);
+    font-size: 1.3em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.x-talk-list-item-title span {
+    flex-grow: 1;
+}
+
+.x-talk-list-item-title svg {
+    display: none;
+    width: 12px;
+    height: 12px;
+    background-color: var(--accent-color);
+    vertical-align: middle;
+    padding: 4px;
+    flex-shrink: 0;
+    margin-right: 0.3em;
+    fill: white;
+}
+
+.x-talk-list-item.is-rated .x-talk-list-item-title span {
+    opacity: 0.7;
+}
+
+.x-talk-list-item.is-rated .x-talk-list-item-title svg {
+    display: inline-block;
+}
+
+.x-talk-list-item-info {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.x-talk-list-item-info-speaker,
+.x-talk-list-item-info-track,
+.x-talk-list-item-info-when {
+    font-size: 1em;
+    font-weight: 700;
+}
+
+.x-talk-list-item-info-speaker {
+    color: var(--speaker-name-color);
+    font-weight: 600;
+    flex-grow: 1;
+}
+
+.x-talk-list-item-info-track {
+    color: var(--accent-color);
+    margin: 0 0.6em;
+    white-space: nowrap;
+}
+
+.x-talk-list-item-info-when {
+    color: var(--primary-color);
+    white-space: nowrap;
+}
+
+/* TALK */
+.x-talk-notification {
+    padding: calc(var(--base-margin) * 1.5);
+    margin-top: var(--base-margin);
+    background-color: var(--accent-color);
+    color: var(--bright-text-color);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.x-talk-notification svg {
+    width: 20px;
+    height: auto;
+    fill: var(--bright-text-color);
+    margin-right: var(--base-margin);
+}
+
+.x-talk-section {
+    --padding: 1em;
+
+    padding: var(--padding);
+    margin-top: var(--base-margin);
+}
+
+.x-talk-section-title {
+    font-size: 1.3em;
+    color: var(--primary-color);
+    margin: 0 0 var(--base-margin) 0;
+    font-weight: normal;
+}
+
+.x-talk-section-advice {
+    opacity: 0.5;
+    font-size: 0.9em;
+}
+
+.x-talk-section.is-boxed {
+    background-color: white;
+}
+
+.x-talk-title {
+    font-size: 1.7em;
+    line-height: 1em;
+    font-weight: 700;
+    margin: 0;
+    color: var(--primary-color);
+}
+
+.x-talk-info {
+    margin-top: var(--base-margin);
+}
+
+.x-talk-info-track,
+.x-talk-info-when {
+    font-size: 1em;
+    font-weight: 700;
+    white-space: nowrap;
+    color: var(--primary-color);
+}
+
+.x-talk-info-track {
+    color: var(--accent-color);
+    margin: 0 0.6em 0 0;
+}
+
+.x-talk-description {
+    line-height: 1.4em;
+    color: var(--dark-text-color);
+}
+
+.x-talk-description>p {
+    margin: var(--base-margin) 0 0 0;
+}
+
+.x-talk-speaker {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.x-talk-speaker-image {
+    flex-shrink: 0;
+    flex-grow: 0;
+    width: 100px;
+    height: 100px;
+    margin-right: 1em;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.x-talk-speaker-info {
+    flex-grow: 1;
+}
+
+.x-talk-speaker-info-name {
+    display: block;
+    font-size: 1.4em;
+    line-height: 1em;
+    font-weight: normal;
+    color: var(--speaker-name-color);
+}
+
+.x-talk-speaker-info-title {
+    margin: 0.5em 0 0 0;
+    display: inline-block;
+    line-height: 1.42;
+    color: var(--primary-color);
+}
+
+.x-talk-textarea {
+    display: block;
+    margin: auto;
+    width: 100%;
+    max-width: calc(var(--max-width) * 0.375);
+    resize: none;
+    height: calc(var(--max-width) * 0.1875);
+    border-color: rgba(0, 0, 0, 0.1);
+    border-style: solid;
+    border-width: 1px;
+    font-size: 1.2em;
+    padding: calc(var(--base-margin) * 1.5);
+    box-sizing: border-box;
+}
+
+.x-talk-button {
+    appearance: none;
+    -moz-appearance: none;
+    width: 100%;
+    max-width: calc(var(--max-width) * 0.375);
+    margin: var(--base-margin) auto 0 auto;
+    display: block;
+    font-size: 1.3em;
+    background-color: var(--accent-color);
+    color: var(--bright-text-color);
+    border: none;
+    padding: 0.4em;
+    cursor: pointer;
+}
+
+.x-talk-question-filter {
+    text-align: right;
+}
+
+.x-talk-question-list.is-fav-only .x-talk-question-list-item:not(.is-fav) {
+    display: none;
+}
+
+.x-talk-question-list-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid var(--primary-color);
+}
+
+.x-talk-question-list-item>p {
+    flex-grow: 1;
+}
+
+.x-talk-question-list-item-actions {
+    flex-shrink: 0;
+}
+
+.x-talk-question-list-item-actions-fav,
+.x-talk-question-list-item-actions-unfav {
+    padding: 0;
+}
+
+.x-talk-question-list-item-actions-fav svg,
+.x-talk-question-list-item-actions-unfav svg {
+    width: 2.3em;
+    height: auto;
+}
+
+.x-talk-question-list-item-actions-fav svg {
+    fill: gray;
+}
+
+.x-talk-question-list-item-actions-unfav svg {
+    fill: var(--accent-color);
+}
+
+.x-talk-question-list-item.is-fav .x-talk-question-list-item-actions-fav {
+    display: none;
+}
+
+.x-talk-question-list-item:not(.is-fav) .x-talk-question-list-item-actions-unfav {
+    display: none;
+}
+
+.x-talk-rating {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.x-talk-rating-stars {
+    margin-right: 15px;
+    display: flex;
+}
+
+.x-talk-rating-stars-numbers {
+    display: flex;
+    flex-direction: column;
+}
+
+.x-talk-rating-stars-numbers span {
+    font-size: 15px;
+    line-height: 1em;
+    text-align: right;
+}
+
+.x-talk-rating-stars-bars {
+    margin-left: 2px;
+}
+
+.x-talk-rating-stars-bars div {
+    display: flex;
+    margin-left: 3px;
+    height: 15px;
+}
+
+.x-talk-rating-stars-bars div svg {
+    width: 10px;
+    height: auto;
+    fill: var(--accent-color);
+    margin-right: 2px;
+}
+
+.x-talk-rating-average {
+    font-size: 2em;
+}
+
+.x-talk-rating-average-value {
+    font-size: 1.5em;
+}
+
+.x-talk-rating-average-max {
+    opacity: 0.6;
+}
+
+.x-talk-comment {
+    background-color: rgba(0, 0, 0, 0.01);
+    margin-top: 15px;
+    padding: 10px;
+}
+
+.x-talk-comment p {
+    margin: 0;
+}
+
+.x-talk-comment-stars {
+    font-size: 14px;
+    display: inline-flex;
+}
+
+.x-talk-comment-stars svg {
+    margin-left: 2px;
+    width: 12px;
+    height: auto;
+    fill: var(--accent-color);
+}
+
+/* STARS */
+.x-stars {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: calc(var(--max-width) * 0.375);
+    margin: var(--base-margin) auto;
+}
+
+.x-stars>label {
+    cursor: pointer;
+}
+
+.x-stars>label>svg {
+    width: 2.5em;
+    height: 2.5em;
+    fill: var(--accent-color);
+}
+
+.x-stars>input {
+    display: none;
+}
+
+.x-stars>input:checked~label>svg {
+    fill: rgba(0, 0, 0, 0.05);
+}
+
+.x-admin-menu {
+    background-color: #ffffca78;
+    margin-top: var(--base-margin);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.x-admin-menu-left {
+    flex-grow: 1;
+    flex-shrink: 0;
+    margin-left: .5em;
+}
+
+.x-admin-menu-right {
+    flex-grow: 1;
+    flex-shrink: 0;
+    text-align: right;
+    margin-right: .5em;
+}
+
+.x-admin-menu-item {
+    display: inline-block;
+    line-height: 2em;
+    margin: 0 .5em;
+}
+
+.x-admin-menu-link {
+    display: inline-block;
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    border-top: 2px solid transparent;
+    line-height: calc(2em - 4px);
+    color: rgba(0, 0, 0, 0.55);
+    margin: 0 .5em;
+}
+
+.x-admin-menu-link:hover {
+    color: black;
+}
+
+.x-admin-menu-link.is-active {
+    border-bottom-color: black;
+    color: black;
+}
+
+@media (max-width: 400px) {
+    .x-admin-menu {
+        flex-direction: column;
+    }
+}

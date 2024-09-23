@@ -1,18 +1,24 @@
 {
-  "editor.detectIndentation": false,
-  "editor.tabSize": 2,
-  "[json]": {
-    "editor.defaultFormatter": "vscode.json-language-features",
-    "files.insertFinalNewline": true
-  },
-  "[jsonc]": {
-    "editor.defaultFormatter": "vscode.json-language-features",
-    "files.insertFinalNewline": true
-  },
-  "[python]": {
-    "editor.tabSize": 4
-  },
-  "files.exclude": {
-    "**/__pycache__": true
-  }
+    "editor.detectIndentation": false,
+    "editor.tabSize": 4,
+    "[jsonc]": {
+        "editor.defaultFormatter": "vscode.json-language-features",
+        "files.insertFinalNewline": true
+    },
+    "[json]": {
+        "editor.defaultFormatter": "vscode.json-language-features",
+        "files.insertFinalNewline": true
+    },
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter"
+    },
+    "[html]": {
+        "editor.defaultFormatter": "vscode.html-language-features"
+    },
+    "[css]": {
+        "editor.defaultFormatter": "vscode.css-language-features"
+    },
+    "files.exclude": {
+        "**/__pycache__": true
+    }
 }

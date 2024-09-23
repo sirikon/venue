@@ -1,2 +1,3 @@
-/dist
+/.venv
+/.workdir
 **/__pycache__
