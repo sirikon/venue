@@ -1,55 +1,55 @@
 [
-    {
-        "model": "venue.speaker",
-        "pk": 1,
-        "fields": {
-            "name": "Douglas Engelbart",
-            "title": "Inventor of the mouse",
-            "image": "speakers/engelbart.jpg"
-        }
-    },
-    {
-        "model": "venue.speaker",
-        "pk": 2,
-        "fields": {
-            "name": "Gary Bernhardt",
-            "title": "Destroy all software",
-            "image": "speakers/bernhardt.jpg"
-        }
-    },
-    {
-        "model": "venue.track",
-        "pk": 1,
-        "fields": {
-            "name": "Main Track"
-        }
-    },
-    {
-        "model": "venue.talk",
-        "pk": 1,
-        "fields": {
-            "name": "The Mother of All Demos",
-            "slug": "the-mother-of-all-demos",
-            "description": "<p>The 90-minute presentation demonstrated for the first time many of the fundamental elements of modern personal computing: windows, hypertext, graphics, efficient navigation and command input, video conferencing, the computer mouse, word processing, dynamic file linking, revision control, and a collaborative real-time editor.</p><p>Engelbart's presentation was the first to publicly demonstrate all of these elements in a single system. The demonstration was highly influential and spawned similar projects at Xerox PARC in the early 1970s.</p><p>The underlying concepts and technologies influenced both the Apple Macintosh and Microsoft Windows graphical user interface operating systems in the 1980s and 1990s.</p>",
-            "date": "2024-06-09T18:00:00Z",
-            "track": 1,
-            "speakers": [
-                1
-            ]
-        }
-    },
-    {
-        "model": "venue.talk",
-        "pk": 2,
-        "fields": {
-            "name": "Wat",
-            "slug": "wat",
-            "description": "<p>wat</p>",
-            "date": "2024-06-09T19:30:00Z",
-            "track": 1,
-            "speakers": [
-                2
-            ]
-        }
+  {
+    "model": "venue.speaker",
+    "pk": 1,
+    "fields": {
+      "name": "Douglas Engelbart",
+      "title": "Inventor of the mouse",
+      "image": "speakers/engelbart.jpg"
     }
+  },
+  {
+    "model": "venue.speaker",
+    "pk": 2,
+    "fields": {
+      "name": "Gary Bernhardt",
+      "title": "Destroy all software",
+      "image": "speakers/bernhardt.jpg"
+    }
+  },
+  {
+    "model": "venue.track",
+    "pk": 1,
+    "fields": {
+      "name": "Main Track"
+    }
+  },
+  {
+    "model": "venue.talk",
+    "pk": 1,
+    "fields": {
+      "name": "The Mother of All Demos",
+      "slug": "the-mother-of-all-demos",
+      "description": "<p>The 90-minute presentation demonstrated for the first time many of the fundamental elements of modern personal computing: windows, hypertext, graphics, efficient navigation and command input, video conferencing, the computer mouse, word processing, dynamic file linking, revision control, and a collaborative real-time editor.</p><p>Engelbart's presentation was the first to publicly demonstrate all of these elements in a single system. The demonstration was highly influential and spawned similar projects at Xerox PARC in the early 1970s.</p><p>The underlying concepts and technologies influenced both the Apple Macintosh and Microsoft Windows graphical user interface operating systems in the 1980s and 1990s.</p>",
+      "date": "2024-06-09T18:00:00Z",
+      "track": 1,
+      "speakers": [
+        1
+      ]
+    }
+  },
+  {
+    "model": "venue.talk",
+    "pk": 2,
+    "fields": {
+      "name": "Wat",
+      "slug": "wat",
+      "description": "<p>wat</p>",
+      "date": "2024-06-09T19:30:00Z",
+      "track": 1,
+      "speakers": [
+        2
+      ]
+    }
+  }
 ]
