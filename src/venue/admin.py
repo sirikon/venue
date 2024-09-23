@@ -1,7 +1,4 @@
 from django.contrib import admin
-from constance import config
-from constance.signals import config_updated
-from django.dispatch import receiver
 from .models import Talk, Speaker, Track, Visitor, Rating, Question
 
 

@@ -483,3 +483,55 @@ img {
 .x-stars>input:checked~label>svg {
     fill: rgba(0, 0, 0, 0.05);
 }
+
+.x-admin-menu {
+    background-color: #ffffca78;
+    margin-top: var(--base-margin);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.x-admin-menu-left {
+    flex-grow: 1;
+    flex-shrink: 0;
+    margin-left: .5em;
+}
+
+.x-admin-menu-right {
+    flex-grow: 1;
+    flex-shrink: 0;
+    text-align: right;
+    margin-right: .5em;
+}
+
+.x-admin-menu-item {
+    display: inline-block;
+    line-height: 2em;
+    margin: 0 .5em;
+}
+
+.x-admin-menu-link {
+    display: inline-block;
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    border-top: 2px solid transparent;
+    line-height: calc(2em - 4px);
+    color: rgba(0, 0, 0, 0.55);
+    margin: 0 .5em;
+}
+
+.x-admin-menu-link:hover {
+    color: black;
+}
+
+.x-admin-menu-link.is-active {
+    border-bottom-color: black;
+    color: black;
+}
+
+@media (max-width: 400px) {
+    .x-admin-menu {
+        flex-direction: column;
+    }
+}

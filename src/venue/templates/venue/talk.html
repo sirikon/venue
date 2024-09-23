@@ -3,7 +3,12 @@
 
 {% block title %}{{ talk.name }} | {{ config.EVENT_NAME }}{% endblock %}
 
+{% block admin_menu %}
+{% include "venue/_talk_admin_menu.html" %}
+{% endblock %}
+
 {% block body %}
+
 {% if talk_rated %}
 <div class="x-talk-notification">
     {% include "venue/icons/check.svg" %}

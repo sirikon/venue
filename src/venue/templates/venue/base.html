@@ -29,6 +29,17 @@
             <span>{{ message }}</span>
         </div>
         {% endfor %}
+        {% if user.is_authenticated %}
+        <div class="x-admin-menu">
+            <div class="x-admin-menu-left">
+                {% block admin_menu %}{% endblock %}
+            </div>
+            <div class="x-admin-menu-right">
+                <span class="x-admin-menu-item">Hello {{ user.username }}!</span>
+                <a class="x-admin-menu-link" href="{% url 'logout' %}">Log out</a>
+            </div>
+        </div>
+        {% endif %}
         {% block body %}{% endblock %}
     </div>
 

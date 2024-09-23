@@ -1,0 +1,6 @@
+<a class="x-admin-menu-link {% if request.resolver_match.url_name == 'talk' %}is-active{% endif %}"
+    href="{% url 'talk' talk.slug %}">Talk</a>
+<a class="x-admin-menu-link {% if request.resolver_match.url_name == 'talk_questions' %}is-active{% endif %}"
+    href="{% url 'talk_questions' talk.slug %}">Questions</a>
+<a class="x-admin-menu-link {% if request.resolver_match.url_name == 'talk_ratings' %}is-active{% endif %}"
+    href="{% url 'talk_ratings' talk.slug %}">Ratings</a>

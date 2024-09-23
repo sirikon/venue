@@ -1,6 +1,8 @@
 from django.http import HttpRequest
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.contrib.auth import logout as auth_logout
+from django.contrib.auth.decorators import login_required
 from django.contrib.postgres.aggregates import ArrayAgg
 from django.http.request import split_domain_port
 from django.core.exceptions import BadRequest
@@ -15,6 +17,23 @@ def get_domain(request):
 
 def get_talk_query(slug):
     return Talk.objects.filter(slug=slug)
+
+
+@login_required
+def login(_: HttpRequest):
+    return redirect("index", permanent=False)
+
+
+def logout(request: HttpRequest):
+    session_data_to_keep = [
+        (k, request.session.get(k))
+        for k in request.session.keys()
+        if k == "visitor_id" or k.startswith("talk_rated_")
+    ]
+    auth_logout(request)
+    for key, value in session_data_to_keep:
+        request.session[key] = value
+    return redirect("index", permanent=False)
 
 
 def index(request: HttpRequest):
@@ -75,6 +94,34 @@ def talk_question(request, slug):
         return redirect("talk", slug, permanent=False)
 
 
+@login_required
+def talk_questions(request: HttpRequest, slug: str):
+    if request.method == "GET":
+        talk = (
+            get_talk_query(slug)
+            .annotate(
+                speakers_ids=ArrayAgg("speakers"),
+            )
+            .values(
+                "pk",
+                "name",
+                "slug",
+                "date",
+                "track__name",
+            )
+            .first()
+        )
+        questions = Question.objects.filter(talk__pk=talk["pk"]).values(
+            "pk",
+            "question",
+        )
+        return render(
+            request,
+            "venue/talk_questions.html",
+            {"talk": talk, "questions": questions},
+        )
+
+
 def talk_rating(request, slug):
     if request.method == "POST":
         rating = int(request.POST.get("rating"))
@@ -93,3 +140,67 @@ def talk_rating(request, slug):
         ).save()
         request.session["talk_rated_" + str(talk.pk)] = True
         return redirect("talk", slug, permanent=False)
+
+
+@login_required
+def talk_ratings(request: HttpRequest, slug: str):
+    if request.method == "GET":
+        talk = (
+            get_talk_query(slug)
+            .annotate(
+                speakers_ids=ArrayAgg("speakers"),
+            )
+            .values(
+                "pk",
+                "name",
+                "slug",
+                "date",
+                "track__name",
+            )
+            .first()
+        )
+        ratings = Rating.objects.filter(talk__pk=talk["pk"]).values(
+            "comment",
+            "rating",
+        )
+
+        summary = {
+            "max": 5,
+            "average": 0,
+            "stars_per_rating": [
+                [True],
+                [True, True],
+                [True, True, True],
+                [
+                    True,
+                    True,
+                    True,
+                    True,
+                ],
+                [
+                    True,
+                    True,
+                    True,
+                    True,
+                    True,
+                ],
+            ],
+            "count_per_rating": [0, 0, 0, 0, 0],
+        }
+
+        if len(ratings) > 0:
+            total = 0
+            for rating in ratings:
+                total += rating["rating"]
+                summary["count_per_rating"][rating["rating"] - 1] += 1
+            summary["average"] = total / len(ratings)
+
+        return render(
+            request,
+            "venue/talk_ratings.html",
+            {
+                "talk": talk,
+                "ratings": [r for r in ratings if r["comment"] != ""],
+                "summary": summary,
+            },
+        )
