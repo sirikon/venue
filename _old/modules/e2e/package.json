@@ -1,8 +1,0 @@
-{
-  "devDependencies": {
-    "@types/pg": "^8.6.4",
-    "cypress": "^13.5.0",
-    "pg": "^8.7.1",
-    "typescript": "^4.5.5"
-  }
-}

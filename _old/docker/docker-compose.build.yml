@@ -1,5 +1,0 @@
-services:
-  venue:
-    image: ghcr.io/sirikon/bilbostack-app:${VENUE_TAG:-dev}
-    build:
-      dockerfile: ./docker/Dockerfile
