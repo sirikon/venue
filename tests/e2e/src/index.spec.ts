@@ -1,15 +1,15 @@
 import { test, expect } from "@playwright/test";
-import { EVENT_NAME, INDEX_URL, TALKS } from "./_common";
+import { EVENT_NAME, BASE_URL, TALKS } from "./_common";
 
 test("has title and footer", async ({ page }) => {
-  await page.goto(INDEX_URL);
+  await page.goto(BASE_URL);
   await expect(page).toHaveTitle(EVENT_NAME);
   await expect(page.locator(".x-header h1")).toHaveText(EVENT_NAME);
   await expect(page.locator(".x-footer .x-body > span")).toHaveText(EVENT_NAME);
 });
 
 test("talks are in order", async ({ page }) => {
-  await page.goto(INDEX_URL);
+  await page.goto(BASE_URL);
   const talks = page.locator(".x-talk-list .x-talk-list-item");
   const talksCount = await talks.count();
   for (let i = 0; i < talksCount; i++) {
