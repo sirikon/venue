@@ -1,10 +1,21 @@
 {% extends "venue/base.html" %}
 {% load static %}
+{% load venue %}
 
 {% block title %}{{ talk.name }} | {{ config.EVENT_NAME }}{% endblock %}
 
 {% block admin_menu %}
 {% include "venue/_talk_admin_menu.html" %}
+{% endblock %}
+
+{% block meta %}
+<meta name="twitter:card" content="summary" />
+<meta property="og:title" content="{{ talk.name }}. ¡Dame feedback!" />
+<meta property="og:type" content="website" />
+{% if talk.speakers %}
+<meta property="og:image" content="{% media_url talk.speakers.0.image %}">
+{% endif %}
+<meta property="og:description" content="Por {{ talk.speakers.0.name }} en {{ config.EVENT_NAME }}" />
 {% endblock %}
 
 {% block body %}
