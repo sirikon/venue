@@ -1,18 +1,5 @@
 import { test, expect } from "@playwright/test";
-
-const INDEX_URL = "http://127.0.0.1:8000/";
-const EVENT_NAME = "Event Name";
-
-const TALKS = [
-  [
-    "the-mother-of-all-demos",
-    "The Mother of All Demos",
-    "Douglas Engelbart",
-    "Main Track",
-    "18:00",
-  ],
-  ["wat", "Wat", "Gary Bernhardt", "Main Track", "19:30"],
-];
+import { EVENT_NAME, INDEX_URL, TALKS } from "./_common";
 
 test("has title and footer", async ({ page }) => {
   await page.goto(INDEX_URL);
@@ -26,18 +13,21 @@ test("talks are in order", async ({ page }) => {
   const talks = page.locator(".x-talk-list .x-talk-list-item");
   const talksCount = await talks.count();
   for (let i = 0; i < talksCount; i++) {
-    await expect(talks.nth(i)).toHaveAttribute("href", `/talk/${TALKS[i][0]}`);
+    await expect(talks.nth(i)).toHaveAttribute(
+      "href",
+      `/talk/${TALKS[i].slug}`
+    );
     await expect(
       talks.nth(i).locator(".x-talk-list-item-title > span")
-    ).toHaveText(TALKS[i][1]);
+    ).toHaveText(TALKS[i].title);
     await expect(
       talks.nth(i).locator(".x-talk-list-item-info-speaker")
-    ).toHaveText(TALKS[i][2]);
+    ).toHaveText(TALKS[i].speaker.name);
     await expect(
       talks.nth(i).locator(".x-talk-list-item-info-track")
-    ).toHaveText(TALKS[i][3]);
+    ).toHaveText(TALKS[i].track);
     await expect(
       talks.nth(i).locator(".x-talk-list-item-info-when")
-    ).toHaveText(TALKS[i][4]);
+    ).toHaveText(TALKS[i].when);
   }
 });
