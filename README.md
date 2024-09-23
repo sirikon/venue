@@ -20,6 +20,8 @@ This project underwent many versions and rewrites. Here's a quick guide:
 
 ## Development
 
+Requires Docker and assumes that all the tools listed in [.tool-versions](./.tool-versions) are installed.
+
 ```bash
 ./meta/setup.sh
 ./meta/start.sh
