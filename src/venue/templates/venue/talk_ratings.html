@@ -41,8 +41,8 @@
             </div>
 
             <div class="x-talk-rating-average">
-                <span class="x-talk-rating-average-value">{% if summary.average != 0 %}{{
-                    summary.average|floatformat:"-2" }}{% else %}--{% endif %}</span><span
+                <span class="x-talk-rating-average-value">
+                    {%if summary.average != 0%}{{summary.average|floatformat:"-2" }}{%else%}--{%endif%}</span><span
                     class="x-talk-rating-average-max">/{{ summary.max }}</span>
             </div>
 

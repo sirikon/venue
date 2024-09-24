@@ -21,8 +21,8 @@
 {% block body %}
 
 {% if talk_rated %}
-<div class="x-talk-notification">
-    {% include "venue/icons/check.svg" %}
+<div class="x-talk-notification success">
+    <span class="icon success">{% include "venue/icons/check.svg" %}</span>
     <span>¡Gracias por su valoración!</span>
 </div>
 {% endif %}
