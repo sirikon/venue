@@ -7,8 +7,8 @@ insert_final_newline = true
 charset = utf-8
 indent_style = space
 
-[**/*.py]
+[**/*.{py,html}]
 indent_size = 4
 
-[**/*.{ts,js,json,yaml,yml,sh}]
+[**/*.{css,ts,js,json,yaml,yml,sh}]
 indent_size = 2

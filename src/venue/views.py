@@ -39,7 +39,9 @@ def logout(request: HttpRequest):
 def index(request: HttpRequest):
     talks = (
         Talk.objects.order_by("date")
-        .annotate(speakers_names=ArrayAgg("speakers__name"))
+        .annotate(
+            speakers_names=ArrayAgg("speakers__name", ordering=("speakers__name"))
+        )
         .values("pk", "name", "slug", "date", "track__name", "speakers_names")
     )
     talks = [
@@ -60,14 +62,19 @@ def talk(request: HttpRequest, slug):
             "name",
             "slug",
             "date",
+            "display_date",
             "track__name",
             "description",
             "speakers_ids",
+            "enable_questions",
+            "enable_ratings",
         )
         .first()
     )
-    talk["speakers"] = Speaker.objects.filter(pk__in=talk["speakers_ids"]).values(
-        "name", "title", "image"
+    talk["speakers"] = (
+        Speaker.objects.filter(pk__in=talk["speakers_ids"])
+        .order_by("name", "title")
+        .values("name", "title", "biography", "image")
     )
     return render(
         request,
@@ -90,7 +97,7 @@ def talk_question(request, slug):
         visitor, _ = Visitor.objects.get_or_create(id=request.session["visitor_id"])
         talk = get_talk_query(slug).first()
         Question.objects.create(talk=talk, question=question, visitor=visitor).save()
-        messages.add_message(request, messages.INFO, "¡Gracias por su pregunta!")
+        messages.add_message(request, messages.SUCCESS, "¡Gracias por su pregunta!")
         return redirect("talk", slug, permanent=False)
 
 
@@ -107,7 +114,9 @@ def talk_questions(request: HttpRequest, slug: str):
                 "name",
                 "slug",
                 "date",
+                "display_date",
                 "track__name",
+                "enable_questions",
             )
             .first()
         )
@@ -155,7 +164,9 @@ def talk_ratings(request: HttpRequest, slug: str):
                 "name",
                 "slug",
                 "date",
+                "display_date",
                 "track__name",
+                "enable_ratings",
             )
             .first()
         )

@@ -8,20 +8,17 @@
 {% endblock %}
 
 {% block body %}
+{% if not talk.enable_questions %}
+<div class="x-talk-notification warning">
+    <span class="icon success">{% include "venue/icons/check.svg" %}</span>
+    <span>⚠️ Questions are <b>disabled</b> in this talk. <a
+            href="/admin/venue/talk/{{ talk.pk }}/change/#id_enable_questions">Edit the talk in the admin panel</a> to
+        enable it.</span>
+</div>
+{% endif %}
+
 <div class="x-talk" data-talk-slug="{{ talk.slug }}">
-    <section class="x-talk-section is-boxed">
-        <h1 class="x-talk-title">
-            {{ talk.name }}
-        </h1>
-        <div class="x-talk-info">
-            <span class="x-talk-info-track">
-                {{ talk.track__name }}
-            </span>
-            <span class="x-talk-info-when">
-                {{ talk.date|date:'H:i' }}
-            </span>
-        </div>
-    </section>
+    {% include "venue/_talk_information.html" %}
 
     <section class="x-talk-section is-boxed">
         <h2 class="x-talk-section-title">

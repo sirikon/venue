@@ -1,0 +1,24 @@
+<section class="x-talk-section is-boxed">
+    <h1 class="x-talk-title">
+        {{ talk.name }}
+    </h1>
+    {% if talk.track__name or talk.display_date %}
+    <div class="x-talk-info">
+        {% if talk.track__name %}
+        <span class="x-talk-info-track">
+            {{ talk.track__name }}
+        </span>
+        {% endif %}
+        {% if talk.display_date %}
+        <span class="x-talk-info-when">
+            {{ talk.date|date:'H:i' }}
+        </span>
+        {% endif %}
+    </div>
+    {% endif %}
+    {% if talk.description %}
+    <div class="x-talk-description">
+        {{ talk.description|safe }}
+    </div>
+    {% endif %}
+</section>

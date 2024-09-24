@@ -5,6 +5,7 @@
     "fields": {
       "name": "Douglas Engelbart",
       "title": "Inventor of the mouse",
+      "biography": "<p>American engineer, inventor, and a pioneer in many aspects of <a href=\"https://en.wikipedia.org/wiki/Computer_science\">computer science.</a></p><p>He is best known for his work on founding the field of <a href=\"https://en.wikipedia.org/wiki/Human%E2%80%93computer_interaction\">human-computer interaction</a>, particularly while at his <a href=\"https://en.wikipedia.org/wiki/Augmentation_Research_Center\">Augmentation Research Center</a> Lab in <a href=\"https://en.wikipedia.org/wiki/SRI_International\">SRI International</a>, which resulted in creation of the computer mouse, and the development of hypertext, networked computers, and precursors to graphical user interfaces.</p>",
       "image": "speakers/engelbart.jpg"
     }
   },
@@ -14,6 +15,7 @@
     "fields": {
       "name": "Gary Bernhardt",
       "title": "Destroy all software",
+      "biography": "<p>You know me from <a href=\"https://www.destroyallsoftware.com/talks/wat\">Wat</a> and, with luck, from <a href=\"https://www.destroyallsoftware.com/talks/boundaries\">Boundaries</a> or <a href=\"https://www.destroyallsoftware.com/talks/the-birth-and-death-of-javascript\">The Birth & Death of JavaScript</a>.</p>",
       "image": "speakers/bernhardt.jpg"
     }
   },

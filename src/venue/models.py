@@ -12,6 +12,7 @@ class Track(models.Model):
 class Speaker(models.Model):
     name = models.CharField(max_length=200)
     title = models.TextField()
+    biography = ProseEditorField(blank=True)
     image = models.ImageField(upload_to="speakers")
 
     def __str__(self) -> str:
@@ -19,12 +20,15 @@ class Speaker(models.Model):
 
 
 class Talk(models.Model):
-    track = models.ForeignKey(Track, on_delete=models.RESTRICT)
+    track = models.ForeignKey(Track, on_delete=models.RESTRICT, blank=True, null=True)
     name = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200)
     description = ProseEditorField(blank=True)
     date = models.DateTimeField()
+    display_date = models.BooleanField(default=True)
     speakers = models.ManyToManyField(Speaker)
+    enable_questions = models.BooleanField(default=True)
+    enable_ratings = models.BooleanField(default=True)
 
     class Meta:
         ordering = ["date"]

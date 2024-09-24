@@ -19,12 +19,16 @@
             <span class="x-talk-list-item-info-speaker">
                 {{ talk.speakers_names|join:', ' }}
             </span>
+            {% if talk.track__name %}
             <span class="x-talk-list-item-info-track">
                 {{ talk.track__name }}
             </span>
+            {% endif %}
+            {% if talk.display_date %}
             <span class="x-talk-list-item-info-when">
                 {{ talk.date|date:'H:i' }}
             </span>
+            {% endif %}
         </div>
     </a>
     {% endfor %}

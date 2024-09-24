@@ -28,38 +28,25 @@
 {% endif %}
 
 <div class="x-talk" data-talk-slug="{{ talk.slug }}">
-    <section class="x-talk-section is-boxed">
-        <h1 class="x-talk-title">
-            {{ talk.name }}
-        </h1>
-        <div class="x-talk-info">
-            <span class="x-talk-info-track">
-                {{ talk.track__name }}
-            </span>
-            <span class="x-talk-info-when">
-                {{ talk.date|date:'H:i' }}
-            </span>
-        </div>
-        <div class="x-talk-description">
-            {{ talk.description|safe }}
-        </div>
-    </section>
+    {% include "venue/_talk_information.html" %}
 
     {% for speaker in talk.speakers %}
     <section class="x-talk-section x-talk-speaker">
         <div class="x-talk-speaker-image" style="background-image:url({% get_media_prefix %}{{ speaker.image }});;">
         </div>
         <div class="x-talk-speaker-info">
-            <span class="x-talk-speaker-info-name">
+            <h2 class="x-talk-speaker-info-name">
                 {{ speaker.name }}
-            </span>
+            </h2>
             <span class="x-talk-speaker-info-title">
                 {{ speaker.title }}
             </span>
+            {{ speaker.biography|safe }}
         </div>
     </section>
     {% endfor %}
 
+    {% if talk.enable_questions %}
     <section class="x-talk-section is-boxed" data-section="question">
         <h2 class="x-talk-section-title">Haz una pregunta</h2>
         <form action="{% url 'talk_question' talk.slug %}" method="POST" enctype="multipart/form-data">
@@ -69,8 +56,9 @@
             <input class="x-talk-button" type="submit" value="Enviar">
         </form>
     </section>
+    {% endif %}
 
-    {% if not talk_rated %}
+    {% if not talk_rated and talk.enable_ratings %}
     <section class="x-talk-section is-boxed" data-section="rating">
         <h2 class="x-talk-section-title">Valora la charla</h2>
         <form action="{% url 'talk_rating' talk.slug %}" method="POST" enctype="multipart/form-data">
