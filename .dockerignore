@@ -1,0 +1,10 @@
+**/*
+
+!pyproject.toml
+!poetry.lock
+
+!src/**/*.html
+!src/**/*.css
+!src/**/*.js
+!src/**/*.svg
+!src/**/*.py
