@@ -9,5 +9,3 @@ pillow = "^10.3.0"
 django-prose-editor = { extras = ["sanitize"], version = "^0.8.1" }
 django-constance = "^4.1.1"
 gunicorn = "^23.0.0"
-uvicorn = "^0.31.0"
-uvicorn-worker = "^0.2.0"
