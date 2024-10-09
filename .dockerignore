@@ -8,3 +8,6 @@
 !src/**/*.js
 !src/**/*.svg
 !src/**/*.py
+
+!meta/_docker/start.sh
+!meta/_docker/Caddyfile

@@ -1,0 +1,11 @@
+{
+  admin off
+  auto_https off
+}
+
+:80
+bind 0.0.0.0
+
+handle {
+  reverse_proxy 127.0.0.1:81
+}
