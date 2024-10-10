@@ -2,7 +2,7 @@
 set -euo pipefail
 
 function main {
-  trap 'kill -s SIGINT -- -$$ && wait' SIGINT
+  trap 'kill -s SIGINT -1 && wait' SIGINT
   start-app &
   start-proxy &
   wait
