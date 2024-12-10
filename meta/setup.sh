@@ -2,8 +2,8 @@
 set -euo pipefail
 
 ./meta/install.sh
-./meta/compose.sh down --volumes
-./meta/compose.sh up --detach --wait
+./meta/devenv/compose.sh down --volumes
+./meta/devenv/compose.sh up --detach --wait
 ./meta/manage.sh migrate
 export DJANGO_SUPERUSER_USERNAME=admin
 export DJANGO_SUPERUSER_PASSWORD=admin
