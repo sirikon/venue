@@ -2,27 +2,35 @@
 from os import getcwd, environ
 from pathlib import Path
 
-DEVENV_FIXTURES = environ.get("VENUE_DEVENV_FIXTURES")
+VENUE_DEBUG = environ.get("VENUE_DEBUG", "false").lower() == "true"
+VENUE_FIXTURES = environ.get("VENUE_FIXTURES")
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-CWD = Path(getcwd()).resolve()
-BASE_DIR = Path(__file__).resolve().parent.parent
+if VENUE_DEBUG:
+    VENUE_SECRET_KEY = environ.get("VENUE_SECRET_KEY", "secret")
+else:
+    VENUE_SECRET_KEY = environ.get("VENUE_SECRET_KEY")
+    if VENUE_SECRET_KEY is None:
+        raise ValueError("VENUE_SECRET_KEY is required")
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "secret"
+CWD = Path(getcwd()).resolve()
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+SECRET_KEY = VENUE_SECRET_KEY
+DEBUG = VENUE_DEBUG
 
 LOGIN_URL = "/admin/login/"
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-INTERNAL_IPS = [
-    "127.0.0.1",
-]
+INTERNAL_IPS = (
+    [
+        "127.0.0.1",
+    ]
+    if VENUE_DEBUG
+    else []
+)
 
 ALLOWED_HOSTS = []
 
@@ -30,7 +38,7 @@ ALLOWED_HOSTS = []
 MEDIA_ROOT = CWD / "serve" / "media"
 MEDIA_URL = "/media/"
 
-FIXTURE_DIRS = [*([DEVENV_FIXTURES] if DEVENV_FIXTURES is not None else [])]
+FIXTURE_DIRS = [*([VENUE_FIXTURES] if VENUE_FIXTURES is not None else [])]
 
 # Application definition
 
@@ -44,7 +52,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django_prose_editor",
     "constance",
-    "debug_toolbar",
+    *(["debug_toolbar"] if VENUE_DEBUG else []),
 ]
 
 CONSTANCE_BACKEND = "constance.backends.database.DatabaseBackend"
@@ -56,7 +64,7 @@ CONSTANCE_CONFIG = {
 }
 
 MIDDLEWARE = [
-    "debug_toolbar.middleware.DebugToolbarMiddleware",
+    *(["debug_toolbar.middleware.DebugToolbarMiddleware"] if VENUE_DEBUG else []),
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
