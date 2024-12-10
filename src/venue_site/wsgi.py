@@ -3,7 +3,9 @@
 import os
 
 from django.core.wsgi import get_wsgi_application
+from django.urls import get_resolver
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'venue_site.settings')
 
 application = get_wsgi_application()
+get_resolver().url_patterns

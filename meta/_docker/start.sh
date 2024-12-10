@@ -17,6 +17,7 @@ function start-app {
   exec /app/.venv/bin/python -m gunicorn \
     venue_site.wsgi:application \
     --bind=0.0.0.0:81 \
+    --preload \
     --workers "${VENUE_WORKERS:-1}"
 }
 
