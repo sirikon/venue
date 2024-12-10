@@ -20,6 +20,10 @@ LOGIN_URL = "/admin/login/"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
+
 ALLOWED_HOSTS = []
 
 
@@ -40,6 +44,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django_prose_editor",
     "constance",
+    "debug_toolbar",
 ]
 
 CONSTANCE_BACKEND = "constance.backends.database.DatabaseBackend"
@@ -51,6 +56,7 @@ CONSTANCE_CONFIG = {
 }
 
 MIDDLEWARE = [
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -96,6 +102,7 @@ DATABASES = {
         "PASSWORD": "venue",
         "HOST": "127.0.0.1",
         "PORT": 5432,
+        "CONN_MAX_AGE": 3600,
     }
 }
 
