@@ -42,7 +42,15 @@ def index(request: HttpRequest):
         .annotate(
             speakers_names=ArrayAgg("speakers__name", ordering=("speakers__name"))
         )
-        .values("pk", "name", "slug", "date", "track__name", "speakers_names")
+        .values(
+            "pk",
+            "name",
+            "slug",
+            "date",
+            "display_date",
+            "track__name",
+            "speakers_names",
+        )
     )
     talks = [
         {**talk, "rated": request.session.get("talk_rated_" + str(talk["pk"]), False)}
