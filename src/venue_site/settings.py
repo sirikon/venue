@@ -7,11 +7,14 @@ VENUE_FIXTURES = environ.get("VENUE_FIXTURES")
 
 if VENUE_DEBUG:
     VENUE_SECRET_KEY = environ.get("VENUE_SECRET_KEY", "secret")
+    VENUE_DISABLE_SECURE_COOKIES = True
 else:
     VENUE_SECRET_KEY = environ.get("VENUE_SECRET_KEY")
     if VENUE_SECRET_KEY is None:
         raise ValueError("VENUE_SECRET_KEY is required")
-
+    VENUE_DISABLE_SECURE_COOKIES = (
+        environ.get("VENUE_DISABLE_SECURE_COOKIES", "false").lower() == "true"
+    )
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -63,8 +66,8 @@ CONSTANCE_CONFIG = {
     ),
 }
 
-CSRF_COOKIE_SECURE = not VENUE_DEBUG
-SESSION_COOKIE_SECURE = not VENUE_DEBUG
+CSRF_COOKIE_SECURE = not VENUE_DISABLE_SECURE_COOKIES
+SESSION_COOKIE_SECURE = not VENUE_DISABLE_SECURE_COOKIES
 
 MIDDLEWARE = [
     *(["debug_toolbar.middleware.DebugToolbarMiddleware"] if VENUE_DEBUG else []),
@@ -160,4 +163,8 @@ STATIC_ROOT = "static"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-SILENCED_SYSTEM_CHECKS = ["security.W004", "security.W008"]
+SILENCED_SYSTEM_CHECKS = [
+    "security.W004",
+    "security.W008",
+    *(["security.W012", "security.W016"] if VENUE_DISABLE_SECURE_COOKIES else []),
+]

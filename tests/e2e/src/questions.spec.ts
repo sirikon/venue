@@ -9,7 +9,7 @@ const RANDOM_QUESTIONS = [
   crypto.randomBytes(20).toString("hex"),
 ];
 
-test("questions work", async ({ page }) => {
+test("questions work", async ({ page, browserName }) => {
   await page.goto(BASE_URL + "/talk/" + TALK.slug);
   const questionForm = page.locator('[data-section="question"] form');
   for (const randomQuestion of RANDOM_QUESTIONS) {

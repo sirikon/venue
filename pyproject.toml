@@ -3,9 +3,9 @@ package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.12"
-django = "~5.1.0"
+django = "^5.1.0"
 psycopg = { extras = ["binary"], version = "^3.1.19" }
-pillow = "^10.3.0"
+pillow = "^11.0.0"
 django-prose-editor = { extras = ["sanitize"], version = "^0.8.1" }
 django-constance = "^4.1.1"
 gunicorn = "^23.0.0"

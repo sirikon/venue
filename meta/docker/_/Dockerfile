@@ -1,5 +1,7 @@
+ARG PYTHON_VERSION='0.0.0'
+
 # Builder
-FROM python:3.12.3-slim AS builder
+FROM python:${PYTHON_VERSION}-slim AS builder
 WORKDIR /w
 RUN apt-get update && apt-get install -y curl xz-utils
 
@@ -16,7 +18,8 @@ RUN sha256sum -c caddy.sha256
 # App Builder
 FROM builder AS app-builder
 ## Poetry
-ENV POETRY_VERSION="1.8.3"
+ARG POETRY_VERSION='0.0.0'
+ENV POETRY_VERSION="${POETRY_VERSION}"
 ENV POETRY_INSTALLER_COMMIT="d62875fc05fb20062175cd14d19a96dbefa48640"
 ENV POETRY_HOME=/poetry
 ENV PATH="/poetry/bin:${PATH}"
@@ -31,7 +34,7 @@ RUN poetry install
 ADD ./src ./src
 
 # Release
-FROM python:3.12.3-slim AS release
+FROM python:${PYTHON_VERSION}-slim AS release
 SHELL [ "/bin/bash", "-c" ]
 RUN apt-get -y update &&  \ 
     apt-get install --no-install-recommends  \
