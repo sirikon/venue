@@ -32,12 +32,14 @@ ADD ./src ./src
 
 # Release
 FROM python:3.12.3-slim AS release
-COPY --from=caddy-downloader /w/caddy /usr/local/bin/caddy
+SHELL [ "/bin/bash", "-c" ]
 COPY --from=app-builder /app/src /app/src
 COPY --from=app-builder /app/.venv /app/.venv
+WORKDIR /app
+RUN VENUE_DEBUG=true ./.venv/bin/python ./src/manage.py collectstatic --no-input
+COPY --from=caddy-downloader /w/caddy /usr/local/bin/caddy
 COPY ./meta/docker/_/Caddyfile /proxy/Caddyfile
 COPY ./meta/docker/_/bin/* /usr/local/bin
-WORKDIR /app
-SHELL [ "/bin/bash" ]
+WORKDIR /w
 ENTRYPOINT []
 CMD  ["venue"]

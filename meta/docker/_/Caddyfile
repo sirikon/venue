@@ -6,6 +6,12 @@
 :{$VENUE_PORT_PREFIX}80
 bind 0.0.0.0
 
+root * /app/static
+
+handle_path /static/* {
+  file_server
+}
+
 handle {
   reverse_proxy 127.0.0.1:{$VENUE_PORT_PREFIX}81
 }
