@@ -32,7 +32,7 @@ INTERNAL_IPS = (
     else []
 )
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 MEDIA_ROOT = CWD / "serve" / "media"
@@ -62,6 +62,9 @@ CONSTANCE_CONFIG = {
         "The full name of the event",
     ),
 }
+
+CSRF_COOKIE_SECURE = not VENUE_DEBUG
+SESSION_COOKIE_SECURE = not VENUE_DEBUG
 
 MIDDLEWARE = [
     *(["debug_toolbar.middleware.DebugToolbarMiddleware"] if VENUE_DEBUG else []),
@@ -156,3 +159,5 @@ STATIC_ROOT = "static"
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+SILENCED_SYSTEM_CHECKS = ["security.W004", "security.W008"]

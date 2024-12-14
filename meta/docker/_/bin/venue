@@ -4,6 +4,8 @@ set -euo pipefail
 function main {
   trap 'true' SIGINT SIGTERM
 
+  /app/.venv/bin/python /app/src/manage.py check --deploy --fail-level WARNING
+
   start-app &
   start-proxy &
 

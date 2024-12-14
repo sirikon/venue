@@ -33,6 +33,10 @@ ADD ./src ./src
 # Release
 FROM python:3.12.3-slim AS release
 SHELL [ "/bin/bash", "-c" ]
+RUN apt-get -y update &&  \ 
+    apt-get install --no-install-recommends  \
+    -y curl && \
+    rm -rf /var/lib/apt/lists/*
 COPY --from=app-builder /app/src /app/src
 COPY --from=app-builder /app/.venv /app/.venv
 WORKDIR /app
@@ -42,4 +46,5 @@ COPY ./meta/docker/_/Caddyfile /proxy/Caddyfile
 COPY ./meta/docker/_/bin/* /usr/local/bin
 WORKDIR /w
 ENTRYPOINT []
-CMD  ["venue"]
+CMD ["venue"]
+HEALTHCHECK --start-period=30s --timeout=1s --start-interval=1s CMD [ "venue-ready" ]
