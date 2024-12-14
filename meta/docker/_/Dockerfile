@@ -32,9 +32,12 @@ ADD ./src ./src
 
 # Release
 FROM python:3.12.3-slim AS release
-WORKDIR /w
 COPY --from=caddy-downloader /w/caddy /usr/local/bin/caddy
-COPY --from=app-builder /app /app
+COPY --from=app-builder /app/src /app/src
+COPY --from=app-builder /app/.venv /app/.venv
 COPY ./meta/docker/_/Caddyfile /proxy/Caddyfile
 COPY ./meta/docker/_/bin/* /usr/local/bin
+WORKDIR /app
+SHELL [ "/bin/bash" ]
+ENTRYPOINT []
 CMD  ["venue"]

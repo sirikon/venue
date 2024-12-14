@@ -7,9 +7,13 @@ function main {
   start-app &
   start-proxy &
 
-  wait -n || true
+  set +e
+  wait -n
+  exit_code="$?"
+  set -e
   kill -s SIGINT -1
   wait
+  exit "$exit_code"
 }
 
 function start-app {
