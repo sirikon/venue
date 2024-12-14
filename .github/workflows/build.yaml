@@ -1,0 +1,15 @@
+name: Build Venue
+on: [push]
+jobs:
+  build:
+    permissions: write-all
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Login into ghcr.io
+        if: github.ref == 'refs/heads/master'
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin
+      - name: Publish
+        if: github.ref == 'refs/heads/master'
+        run: ./meta/docker/publish.sh

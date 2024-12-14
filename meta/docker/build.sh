@@ -2,6 +2,6 @@
 set -euo pipefail
 
 docker build \
-  -t venue:dev \
+  -t "${VENUE_TAG:-"venue:dev"}" \
   --file "$(dirname "${BASH_SOURCE[0]}")/_/Dockerfile" \
   .
