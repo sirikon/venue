@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-cd meta/_devenv/compose/venue-devenv
+cd "$(dirname "${BASH_SOURCE[0]}")/_/compose/venue-devenv"
 docker compose "$@"

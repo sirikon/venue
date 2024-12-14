@@ -35,6 +35,6 @@ FROM python:3.12.3-slim AS release
 WORKDIR /w
 COPY --from=caddy-downloader /w/caddy /usr/local/bin/caddy
 COPY --from=app-builder /app /app
-COPY ./meta/_docker/start.sh /start.sh
-COPY ./meta/_docker/Caddyfile /proxy/Caddyfile
-CMD  ["/start.sh"]
+COPY ./meta/docker/_/Caddyfile /proxy/Caddyfile
+COPY ./meta/docker/_/bin/* /usr/local/bin
+CMD  ["venue"]

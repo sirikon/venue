@@ -9,5 +9,5 @@
 !src/**/*.svg
 !src/**/*.py
 
-!meta/_docker/start.sh
-!meta/_docker/Caddyfile
+!meta/docker/_/bin/*
+!meta/docker/_/Caddyfile

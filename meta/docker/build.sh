@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-docker build -t venue:dev --file meta/_docker/Dockerfile .
+docker build \
+  -t venue:dev \
+  --file "$(dirname "${BASH_SOURCE[0]}")/_/Dockerfile" \
+  .
