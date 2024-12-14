@@ -45,6 +45,8 @@ COPY --from=caddy-downloader /w/caddy /usr/local/bin/caddy
 COPY ./meta/docker/_/Caddyfile /proxy/Caddyfile
 COPY ./meta/docker/_/bin/* /usr/local/bin
 WORKDIR /w
+RUN useradd --system --home /w --shell /bin/false venue
+USER venue
 ENTRYPOINT []
 CMD ["venue"]
 HEALTHCHECK --start-period=30s --timeout=1s --start-interval=1s CMD [ "venue-ready" ]

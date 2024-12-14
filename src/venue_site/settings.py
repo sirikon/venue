@@ -35,7 +35,7 @@ INTERNAL_IPS = (
 ALLOWED_HOSTS = ["*"]
 
 
-MEDIA_ROOT = CWD / "serve" / "media"
+MEDIA_ROOT = CWD / "media"
 MEDIA_URL = "/media/"
 
 FIXTURE_DIRS = [*([VENUE_FIXTURES] if VENUE_FIXTURES is not None else [])]

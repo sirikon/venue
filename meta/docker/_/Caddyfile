@@ -6,9 +6,14 @@
 :{$VENUE_PORT_PREFIX}80
 bind 0.0.0.0
 
-root * /app/static
 
 handle_path /static/* {
+  root * /app/static
+  file_server
+}
+
+handle_path /media/* {
+  root * /w/media
   file_server
 }
 

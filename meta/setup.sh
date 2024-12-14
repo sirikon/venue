@@ -9,6 +9,6 @@ export DJANGO_SUPERUSER_USERNAME=admin
 export DJANGO_SUPERUSER_PASSWORD=admin
 export DJANGO_SUPERUSER_EMAIL=''
 ./meta/manage.sh createsuperuser --skip-checks --no-input
-mkdir -p .workdir/serve
-cp -r ./meta/devenv/_/media .workdir/serve
+mkdir -p .workdir
+cp -r ./meta/devenv/_/media .workdir
 ./meta/manage.sh loaddata devenv
