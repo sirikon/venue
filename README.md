@@ -1,5 +1,7 @@
 # Venue
 
+_(Previously named **BilboStack App**)_
+
 Provide tools to event organizers. Including:
 
 - Talk listing with details.

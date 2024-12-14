@@ -37,16 +37,16 @@ RUN apt-get -y update &&  \
     apt-get install --no-install-recommends  \
     -y curl && \
     rm -rf /var/lib/apt/lists/*
-COPY --from=app-builder /app/src /app/src
-COPY --from=app-builder /app/.venv /app/.venv
-WORKDIR /app
-RUN VENUE_DEBUG=true ./.venv/bin/python ./src/manage.py collectstatic --no-input
 COPY --from=caddy-downloader /w/caddy /usr/local/bin/caddy
 COPY ./meta/docker/_/Caddyfile /proxy/Caddyfile
 COPY ./meta/docker/_/bin/* /usr/local/bin
-WORKDIR /w
-RUN useradd --system --home /w --shell /bin/false venue
-USER venue
+RUN useradd --system --create-home --shell /bin/false venue
 ENTRYPOINT []
 CMD ["venue"]
 HEALTHCHECK --start-period=30s --timeout=1s --start-interval=1s CMD [ "venue-ready" ]
+COPY --from=app-builder /app/.venv /app/.venv
+COPY --from=app-builder /app/src /app/src
+WORKDIR /app
+RUN VENUE_DEBUG=true ./.venv/bin/python ./src/manage.py collectstatic --no-input
+USER venue
+WORKDIR /w
