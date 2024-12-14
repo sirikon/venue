@@ -2,4 +2,4 @@
 set -euo pipefail
 
 cd tests/e2e
-npm exec playwright -- "$@"
+exec npm exec playwright -- "$@"
