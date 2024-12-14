@@ -12,3 +12,6 @@ indent_size = 4
 
 [**/*.{css,ts,js,json,yaml,yml,sh}]
 indent_size = 2
+
+[**/Caddyfile]
+indent_size = 8

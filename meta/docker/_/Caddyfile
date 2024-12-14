@@ -1,22 +1,21 @@
 {
-  admin off
-  auto_https off
+	admin off
+	auto_https off
 }
 
 :{$VENUE_PORT_PREFIX}80
 bind 0.0.0.0
 
-
 handle_path /static/* {
-  root * /app/static
-  file_server
+	root * /app/static
+	file_server
 }
 
 handle_path /media/* {
-  root * /w/media
-  file_server
+	root * /w/media
+	file_server
 }
 
 handle {
-  reverse_proxy 127.0.0.1:{$VENUE_PORT_PREFIX}81
+	reverse_proxy 127.0.0.1:{$VENUE_PORT_PREFIX}81
 }
