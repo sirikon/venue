@@ -21,7 +21,7 @@ function main {
 function start-app {
   VENUE_WORKERS="${VENUE_WORKERS:-1}"
   VENUE_THREADS="${VENUE_THREADS:-1}"
-  VENUE_PORT_PREFIX="${VENUE_PORT_PREFIX:-''}"
+  VENUE_PORT_PREFIX="${VENUE_PORT_PREFIX:-}"
   export PYTHONPATH="/app/src"
   exec /app/.venv/bin/python -m gunicorn \
     venue_site.wsgi:application \
@@ -32,7 +32,7 @@ function start-app {
 }
 
 function start-proxy {
-  VENUE_PORT_PREFIX="${VENUE_PORT_PREFIX:-''}"
+  VENUE_PORT_PREFIX="${VENUE_PORT_PREFIX:-}"
   export VENUE_PORT_PREFIX
   exec caddy run --config /proxy/Caddyfile
 }
