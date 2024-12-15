@@ -87,6 +87,7 @@ a {
 .x-header .x-header-image img {
   display: block;
   max-height: var(--navbar-height);
+  max-width: 100%;
   width: auto;
 }
 
