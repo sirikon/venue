@@ -43,7 +43,7 @@ INTERNAL_IPS = (
 )
 
 ALLOWED_HOSTS = ["*"]
-
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 MEDIA_ROOT = CWD / "media"
 MEDIA_URL = "/media/"
