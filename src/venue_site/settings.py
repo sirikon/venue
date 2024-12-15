@@ -71,6 +71,7 @@ CONSTANCE_CONFIG = {
         "Event Name",
         "The full name of the event",
     ),
+    "EVENT_YEAR": (0, "Year of the event", int),
     "HEADER_IMAGE": ("", "Header image", "image"),
     "BEFORE_TALK_LIST": (
         "<p></p>",
@@ -94,7 +95,7 @@ CONSTANCE_ADDITIONAL_FIELDS = {
 }
 CONSTANCE_CONFIG_FIELDSETS = OrderedDict(
     [
-        ("Brand", ("EVENT_NAME", "HEADER_IMAGE")),
+        ("Brand", ("EVENT_NAME", "EVENT_YEAR", "HEADER_IMAGE")),
         ("Content", ("BEFORE_TALK_LIST", "AFTER_TALK_LIST")),
         ("UI", ("EXTRA_CSS", "EXTRA_JS")),
     ]

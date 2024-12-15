@@ -59,6 +59,7 @@
         <div class="x-container x-body">
             <div class="x-footer-left">
                 <span>{{ config.EVENT_NAME }}</span>
+                {% if config.EVENT_YEAR %}<span>{{ config.EVENT_YEAR }}</span>{% endif %}
             </div>
             <div class="x-footer-right">
                 <a href="https://github.com/sirikon/venue" target="_blank"><span class="icon">{% include "venue/icons/github-mark.svg" %}</span> Source Code</a>
