@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-VENUE_PORT_PREFIX="${VENUE_PORT_PREFIX:-''}"
+VENUE_PORT_PREFIX="${VENUE_PORT_PREFIX:-}"
 exec curl --fail --silent "http://127.0.0.1:${VENUE_PORT_PREFIX}80" >/dev/null
