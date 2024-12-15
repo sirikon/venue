@@ -204,3 +204,17 @@ SILENCED_SYSTEM_CHECKS = [
     "security.W008",
     *(["security.W012", "security.W016"] if VENUE_DISABLE_SECURE_COOKIES else []),
 ]
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+        },
+    },
+    "root": {
+        "handlers": ["console"],
+        "level": "WARNING",
+    },
+}

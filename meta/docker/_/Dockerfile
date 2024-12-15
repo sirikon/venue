@@ -53,3 +53,4 @@ WORKDIR /app
 RUN VENUE_DEBUG=true ./.venv/bin/python ./src/manage.py collectstatic --no-input
 USER venue
 WORKDIR /w
+ENV PYTHONUNBUFFERED=1

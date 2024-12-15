@@ -25,6 +25,7 @@ function start-app {
   export PYTHONPATH="/app/src"
   exec /app/.venv/bin/python -m gunicorn \
     venue_site.wsgi:application \
+    --enable-stdio-inheritance \
     --bind="0.0.0.0:${VENUE_PORT_PREFIX}81" \
     --preload \
     --workers "${VENUE_WORKERS}" \
