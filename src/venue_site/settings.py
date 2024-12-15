@@ -5,6 +5,12 @@ from collections import OrderedDict
 
 VENUE_DEBUG = environ.get("VENUE_DEBUG", "false").lower() == "true"
 VENUE_FIXTURES = environ.get("VENUE_FIXTURES")
+VENUE_DB_NAME = environ.get("VENUE_DB_NAME", "venue")
+VENUE_DB_USER = environ.get("VENUE_DB_USER", "venue")
+VENUE_DB_PASSWORD = environ.get("VENUE_DB_PASSWORD", "venue")
+VENUE_DB_HOST = environ.get("VENUE_DB_HOST", "127.0.0.1")
+VENUE_DB_PORT = int(environ.get("VENUE_DB_PORT", "5432"))
+VENUE_DB_CONN_MAX_AGE = int(environ.get("VENUE_DB_CONN_MAX_AGE", "3600"))
 
 if VENUE_DEBUG:
     VENUE_SECRET_KEY = environ.get("VENUE_SECRET_KEY", "secret")
@@ -82,10 +88,7 @@ CONSTANCE_CONFIG = {
 CONSTANCE_ADDITIONAL_FIELDS = {
     "image": [
         "django.forms.ImageField",
-        {
-            "widget": "venue.widgets.ActuallyClearableFileInput",
-            "required": False
-        },
+        {"widget": "venue.widgets.ActuallyClearableFileInput", "required": False},
     ],
     "prose": ["django_prose_editor.fields.ProseEditorFormField", {}],
 }
@@ -143,12 +146,12 @@ WSGI_APPLICATION = "venue_site.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "venue",
-        "USER": "venue",
-        "PASSWORD": "venue",
-        "HOST": "127.0.0.1",
-        "PORT": 5432,
-        "CONN_MAX_AGE": 3600,
+        "NAME": VENUE_DB_NAME,
+        "USER": VENUE_DB_USER,
+        "PASSWORD": VENUE_DB_PASSWORD,
+        "HOST": VENUE_DB_HOST,
+        "PORT": VENUE_DB_PORT,
+        "CONN_MAX_AGE": VENUE_DB_CONN_MAX_AGE,
     }
 }
 
