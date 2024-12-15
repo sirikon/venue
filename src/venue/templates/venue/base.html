@@ -11,10 +11,10 @@
     <link rel="stylesheet" href="{% static 'venue/style.css' %}">
     {% block meta %}{% endblock %}
     {% if config.EXTRA_CSS %}
-        <style>{{ config.EXTRA_CSS|safe }}</style>
+    <style>{{ config.EXTRA_CSS|safe }}</style>
     {% endif %}
     {% if config.EXTRA_JS %}
-        <script type="text/javascript">{{ config.EXTRA_JS|safe }}</script>
+    <script type="text/javascript">{{ config.EXTRA_JS|safe }}</script>
     {% endif %}
 </head>
 
@@ -57,9 +57,12 @@
 
     <footer class="x-footer">
         <div class="x-container x-body">
-            <span>
-                {{ config.EVENT_NAME }}
-            </span>
+            <div class="x-footer-left">
+                <span>{{ config.EVENT_NAME }}</span>
+            </div>
+            <div class="x-footer-right">
+                <a href="https://github.com/sirikon/venue" target="_blank"><span class="icon">{% include "venue/icons/github-mark.svg" %}</span> Source Code</a>
+            </div>
         </div>
     </footer>
 

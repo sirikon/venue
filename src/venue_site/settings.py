@@ -72,8 +72,6 @@ CONSTANCE_CONFIG = {
         "The full name of the event",
     ),
     "HEADER_IMAGE": ("", "Header image", "image"),
-    "EXTRA_CSS": ("", "Custom CSS"),
-    "EXTRA_JS": ("", "Custom JS"),
     "BEFORE_TALK_LIST": (
         "<p></p>",
         "Content block that goes before all the items in the index",
@@ -84,6 +82,8 @@ CONSTANCE_CONFIG = {
         "Content block that goes after all the items in the index",
         "prose",
     ),
+    "EXTRA_CSS": ("", "Custom CSS"),
+    "EXTRA_JS": ("", "Custom JS"),
 }
 CONSTANCE_ADDITIONAL_FIELDS = {
     "image": [

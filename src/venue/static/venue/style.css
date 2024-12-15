@@ -94,8 +94,41 @@ a {
 .x-footer {
   color: var(--primary-color);
   padding: calc(var(--base-margin) * 2.5) 0;
-  text-align: center;
   flex-shrink: 0;
+}
+
+.x-footer .x-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+.x-footer-left,
+.x-footer-right {
+  flex-basis: 1px;
+  flex-grow: 1;
+  flex-shrink: 0;
+}
+
+.x-footer-right {
+  text-align: right;
+  font-size: 0.8em;
+}
+
+.x-footer-right span.icon {
+  vertical-align: middle;
+  display: inline-block;
+}
+
+.x-footer-right span.icon svg {
+  display: block;
+  height: 1em;
+  width: auto;
+}
+
+.x-footer-right span.icon svg path {
+  fill: var(--accent-text-color);
 }
 
 @media print {
