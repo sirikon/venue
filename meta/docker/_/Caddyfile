@@ -17,6 +17,9 @@ handle_path /static/* {
 handle_path /media/* {
 	root * /w/media
 	file_server
+	header {
+		Cache-Control "public, max-age=31560000, immutable"
+	}
 }
 
 handle {
