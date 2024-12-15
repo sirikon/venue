@@ -1,3 +1,4 @@
+import constance.settings
 from django.http import HttpRequest
 from django.shortcuts import render, redirect
 from django.contrib import messages
