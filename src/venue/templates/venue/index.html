@@ -3,6 +3,12 @@
 {% block title %}{{ config.EVENT_NAME }}{% endblock %}
 
 {% block body %}
+{% if config.BEFORE_TALK_LIST != "<p></p>" %}
+<div class="x-before-talk-list">
+    {{ config.BEFORE_TALK_LIST|safe }}
+</div>
+{% endif %}
+
 <div class="x-talk-list">
 
     {% for talk in talks %}
@@ -33,6 +39,11 @@
     </a>
     {% endfor %}
 
-
 </div>
+
+{% if config.AFTER_TALK_LIST != "<p></p>" %}
+<div class="x-after-talk-list">
+    {{ config.AFTER_TALK_LIST|safe }}
+</div>
+{% endif %}
 {% endblock %}

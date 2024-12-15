@@ -80,17 +80,14 @@ a {
   text-decoration: none;
 }
 
-.x-header-image {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  box-sizing: border-box;
-  padding: calc(var(--base-margin) * 0.5);
+.x-header .x-header-image {
+  display: block;
 }
 
-.x-header-image img {
-  max-height: 100%;
+.x-header .x-header-image img {
+  display: block;
+  max-height: var(--navbar-height);
+  width: auto;
 }
 
 /* FOOTER */
@@ -323,7 +320,7 @@ a {
 .x-talk-speaker-info-title {
   display: inline-block;
   line-height: 1.2;
-  margin-top: .1em;
+  margin-top: 0.1em;
   color: #0e3046b0;
 }
 

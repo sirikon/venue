@@ -1,6 +1,7 @@
 # https://docs.djangoproject.com/en/5.0/ref/settings/
 from os import getcwd, environ
 from pathlib import Path
+from collections import OrderedDict
 
 VENUE_DEBUG = environ.get("VENUE_DEBUG", "false").lower() == "true"
 VENUE_FIXTURES = environ.get("VENUE_FIXTURES")
@@ -64,7 +65,38 @@ CONSTANCE_CONFIG = {
         "Event Name",
         "The full name of the event",
     ),
+    "HEADER_IMAGE": ("", "Header image", "image"),
+    "EXTRA_CSS": ("", "Custom CSS"),
+    "EXTRA_JS": ("", "Custom JS"),
+    "BEFORE_TALK_LIST": (
+        "<p></p>",
+        "Content block that goes before all the items in the index",
+        "prose",
+    ),
+    "AFTER_TALK_LIST": (
+        "<p></p>",
+        "Content block that goes after all the items in the index",
+        "prose",
+    ),
 }
+CONSTANCE_ADDITIONAL_FIELDS = {
+    "image": [
+        "django.forms.ImageField",
+        {
+            "widget": "venue.widgets.ActuallyClearableFileInput",
+            "required": False
+        },
+    ],
+    "prose": ["django_prose_editor.fields.ProseEditorFormField", {}],
+}
+CONSTANCE_CONFIG_FIELDSETS = OrderedDict(
+    [
+        ("Brand", ("EVENT_NAME", "HEADER_IMAGE")),
+        ("Content", ("BEFORE_TALK_LIST", "AFTER_TALK_LIST")),
+        ("UI", ("EXTRA_CSS", "EXTRA_JS")),
+    ]
+)
+
 
 CSRF_COOKIE_SECURE = not VENUE_DISABLE_SECURE_COOKIES
 SESSION_COOKIE_SECURE = not VENUE_DISABLE_SECURE_COOKIES
