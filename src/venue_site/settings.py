@@ -3,6 +3,7 @@ from os import getcwd, environ
 from pathlib import Path
 from collections import OrderedDict
 
+VENUE_VERSION = environ.get("VENUE_VERSION", "dev")
 VENUE_DEBUG = environ.get("VENUE_DEBUG", "false").lower() == "true"
 VENUE_FIXTURES = environ.get("VENUE_FIXTURES")
 VENUE_DB_NAME = environ.get("VENUE_DB_NAME", "venue")
@@ -71,8 +72,10 @@ CONSTANCE_CONFIG = {
         "Event Name",
         "The full name of the event",
     ),
+    "EVENT_DESCRIPTION": ("", "Description for metadata"),
     "EVENT_YEAR": (0, "Year of the event", int),
     "HEADER_IMAGE": ("", "Header image", "image"),
+    "LANG": ("en", "Language (ISO code)"),
     "BEFORE_TALK_LIST": (
         "<p></p>",
         "Content block that goes before all the items in the index",
@@ -95,8 +98,8 @@ CONSTANCE_ADDITIONAL_FIELDS = {
 }
 CONSTANCE_CONFIG_FIELDSETS = OrderedDict(
     [
-        ("Brand", ("EVENT_NAME", "EVENT_YEAR", "HEADER_IMAGE")),
-        ("Content", ("BEFORE_TALK_LIST", "AFTER_TALK_LIST")),
+        ("Brand", ("EVENT_NAME", "EVENT_DESCRIPTION", "EVENT_YEAR", "HEADER_IMAGE")),
+        ("Content", ("LANG", "BEFORE_TALK_LIST", "AFTER_TALK_LIST")),
         ("UI", ("EXTRA_CSS", "EXTRA_JS")),
     ]
 )
@@ -129,6 +132,7 @@ TEMPLATES = [
         "OPTIONS": {
             "context_processors": [
                 "venue.context_processors.config",
+                "venue.context_processors.version",
                 "django.template.context_processors.debug",
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",

@@ -2,13 +2,15 @@
 {% load venue %}
 
 <!DOCTYPE html>
-<html>
+<html lang="{{config.LANG}}">
 
 <head>
     <meta charset="utf8">
+    <meta name="description" content="{{config.EVENT_DESCRIPTION}}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'venue/style.css' %}">
+    <link rel="stylesheet" href="{% static 'venue/style.css' %}?v={{VERSION}}">
+    <link rel="icon" href="data:image/png;base64,iVBORw0KGgo=">
     {% block meta %}{% endblock %}
     {% if config.EXTRA_CSS %}
     <style>{{ config.EXTRA_CSS|safe }}</style>
