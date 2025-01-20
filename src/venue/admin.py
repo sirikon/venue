@@ -19,7 +19,12 @@ class SpeakerAdmin(admin.ModelAdmin):
     list_editable = ["title", "biography"]
 
 
-admin.site.register(Track)
+@admin.register(Track)
+class TalkAdmin(admin.ModelAdmin):
+    list_display = ["name", "order"]
+    list_editable = ["order"]
+
+
 admin.site.register(Rating)
 admin.site.register(Visitor)
 

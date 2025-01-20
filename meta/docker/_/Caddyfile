@@ -12,6 +12,9 @@ bind 0.0.0.0
 handle_path /static/* {
 	root * /app/static
 	file_server
+
+	@versioned_urls query v=*
+  	header @versioned_urls Cache-Control "public, max-age=31536000, immutable"
 }
 
 handle_path /media/* {

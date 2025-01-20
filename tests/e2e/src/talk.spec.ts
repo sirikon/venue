@@ -9,7 +9,7 @@ for (const TALK of TALKS) {
       await page.goto(BASE_URL + "/talk/" + TALK.slug);
       await expect(page).toHaveTitle(`${TALK.title} | ${EVENT_NAME}`);
       await expect(page.locator(".x-header h1")).toHaveText(EVENT_NAME);
-      await expect(page.locator(".x-footer .x-body > span")).toHaveText(
+      await expect(page.locator(".x-footer .x-body > .x-footer-left > span")).toHaveText(
         EVENT_NAME
       );
     });

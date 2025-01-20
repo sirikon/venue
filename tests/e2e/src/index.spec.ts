@@ -5,7 +5,7 @@ test("has title and footer", async ({ page }) => {
   await page.goto(BASE_URL);
   await expect(page).toHaveTitle(EVENT_NAME);
   await expect(page.locator(".x-header h1")).toHaveText(EVENT_NAME);
-  await expect(page.locator(".x-footer .x-body > span")).toHaveText(EVENT_NAME);
+  await expect(page.locator(".x-footer .x-body > .x-footer-left > span")).toHaveText(EVENT_NAME);
 });
 
 test("talks are in order", async ({ page }) => {

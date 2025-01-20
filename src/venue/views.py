@@ -39,7 +39,7 @@ def logout(request: HttpRequest):
 
 def index(request: HttpRequest):
     talks = (
-        Talk.objects.order_by("date")
+        Talk.objects.order_by("date", "track__order", "track__name")
         .annotate(
             speakers_names=ArrayAgg("speakers__name", ordering=("speakers__name"))
         )
