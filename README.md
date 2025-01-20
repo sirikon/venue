@@ -1,6 +1,6 @@
 # Venue
 
-_(Previously named **BilboStack App**)_
+_(a.k.a. **BilboStack App**)_
 
 Provide tools to event organizers. Including:
 
