@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-./meta/install.sh
+./meta/poetry.sh install
 ./meta/devenv/compose.sh down --volumes
 ./meta/devenv/compose.sh up --detach --wait
 ./meta/manage.sh migrate
