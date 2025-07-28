@@ -1,3 +1,4 @@
+/.poetry
 /.venv
 /.workdir
 **/__pycache__

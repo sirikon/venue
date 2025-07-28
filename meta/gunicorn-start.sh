@@ -1,13 +1,14 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-root="$(pwd)"
+# shellcheck disable=SC1091
+source "./meta/_/env.sh"
+
 mkdir -p .workdir
 cd .workdir
-export VENUE_DEBUG="true"
-export VENUE_FIXTURES="$root/meta/devenv/_/fixtures"
-export PYTHONPATH="$root/src"
-exec "$root/.venv/bin/python" -m gunicorn \
+
+export PYTHONPATH="$VENUE_ROOT/src"
+exec "$VENUE_ROOT/.venv/bin/python" -m gunicorn \
   venue_site.wsgi:application \
   --preload \
   --workers 1 \

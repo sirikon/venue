@@ -11,3 +11,4 @@
 
 !meta/docker/_/bin/*
 !meta/docker/_/Caddyfile
+!meta/poetry.sh

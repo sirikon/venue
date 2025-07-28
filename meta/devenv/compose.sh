@@ -2,4 +2,4 @@
 set -euo pipefail
 
 cd "$(dirname "${BASH_SOURCE[0]}")/_/compose/venue-devenv"
-docker compose "$@"
+exec docker compose "$@"
