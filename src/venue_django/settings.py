@@ -92,7 +92,10 @@ CONSTANCE_CONFIG = {
 CONSTANCE_ADDITIONAL_FIELDS = {
     "image": [
         "django.forms.ImageField",
-        {"widget": "venue_django_app.widgets.ActuallyClearableFileInput", "required": False},
+        {
+            "widget": "venue_django_app.widgets.ActuallyClearableFileInput",
+            "required": False,
+        },
     ],
     "prose": ["django_prose_editor.fields.ProseEditorFormField", {}],
 }
@@ -117,6 +120,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "venue_django_app.middleware.contextvar_middleware",
     "venue_django_app.middleware.visitor_middleware",
 ]
 

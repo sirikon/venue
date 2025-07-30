@@ -10,6 +10,8 @@ from django.core.exceptions import BadRequest
 
 from venue_django_app.models import Question, Rating, Speaker, Talk, Visitor
 
+from venue import ioc
+
 
 def get_domain(request):
     domain, _ = split_domain_port(request.get_host())
@@ -103,9 +105,8 @@ def talk_question(request, slug):
         if question.strip() == "":
             return redirect("talk", slug, permanent=False)
 
-        visitor, _ = Visitor.objects.get_or_create(id=request.session["visitor_id"])
-        talk = get_talk_query(slug).first()
-        Question.objects.create(talk=talk, question=question, visitor=visitor).save()
+        ioc.talk_question_creation_command.handle(talk_slug=slug, question=question)
+
         messages.add_message(request, messages.SUCCESS, "¡Gracias por su pregunta!")
         return redirect("talk", slug, permanent=False)
 
@@ -151,11 +152,11 @@ def talk_rating(request, slug):
         if len(comment) > 600:
             raise BadRequest()
 
-        visitor, _ = Visitor.objects.get_or_create(id=request.session["visitor_id"])
+        ioc.talk_rating_creation_command.handle(
+            talk_slug=slug, rating=rating, comment=comment
+        )
+
         talk = get_talk_query(slug).first()
-        Rating.objects.create(
-            talk=talk, rating=rating, comment=comment, visitor=visitor
-        ).save()
         request.session["talk_rated_" + str(talk.pk)] = True
         return redirect("talk", slug, permanent=False)
 

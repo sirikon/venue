@@ -1,0 +1,27 @@
+from django.db.models.manager import BaseManager
+
+from venue.domain.visitor_context import VisitorContext
+from venue.domain.visitor_service import VisitorService
+from venue_django_app.models import Rating, Talk, Visitor
+
+
+class TalkRatingCreationCommand:
+
+    def __init__(
+        self,
+        *,
+        visitor_service: VisitorService,
+        talk_manager: BaseManager[Talk],
+        rating_manager: BaseManager[Rating],
+    ):
+        self.__visitor_service = visitor_service
+        self.__talk_manager = talk_manager
+        self.__rating_manager = rating_manager
+
+    def handle(self, *, talk_slug: str, rating: int, comment: str):
+        talk = self.__talk_manager.filter(slug=talk_slug).first()
+
+        visitor = self.__visitor_service.get_or_create()
+        self.__rating_manager.create(
+            talk=talk, rating=rating, comment=comment, visitor=visitor
+        ).save()
