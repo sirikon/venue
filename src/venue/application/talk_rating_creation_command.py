@@ -2,6 +2,7 @@ from django.db.models.manager import BaseManager
 
 from venue.domain.visitor_context import VisitorContext
 from venue.domain.visitor_service import VisitorService
+from venue.domain.visitor_talk_rating_service import VisitorTalkRatingService
 from venue_django_app.models import Rating, Talk, Visitor
 
 
@@ -11,10 +12,12 @@ class TalkRatingCreationCommand:
         self,
         *,
         visitor_service: VisitorService,
+        visitor_talk_rating_service: VisitorTalkRatingService,
         talk_manager: BaseManager[Talk],
         rating_manager: BaseManager[Rating],
     ):
         self.__visitor_service = visitor_service
+        self.__visitor_talk_rating_service = visitor_talk_rating_service
         self.__talk_manager = talk_manager
         self.__rating_manager = rating_manager
 
