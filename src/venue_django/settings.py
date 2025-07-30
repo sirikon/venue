@@ -54,7 +54,7 @@ FIXTURE_DIRS = [*([VENUE_FIXTURES] if VENUE_FIXTURES is not None else [])]
 # Application definition
 
 INSTALLED_APPS = [
-    "venue.apps.VenueConfig",
+    "venue_django_app.apps.VenueConfig",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -92,7 +92,7 @@ CONSTANCE_CONFIG = {
 CONSTANCE_ADDITIONAL_FIELDS = {
     "image": [
         "django.forms.ImageField",
-        {"widget": "venue.widgets.ActuallyClearableFileInput", "required": False},
+        {"widget": "venue_django_app.widgets.ActuallyClearableFileInput", "required": False},
     ],
     "prose": ["django_prose_editor.fields.ProseEditorFormField", {}],
 }
@@ -117,7 +117,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "venue.middleware.visitor_middleware",
+    "venue_django_app.middleware.visitor_middleware",
 ]
 
 MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
@@ -131,8 +131,8 @@ TEMPLATES = [
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
-                "venue.context_processors.config",
-                "venue.context_processors.version",
+                "venue_django_app.context_processors.config",
+                "venue_django_app.context_processors.version",
                 "django.template.context_processors.debug",
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",

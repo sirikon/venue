@@ -8,7 +8,7 @@ from django.contrib.postgres.aggregates import ArrayAgg
 from django.http.request import split_domain_port
 from django.core.exceptions import BadRequest
 
-from venue.models import Question, Rating, Speaker, Talk, Visitor
+from venue_django_app.models import Question, Rating, Speaker, Talk, Visitor
 
 
 def get_domain(request):
