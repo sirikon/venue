@@ -122,7 +122,7 @@ MIDDLEWARE = [
 
 MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
 
-ROOT_URLCONF = "venue_site.urls"
+ROOT_URLCONF = "venue_django.urls"
 
 TEMPLATES = [
     {
@@ -142,7 +142,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "venue_site.wsgi.application"
+WSGI_APPLICATION = "venue_django.wsgi.application"
 
 
 # Database
