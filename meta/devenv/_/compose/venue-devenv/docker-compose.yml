@@ -4,6 +4,7 @@ services:
     restart: always
     ports:
       - 127.0.0.1:5432:5432
+    command: -c 'max_connections=10000'
     environment:
       POSTGRES_DB: venue
       POSTGRES_USER: venue
