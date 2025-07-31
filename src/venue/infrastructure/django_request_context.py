@@ -2,15 +2,16 @@ from contextvars import ContextVar
 
 from django.http import HttpRequest
 
-DJANGO_REQUEST_CONTEXTVAR = ContextVar[HttpRequest]("django_request", default=None)
-
 
 class DjangoRequestContext:
 
+    def __init__(self):
+        self.__contextvar = ContextVar[HttpRequest]("django_request", default=None)
+
     def set(self, request: HttpRequest):
-        if DJANGO_REQUEST_CONTEXTVAR.get() is not None:
+        if self.__contextvar.get() is not None:
             raise Exception("Setting request failed because it is already defined")
-        DJANGO_REQUEST_CONTEXTVAR.set(request)
+        self.__contextvar.set(request)
 
     def get(self):
-        return DJANGO_REQUEST_CONTEXTVAR.get()
+        return self.__contextvar.get()
