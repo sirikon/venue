@@ -1,4 +1,3 @@
-import constance.settings
 from django.http import HttpRequest
 from django.shortcuts import render, redirect
 from django.contrib import messages
@@ -8,7 +7,7 @@ from django.contrib.postgres.aggregates import ArrayAgg
 from django.http.request import split_domain_port
 from django.core.exceptions import BadRequest
 
-from venue_django_app.models import Question, Rating, Speaker, Talk, Visitor
+from venue_django_app.models import Question, Rating, Speaker, Talk
 
 from venue import ioc
 
