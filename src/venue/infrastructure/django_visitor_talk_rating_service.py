@@ -9,7 +9,9 @@ class DjangoVisitorTalkRatingService(VisitorTalkRatingService):
         super().__init__()
 
     def has_rated(self, talk_id: int):
-        return self.__django_request_context.get().session["talk_rated_" + str(talk_id)]
+        return self.__django_request_context.get().session.get(
+            "talk_rated_" + str(talk_id), False
+        )
 
     def flag_rated(self, talk_id: int):
         self.__django_request_context.get().session["talk_rated_" + str(talk_id)] = True

@@ -12,5 +12,5 @@ class DjangoRequestContext:
             raise Exception("Setting request failed because it is already defined")
         DJANGO_REQUEST_CONTEXTVAR.set(request)
 
-    def get():
+    def get(self):
         return DJANGO_REQUEST_CONTEXTVAR.get()

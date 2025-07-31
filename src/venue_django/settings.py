@@ -121,6 +121,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "venue_django_app.middleware.contextvar_middleware",
+    "venue_django_app.middleware.request_context_middleware",
     "venue_django_app.middleware.visitor_middleware",
 ]
 

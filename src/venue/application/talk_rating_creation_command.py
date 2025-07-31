@@ -1,6 +1,6 @@
 from django.db.models.manager import BaseManager
+from django.db import transaction
 
-from venue.domain.visitor_context import VisitorContext
 from venue.domain.visitor_service import VisitorService
 from venue.domain.visitor_talk_rating_service import VisitorTalkRatingService
 from venue_django_app.models import Rating, Talk, Visitor
@@ -25,6 +25,9 @@ class TalkRatingCreationCommand:
         talk = self.__talk_manager.filter(slug=talk_slug).first()
 
         visitor = self.__visitor_service.get_or_create()
-        self.__rating_manager.create(
-            talk=talk, rating=rating, comment=comment, visitor=visitor
-        ).save()
+
+        with transaction.atomic():
+            self.__rating_manager.create(
+                talk=talk, rating=rating, comment=comment, visitor=visitor
+            ).save()
+            self.__visitor_talk_rating_service.flag_rated(talk_id=talk.id)

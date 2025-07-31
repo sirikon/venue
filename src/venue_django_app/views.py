@@ -56,7 +56,7 @@ def index(request: HttpRequest):
         )
     )
     talks = [
-        {**talk, "rated": request.session.get("talk_rated_" + str(talk["pk"]), False)}
+        {**talk, "rated": ioc.visitor_talk_rating_service.has_rated(talk["pk"])}
         for talk in talks
     ]
     return render(request, "venue/index.html", {"talks": talks})
@@ -92,7 +92,7 @@ def talk(request: HttpRequest, slug):
         "venue/talk.html",
         {
             "talk": talk,
-            "talk_rated": request.session.get("talk_rated_" + str(talk["pk"]), False),
+            "talk_rated": ioc.visitor_talk_rating_service.has_rated(talk["pk"]),
         },
     )
 
@@ -156,8 +156,6 @@ def talk_rating(request, slug):
             talk_slug=slug, rating=rating, comment=comment
         )
 
-        talk = get_talk_query(slug).first()
-        request.session["talk_rated_" + str(talk.pk)] = True
         return redirect("talk", slug, permanent=False)
 
 

@@ -14,6 +14,14 @@ def contextvar_middleware(get_response):
     return middleware
 
 
+def request_context_middleware(get_response):
+    def middleware(request: HttpRequest):
+        ioc.django_request_context.set(request)
+        return get_response(request)
+
+    return middleware
+
+
 def visitor_middleware(get_response):
     def middleware(request: HttpRequest):
         if "visitor_id" not in request.session:
