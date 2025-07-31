@@ -20,7 +20,7 @@ class SpeakerAdmin(admin.ModelAdmin):
 
 
 @admin.register(Track)
-class TalkAdmin(admin.ModelAdmin):
+class TrackAdmin(admin.ModelAdmin):
     list_display = ["name", "order"]
     list_editable = ["order"]
 

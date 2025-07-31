@@ -3,7 +3,7 @@ from django.db import transaction
 
 from venue.domain.visitor_service import VisitorService
 from venue.domain.visitor_talk_rating_service import VisitorTalkRatingService
-from venue_django_app.models import Rating, Talk, Visitor
+from venue_django_app.models import Rating, Talk
 
 
 class TalkRatingCreationCommand:
