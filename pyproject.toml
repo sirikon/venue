@@ -1,6 +1,10 @@
 [tool.poetry]
 package-mode = false
 
+[tool.poetry.group.dev.dependencies]
+django-debug-toolbar = "^4.4.6"
+ruff = "^0.12.7"
+
 [tool.poetry.dependencies]
 python = "^3.12"
 django = "^5.1.0"
@@ -9,4 +13,3 @@ pillow = "^11.0.0"
 django-prose-editor = { extras = ["sanitize"], version = "^0.8.1" }
 django-constance = "^4.1.1"
 gunicorn = "^23.0.0"
-django-debug-toolbar = "^4.4.6"
