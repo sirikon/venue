@@ -23,13 +23,13 @@ function start-app {
   VENUE_THREADS="${VENUE_THREADS:-1}"
   VENUE_PORT_PREFIX="${VENUE_PORT_PREFIX:-}"
   export PYTHONPATH="/app/src"
-  exec /app/.venv/bin/python -m gunicorn \
+  exec /app/.venv/bin/granian \
+    --interface wsgi \
     venue_django.wsgi:application \
-    --enable-stdio-inheritance \
-    --bind="0.0.0.0:${VENUE_PORT_PREFIX}81" \
-    --preload \
+    --host="0.0.0.0" \
+    --port="${VENUE_PORT_PREFIX}81" \
     --workers "${VENUE_WORKERS}" \
-    --threads "${VENUE_THREADS}"
+    --blocking-threads "${VENUE_THREADS}"
 }
 
 function start-proxy {
