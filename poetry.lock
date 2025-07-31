@@ -403,6 +403,72 @@ files = [
 ]
 
 [[package]]
+name = "pyinstrument"
+version = "5.0.3"
+description = "Call stack profiler for Python. Shows you why your code is slow!"
+optional = false
+python-versions = ">=3.8"
+groups = ["dev"]
+files = [
+    {file = "pyinstrument-5.0.3-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:b5aaf098234bbb877cbf90978fe7db4fc3e42311715a58e9d0757ddc8673f6aa"},
+    {file = "pyinstrument-5.0.3-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:9297d078178038a12b9416d285af53525e14368c7f5e40596e8e9f9124f47366"},
+    {file = "pyinstrument-5.0.3-cp310-cp310-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:2b98e12a5deb4d854446d605db28ca02803ec7c7f79d6ba58b7fa198ed9bf7f8"},
+    {file = "pyinstrument-5.0.3-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:81e6ce653de7bf3b085920cc5a6aed432f87a4c00eede37f71a01457a72351a9"},
+    {file = "pyinstrument-5.0.3-cp310-cp310-musllinux_1_2_aarch64.whl", hash = "sha256:72ff11e851bdd226928ce4ee8e01b5a90cd53c39c5cec7c5dac225f4bf54b141"},
+    {file = "pyinstrument-5.0.3-cp310-cp310-musllinux_1_2_x86_64.whl", hash = "sha256:ed72bd5052fcc0366c3792fdd099eccf88397f5a9e48b04c09a8d2c79aef30e0"},
+    {file = "pyinstrument-5.0.3-cp310-cp310-win32.whl", hash = "sha256:6b57d402d34b5c02c0a2ad808b854565feaa8d6c17631a4fc6014dc755fa6c9a"},
+    {file = "pyinstrument-5.0.3-cp310-cp310-win_amd64.whl", hash = "sha256:338c83e7f33627ac32ec84317aa478e2c85e6ae1f6294cec3927c212137fb13a"},
+    {file = "pyinstrument-5.0.3-cp311-cp311-macosx_10_9_universal2.whl", hash = "sha256:e4712e480d2dea9181b8c5a81af3500c6711d018f4e4064cea18285fe6578f61"},
+    {file = "pyinstrument-5.0.3-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:31faf45a5f1043e850f6902be27ad8460a672dc0d8e74902b85511c562494dbe"},
+    {file = "pyinstrument-5.0.3-cp311-cp311-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:961ef61f16f4e65219da2a4ca6e84090a8e7588590b57f6400a2fc1b4cce2673"},
+    {file = "pyinstrument-5.0.3-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:fc336cfac38dcba4432af7be3bc3744943c9c489fe2217b226b893b195971598"},
+    {file = "pyinstrument-5.0.3-cp311-cp311-musllinux_1_2_aarch64.whl", hash = "sha256:5e1ceb1fccc5825e601dd0044512daa480396df69ff98b83aee4fe172bc6a015"},
+    {file = "pyinstrument-5.0.3-cp311-cp311-musllinux_1_2_x86_64.whl", hash = "sha256:d0336740e4296004725908e836a2bd533cbaffd8ca538e08e2a61d1c34ded169"},
+    {file = "pyinstrument-5.0.3-cp311-cp311-win32.whl", hash = "sha256:a9dced692a030df1144d8b6a58524e28ce9acf5382c21b23eae3a38cbdd74a4a"},
+    {file = "pyinstrument-5.0.3-cp311-cp311-win_amd64.whl", hash = "sha256:064f5546354327667cce54a001957797b8a18140e6014aa4bc391baac9947f5b"},
+    {file = "pyinstrument-5.0.3-cp312-cp312-macosx_10_13_universal2.whl", hash = "sha256:c6176f037cb4c673d0f121cb4117b1366aac3d80e451a3d3af84ba2b145194fc"},
+    {file = "pyinstrument-5.0.3-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:df8b02262208a1310a11f0c037e4efeb8d628660be60e3c9917d9ff950fa1519"},
+    {file = "pyinstrument-5.0.3-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:df477beeb37ba35b7d1f3cbefc973d3cc09a9281195ac18d72d4c92f8916c323"},
+    {file = "pyinstrument-5.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:d54799accccb2a8611d0975ff696e20c775af55d4ed2f8e0e07806bb5db5b015"},
+    {file = "pyinstrument-5.0.3-cp312-cp312-musllinux_1_2_aarch64.whl", hash = "sha256:97eaa3bbe181903ccf955ade86d31aca7805d3bc06f5e742d767845005a3ca75"},
+    {file = "pyinstrument-5.0.3-cp312-cp312-musllinux_1_2_x86_64.whl", hash = "sha256:2ecfff795dce1fcbedef4f6a63cd2ae549688fb1b6fbc8fa16d852d70da3da80"},
+    {file = "pyinstrument-5.0.3-cp312-cp312-win32.whl", hash = "sha256:9b513ff9960f131bf1ab46034315146b825ccd7d6f84680f2a3642b24abe7f3c"},
+    {file = "pyinstrument-5.0.3-cp312-cp312-win_amd64.whl", hash = "sha256:88df7e3ab11604ae7cef1f576c097a08752bf8fc13c5755803bd3cd92f15aba3"},
+    {file = "pyinstrument-5.0.3-cp313-cp313-macosx_10_13_universal2.whl", hash = "sha256:aa6eb04572c6cb00c204e7ae287403becca90f3b00b56b43df2d2f81d726ed5b"},
+    {file = "pyinstrument-5.0.3-cp313-cp313-macosx_11_0_arm64.whl", hash = "sha256:12a71a39b82a49482fd14c2478d04a3ef69bfad393c31ea1fa9d2de3f4d8becd"},
+    {file = "pyinstrument-5.0.3-cp313-cp313-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:bc858887463d12c66ac642b1791c1a3b535ebe0db0bef26901bd6e7210a43cf1"},
+    {file = "pyinstrument-5.0.3-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:861c549be809759f0b236d6e9844a22a91343d952a1e35983ae193863d0ef276"},
+    {file = "pyinstrument-5.0.3-cp313-cp313-musllinux_1_2_aarch64.whl", hash = "sha256:2ec782f1946fe280ca4efa2280b5ad64e318378241421554134adcb4265dc1f8"},
+    {file = "pyinstrument-5.0.3-cp313-cp313-musllinux_1_2_x86_64.whl", hash = "sha256:87a558b1f39dc556621ef7e9482c0d2884af7df2aae35b90edad02fe099d28ab"},
+    {file = "pyinstrument-5.0.3-cp313-cp313-win32.whl", hash = "sha256:a71777ae66969a5c1a57ba06e81ac3f19e3234b4de30fea84eb12f0cf29d009e"},
+    {file = "pyinstrument-5.0.3-cp313-cp313-win_amd64.whl", hash = "sha256:4a385975db0aa52a65fd4c1ea72158af3aaf03d704156551a28d2146bbb107ee"},
+    {file = "pyinstrument-5.0.3-cp38-cp38-macosx_10_9_universal2.whl", hash = "sha256:e0d7786b9656c2deb25db75c3c0eb4288d18a26f55b1e8de34879ad10694a8c7"},
+    {file = "pyinstrument-5.0.3-cp38-cp38-macosx_11_0_arm64.whl", hash = "sha256:be6056192ef1cf7e90d488d1219dc3f18d8ccdafcd216d106301883fe64c3597"},
+    {file = "pyinstrument-5.0.3-cp38-cp38-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:3a99acf8adf17297d8208a33f62d3cf251a171105919400999671cd2b352ad9d"},
+    {file = "pyinstrument-5.0.3-cp38-cp38-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:539c266145e6bbeee3b216f57d3c216da20737aeb8cf1fef9c2e5dae6018ea00"},
+    {file = "pyinstrument-5.0.3-cp38-cp38-musllinux_1_2_aarch64.whl", hash = "sha256:c8744d04cdee2b2a3f69613c04729d429cf84f2c1a174f618fe844d5a11c9e40"},
+    {file = "pyinstrument-5.0.3-cp38-cp38-musllinux_1_2_x86_64.whl", hash = "sha256:92a503c56f27641ce07a281068b2d8d77a4efe69e14fe859109b7886b24b3e73"},
+    {file = "pyinstrument-5.0.3-cp38-cp38-win32.whl", hash = "sha256:842f19848180598dedda57d6ea3d8a7b4e3de53ce78573f8b6411db5ac27449a"},
+    {file = "pyinstrument-5.0.3-cp38-cp38-win_amd64.whl", hash = "sha256:8288adadfa51d4f57b878910391dd80751a934ca45e52a4c9ad898a11565de03"},
+    {file = "pyinstrument-5.0.3-cp39-cp39-macosx_10_9_universal2.whl", hash = "sha256:d5b32915b0bbc2e173e73191491fe02e390f6f15d60310bdcf9bff04ce7e64ff"},
+    {file = "pyinstrument-5.0.3-cp39-cp39-macosx_11_0_arm64.whl", hash = "sha256:8ed8486f140f26a84f1d9cf3a2ed4a288fa32808c954084e95e4342a2ecf8c6f"},
+    {file = "pyinstrument-5.0.3-cp39-cp39-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:2652f00bdad6f005b7422a5f87aafcc09074d612802e6be009706975f97c7e4b"},
+    {file = "pyinstrument-5.0.3-cp39-cp39-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:26851778e4094da89d8d79474b0fc1a4cab046d0beb8e3a2818ec91e7901830b"},
+    {file = "pyinstrument-5.0.3-cp39-cp39-musllinux_1_2_aarch64.whl", hash = "sha256:4a09145c8394371185c24a905f76246ba77f9b64a358a609133088247efb0ab0"},
+    {file = "pyinstrument-5.0.3-cp39-cp39-musllinux_1_2_x86_64.whl", hash = "sha256:bd47898f00fefce0159728e5439390873a96f3d221127e0ee44eb4c4165b09a9"},
+    {file = "pyinstrument-5.0.3-cp39-cp39-win32.whl", hash = "sha256:704d036a5712d8113fde3a88424982e5afef4f8f80483d323ae922d95a869eef"},
+    {file = "pyinstrument-5.0.3-cp39-cp39-win_amd64.whl", hash = "sha256:5a7a16a9a60c117f665bab9987f67eda390d3e27d92ba77eff61ef7492f95be7"},
+    {file = "pyinstrument-5.0.3.tar.gz", hash = "sha256:88281dfe65e5d6b42035bba72808cbcd4cb46cd0a0ba35da23d3e74a41ebdd05"},
+]
+
+[package.extras]
+bin = ["click", "nox"]
+docs = ["furo (==2024.7.18)", "myst-parser (==3.0.1)", "sphinx (==7.4.7)", "sphinx-autobuild (==2024.4.16)", "sphinxcontrib-programoutput (==0.17)"]
+examples = ["django", "litestar", "numpy"]
+test = ["cffi (>=1.17.0)", "flaky", "greenlet (>=3)", "ipython", "pytest", "pytest-asyncio (==0.23.8)", "trio"]
+types = ["typing_extensions"]
+
+[[package]]
 name = "ruff"
 version = "0.12.7"
 description = "An extremely fast Python linter and code formatter, written in Rust."
@@ -475,4 +541,4 @@ files = [
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.12"
-content-hash = "edd33a8cedfafc4d4da3703d1342278b3f325c0849e7036cb130a670af5b6dd0"
+content-hash = "495ce1d1ac1bd2c40dbd6dd5d5dde27b2fea5d92e09d442145407f2574279d84"
