@@ -13,4 +13,4 @@ psycopg = { extras = ["binary"], version = "^3.1.19" }
 pillow = "^11.0.0"
 django-prose-editor = { extras = ["sanitize"], version = "^0.8.1" }
 django-constance = "^4.1.1"
-granian = "^2.5.0"
+gunicorn = "^23.0.0"
