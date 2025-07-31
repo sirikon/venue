@@ -1,41 +1,19 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-function main {
-  trap 'true' SIGINT SIGTERM
+/app/.venv/bin/python /app/src/manage.py check --deploy --fail-level WARNING
 
-  /app/.venv/bin/python /app/src/manage.py check --deploy --fail-level WARNING
+VENUE_WORKERS="${VENUE_WORKERS:-1}"
+VENUE_THREADS="${VENUE_THREADS:-1}"
+VENUE_PORT_PREFIX="${VENUE_PORT_PREFIX:-}"
+export PYTHONPATH="/app/src"
 
-  start-app &
-  start-proxy &
-
-  set +e
-  wait -n
-  exit_code="$?"
-  set -e
-  kill -s SIGTERM -1
-  wait
-  exit "$exit_code"
-}
-
-function start-app {
-  VENUE_WORKERS="${VENUE_WORKERS:-1}"
-  VENUE_THREADS="${VENUE_THREADS:-1}"
-  VENUE_PORT_PREFIX="${VENUE_PORT_PREFIX:-}"
-  export PYTHONPATH="/app/src"
-  exec /app/.venv/bin/granian \
-    --interface wsgi \
-    venue_django.wsgi:application \
-    --host="0.0.0.0" \
-    --port="${VENUE_PORT_PREFIX}81" \
-    --workers "${VENUE_WORKERS}" \
-    --blocking-threads "${VENUE_THREADS}"
-}
-
-function start-proxy {
-  VENUE_PORT_PREFIX="${VENUE_PORT_PREFIX:-}"
-  export VENUE_PORT_PREFIX
-  exec caddy run --config /proxy/Caddyfile
-}
-
-main "$@"
+exec /app/.venv/bin/granian \
+  --interface wsgi \
+  venue_django.wsgi:application \
+  --host="0.0.0.0" \
+  --port="${VENUE_PORT_PREFIX}80" \
+  --workers "${VENUE_WORKERS}" \
+  --blocking-threads "${VENUE_THREADS}" \
+  --static-path-route "/static" \
+  --static-path-mount "/app/static"
