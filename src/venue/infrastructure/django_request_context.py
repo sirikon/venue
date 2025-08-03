@@ -4,7 +4,6 @@ from django.http import HttpRequest
 
 
 class DjangoRequestContext:
-
     def __init__(self):
         self.__contextvar = ContextVar[HttpRequest]("django_request", default=None)
 

@@ -2,7 +2,6 @@ from contextvars import ContextVar
 
 
 class VisitorContext:
-
     def __init__(self):
         self.__contextvar = ContextVar[str]("visitor", default=None)
 

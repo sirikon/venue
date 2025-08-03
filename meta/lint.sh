@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-exec ./.venv/bin/ruff check "$@" .
+./.venv/bin/ruff check --fix
+./.venv/bin/ruff format

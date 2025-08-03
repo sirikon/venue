@@ -7,7 +7,6 @@ from venue.domain.visitor_service import VisitorService
 
 
 class DjangoVisitorService(VisitorService):
-
     def __init__(
         self, *, visitor_context: VisitorContext, visitor_manager: BaseManager[Visitor]
     ):

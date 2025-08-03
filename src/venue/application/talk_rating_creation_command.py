@@ -7,7 +7,6 @@ from venue_django_app.models import Rating, Talk
 
 
 class TalkRatingCreationCommand:
-
     def __init__(
         self,
         *,

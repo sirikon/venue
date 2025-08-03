@@ -3,7 +3,6 @@ from venue.infrastructure.django_request_context import DjangoRequestContext
 
 
 class DjangoVisitorTalkRatingService(VisitorTalkRatingService):
-
     def __init__(self, *, django_request_context: DjangoRequestContext):
         self.__django_request_context = django_request_context
         super().__init__()

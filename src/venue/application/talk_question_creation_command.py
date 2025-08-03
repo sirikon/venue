@@ -5,7 +5,6 @@ from venue_django_app.models import Question, Talk
 
 
 class TalkQuestionCreationCommand:
-
     def __init__(
         self,
         *,
